@@ -32,7 +32,7 @@ export default function Home() {
               <ProductCard
                 key={p.id}
                 product={p}
-                onView={() => setSelectedProduct(p)}
+                onView={(prod) => setSelectedProduct(p)}
                 onNegotiate={() => {
                   setSelectedProduct(p);
                   setOpenNegotiation(true);
