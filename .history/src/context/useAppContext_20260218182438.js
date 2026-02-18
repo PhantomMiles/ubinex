@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext } from "react";
 
 export const AppContext = createContext();
 
@@ -14,14 +14,4 @@ export function useApp() {
   const ctx = React.useContext(AppContext);
   if (!ctx) throw new Error("useApp must be inside AppProvider");
   return ctx;
-}
-
-export function AppProvider({ children }) {
-  const [currency, setCurrency] = useState("NG");
-
-  return React.createElement(
-    AppContext.Provider,
-    { value: { currency, setCurrency, currencies: CURRENCIES } },
-    children
-  );
 }

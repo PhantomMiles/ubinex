@@ -1,6 +1,131 @@
-// Clean Enugu-focused product catalog for AgroLink
+// Sample Enugu-focused product catalog for AgroLink
+// Small curated dataset used by the frontend for demos
 export const agroProducts = [
-    {
+  {
+    id: 'p1',
+    name: 'Ugu (Fluted Pumpkin Leaves)',
+    category: 'Vegetables',
+    description: 'Fresh leafy ugu grown and harvested within Enugu State. Great for soups and local dishes.',
+    pricePerKg: 120, // NGN per kg
+    unit: 'kg',
+    stockKg: 120,
+    location: 'Nsukka, Enugu State',
+    image: 'https://via.placeholder.com/600x400?text=Ugu',
+    rating: 4.6,
+  },
+  {
+    id: 'p2',
+    name: 'Ripe Tomatoes',
+    category: 'Vegetables',
+    description: 'Locally grown juicy tomatoes. Perfect for stews and sauces.',
+    pricePerKg: 180,
+    unit: 'kg',
+    stockKg: 250,
+    location: 'Enugu, Enugu State',
+    image: 'https://via.placeholder.com/600x400?text=Tomatoes',
+    rating: 4.5,
+  },
+  {
+    id: 'p3',
+    name: 'Yam (White)',
+    category: 'Grains',
+    description: 'Top-quality white yam tubers from nearby farms — sold per tuber or by kg.',
+    pricePerKg: 200,
+    unit: 'kg',
+    stockKg: 500,
+    location: 'Agbani, Nkanu West, Enugu State',
+    image: 'https://via.placeholder.com/600x400?text=Yam',
+    rating: 4.7,
+  },
+  {
+    id: 'p4',
+    name: 'Red Onions',
+    category: 'Vegetables',
+    description: 'Crisp red onions with strong flavor. Washed and ready for market.',
+    pricePerKg: 150,
+    unit: 'kg',
+    stockKg: 300,
+    location: 'Oji River, Enugu State',
+    image: 'https://via.placeholder.com/600x400?text=Onions',
+    rating: 4.4,
+  },
+  {
+    id: 'p5',
+    name: 'Maize (White)',
+    category: 'Grains',
+    description: 'Dried white maize — good for milling and traditional dishes.',
+    pricePerKg: 90,
+    unit: 'kg',
+    stockKg: 1000,
+    location: 'Uzo-Uwani, Enugu State',
+    image: 'https://via.placeholder.com/600x400?text=Maize',
+    rating: 4.2,
+  },
+  {
+    id: 'p6',
+    name: 'Palm Oil (Refined)',
+    category: 'Dairy',
+    description: 'Locally pressed and refined palm oil sold by liter.',
+    pricePerLiter: 650,
+    unit: 'liter',
+    stockLiters: 200,
+    location: 'Ezeagu, Enugu State',
+    image: 'https://via.placeholder.com/600x400?text=Palm+Oil',
+    rating: 4.3,
+  },
+  {
+    id: 'p7',
+    name: 'Fresh Eggs (crate)',
+    category: 'Poultry',
+    description: 'Farm-fresh eggs collected daily. Sold by crate (30).',
+    pricePerUnit: 9000,
+    unit: 'crate',
+    stockUnits: 40,
+    location: 'Awgu, Enugu State',
+    image: 'https://via.placeholder.com/600x400?text=Eggs',
+    rating: 4.8,
+  },
+  {
+    id: 'p8',
+    name: 'Garden Egg (Eggplant)',
+    category: 'Vegetables',
+    description: 'Small bitter garden egg — ideal for local recipes.',
+    pricePerKg: 130,
+    unit: 'kg',
+    stockKg: 150,
+    location: 'Enugu, Enugu State',
+    image: 'https://via.placeholder.com/600x400?text=Garden+Egg',
+    rating: 4.1,
+  },
+  {
+    id: 'p9',
+    name: 'Plantain (ripe)',
+    category: 'Fruits',
+    description: 'Sweet ripe plantains ready for frying or boiling.',
+    pricePerKg: 140,
+    unit: 'kg',
+    stockKg: 400,
+    location: 'Nsukka, Enugu State',
+    image: 'https://via.placeholder.com/600x400?text=Plantain',
+    rating: 4.5,
+  },
+  {
+    id: 'p10',
+    name: 'Groundnut (peanut)',
+    category: 'Grains',
+    description: 'Dried groundnut — good for oil extraction and snacks.',
+    pricePerKg: 220,
+    unit: 'kg',
+    stockKg: 350,
+    location: 'Udi, Enugu State',
+    image: 'https://via.placeholder.com/600x400?text=Groundnut',
+    rating: 4.0,
+  }
+];
+
+export default agroProducts;
+export const agroProducts = [
+                                                                                              {
         id: 1,
         name: "Fresh Tomatoes",
         category: "Vegetables",
@@ -550,6 +675,4 @@ export const agroProducts = [
         stockKg: 110,
         description: "Lean guinea fowl meat for special dishes."
     }
-];
-
-export default agroProducts;
+]

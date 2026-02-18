@@ -59,7 +59,7 @@ export default function Negotiation({ product = {}, onClose }) {
               min="0"
               value={offer}
               onChange={(e) => setOffer(e.target.value)}
-              placeholder={`Your offer (${symbol})`}
+              placeholder="Your offer (GHS)"
               className="flex-1 border border-gray-200 rounded-full py-2 px-3"
             />
             <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded-full">Propose</button>

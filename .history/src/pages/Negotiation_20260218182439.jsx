@@ -1,14 +1,10 @@
 import React, { useState } from "react";
-import { useApp } from "../context/useAppContext";
 
 export default function Negotiation({ product = {}, onClose }) {
   const [offer, setOffer] = useState("");
   const [notes, setNotes] = useState("");
-  const { currency, currencies } = useApp();
-  const symbol = (currencies && currencies[currency] && currencies[currency].symbol) || '₦';
-
   const [offers, setOffers] = useState([
-    { id: 1, from: "seller", amount: product.price || product.pricePerKg || 0, message: "Starting price" },
+    { id: 1, from: "seller", amount: product.price || 0, message: "Starting price" },
   ]);
 
   function sendOffer(e) {
@@ -45,7 +41,7 @@ export default function Negotiation({ product = {}, onClose }) {
               <div key={o.id} className={`p-2 rounded-lg ${o.from === "buyer" ? "bg-green-50 self-end" : "bg-gray-100"}`}>
               <div className="flex items-center justify-between text-xs text-gray-600">
                   <div>{o.from === "buyer" ? "You" : "Seller"}</div>
-                  <div className="font-semibold">{symbol} {o.amount}</div>
+                  <div className="font-semibold">₦ {o.amount}</div>
               </div>
               {o.message && <div className="mt-1 text-sm text-gray-700">{o.message}</div>}
             </div>
@@ -59,7 +55,7 @@ export default function Negotiation({ product = {}, onClose }) {
               min="0"
               value={offer}
               onChange={(e) => setOffer(e.target.value)}
-              placeholder={`Your offer (${symbol})`}
+              placeholder="Your offer (GHS)"
               className="flex-1 border border-gray-200 rounded-full py-2 px-3"
             />
             <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded-full">Propose</button>

@@ -19,9 +19,9 @@ export function useApp() {
 export function AppProvider({ children }) {
   const [currency, setCurrency] = useState("NG");
 
-  return React.createElement(
-    AppContext.Provider,
-    { value: { currency, setCurrency, currencies: CURRENCIES } },
-    children
+  return (
+    <AppContext.Provider value={{ currency, setCurrency, currencies: CURRENCIES }}>
+      {children}
+    </AppContext.Provider>
   );
 }
