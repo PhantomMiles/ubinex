@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useApp } from "../context/useAppContext";
-import ubinexLogo from "../public/ubinex.png";
+import logo from '../assets/ubinex.png';
 
 export default function Auth() {
   const { login } = useApp();
@@ -40,7 +40,7 @@ export default function Auth() {
         {/* Header with Logo and Branding */}
         <div className="text-center mb-4">
           <div className="text-5xl flex justify-center">
-            <img src={ubinexLogo} alt="Ubinex Logo" className="h-24" />
+            <img src={logo} alt="Ubinex Logo" className="h-24" />
           </div>
           <h1 className="text-3xl font-bold" style={{ color: "#2d5016" }}>
             Ubinex

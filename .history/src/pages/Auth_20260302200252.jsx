@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useApp } from "../context/useAppContext";
-import ubinexLogo from "../public/ubinex.png";
+import ubinexLogo from "../assets/ubinex.png";
 
 export default function Auth() {
   const { login } = useApp();

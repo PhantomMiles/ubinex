@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/useAppContext';
-import navbarLogo from '../public/logo.png';
+import navbarLogo from '../assets/logo.png';
 
 export default function Navbar({ query = "", setQuery = () => {}, selectedCategory = "", setSelectedCategory = () => {} }) {
   const [open, setOpen] = useState(false);

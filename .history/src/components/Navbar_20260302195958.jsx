@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/useAppContext';
-import navbarLogo from '../public/logo.png';
+import logoImg from '../assets/logo.png';
 
 export default function Navbar({ query = "", setQuery = () => {}, selectedCategory = "", setSelectedCategory = () => {} }) {
   const [open, setOpen] = useState(false);
@@ -30,7 +30,7 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
     <header className="w-full bg-white shadow-sm sticky top-0 z-20">
       <div className="max-w-full mx-auto px-4 py-3 flex items-center justify-between gap-4">
         <div className="flex items-center gap-3 max-w-lg h-10">
-         <img src={navbarLogo} alt="Ubinex Logo" className="w-full h-full object-cover" />
+         <img src={logoImg} alt="Ubinex Logo" className="w-full h-full object-cover" />
         </div>
 
         <div className="flex-1 max-w-xl hidden sm:block">

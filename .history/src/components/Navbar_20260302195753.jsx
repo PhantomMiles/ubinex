@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/useAppContext';
-import navbarLogo from '../public/logo.png';
+import logoImg from '../assets/logo.png';
 
 export default function Navbar({ query = "", setQuery = () => {}, selectedCategory = "", setSelectedCategory = () => {} }) {
   const [open, setOpen] = useState(false);
@@ -30,7 +30,7 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
     <header className="w-full bg-white shadow-sm sticky top-0 z-20">
       <div className="max-w-full mx-auto px-4 py-3 flex items-center justify-between gap-4">
         <div className="flex items-center gap-3 max-w-lg h-10">
-         <img src={navbarLogo} alt="Ubinex Logo" className="w-full h-full object-cover" />
+         <img src={logoImg} alt="Ubinex Logo" className="w-full h-full object-cover" />
         </div>
 
         <div className="flex-1 max-w-xl hidden sm:block">
@@ -49,32 +49,36 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
         </div>
 
         <div className="flex items-center gap-3">
-          <button 
-            onClick={() => navigateTo('/categories')}
-            className="px-3 space-x-2 py-2 rounded-md hover:bg-gray-100 hidden sm:inline text-sm text-gray-700 transition flex items-center gap-1"
-            title="Browse all categories"
-          >
-            <i className="fas fa-th-large"></i>
-            <span>Categories</span>
-          </button>
-          <button 
-            onClick={() => navigateTo('/orders')}
-            className="px-3 space-x-2 py-2 rounded-md hover:bg-gray-100 hidden sm:inline text-sm text-gray-700 transition flex items-center gap-1"
-            title="View your orders"
-          >
-            <i className="fas fa-list-ul"></i>
-            <span>Orders</span>
-          </button>
-          <button 
-            onClick={() => navigateTo('/cart')}
-            className="text-white px-3 space-x-2 py-2 rounded-md flex items-center gap-2 hidden sm:inline text-sm transition hover:shadow-md" 
-            style={{ backgroundColor: "#2d5016" }}
-            title="View shopping cart"
-          > 
-            <i className="fas fa-shopping-cart"></i>
-            <span>Cart</span>
-            <span className="bg-white text-gray-900 font-semibold text-xs rounded-full px-2">0</span>
-          </button>
+          {user?.role !== 'farmer' && (
+            <>
+              <button 
+                onClick={() => navigateTo('/categories')}
+                className="px-3 space-x-2 py-2 rounded-md hover:bg-gray-100 hidden sm:inline text-sm text-gray-700 transition flex items-center gap-1"
+                title="Browse all categories"
+              >
+                <i className="fas fa-th-large"></i>
+                <span>Categories</span>
+              </button>
+              <button 
+                onClick={() => navigateTo('/orders')}
+                className="px-3 space-x-2 py-2 rounded-md hover:bg-gray-100 hidden sm:inline text-sm text-gray-700 transition flex items-center gap-1"
+                title="View your orders"
+              >
+                <i className="fas fa-list-ul"></i>
+                <span>Orders</span>
+              </button>
+              <button 
+                onClick={() => navigateTo('/cart')}
+                className="text-white px-3 space-x-2 py-2 rounded-md flex items-center gap-2 hidden sm:inline text-sm transition hover:shadow-md" 
+                style={{ backgroundColor: "#2d5016" }}
+                title="View shopping cart"
+              > 
+                <i className="fas fa-shopping-cart"></i>
+                <span>Cart</span>
+                <span className="bg-white text-gray-900 font-semibold text-xs rounded-full px-2">0</span>
+              </button>
+            </>
+          )}
 
           {/* User Profile Dropdown */}
           <div className="relative hidden sm:block">
@@ -175,28 +179,33 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
         </div>
       )}
 
-      <nav className="bg-green-50 border-t border-green-100" style={{ backgroundColor: "#f0ffe8" }}>
-        <div className="max-w-5xl mx-auto px-4 py-2 flex gap-3 overflow-x-auto">
-          {categories.map((c) => (
-            <button 
-              key={c} 
-              onClick={() => setSelectedCategory(c === "All" ? "" : c)}
-              className={`text-sm px-3 py-1.5 rounded-full whitespace-nowrap transition ${ 
-                (selectedCategory === "" && c === "All") || selectedCategory === c
-                  ? "text-white font-semibold shadow-md"
-                  : "bg-white shadow-sm hover:shadow-md text-gray-700"
-              }`}
-              style={
-                (selectedCategory === "" && c === "All") || selectedCategory === c
-                  ? { backgroundColor: "#2d5016" }
-                  : {}
-              }
-            >
-              {c}
-            </button>
-          ))}
-        </div>
-      </nav>
+      {user?.role !== 'farmer' && (
+        <nav className="bg-green-50 border-t border-green-100" style={{ backgroundColor: "#f0ffe8" }}>
+          <div className="max-w-5xl mx-auto px-4 py-2 flex gap-3 overflow-x-auto">
+            {categories.map((c) => (
+              <button 
+                key={c} 
+                onClick={() => {
+                  navigateTo('/categories');
+                  setSelectedCategory(c === "All" ? "" : c);
+                }}
+                className={`text-sm px-3 py-1.5 rounded-full whitespace-nowrap transition ${ 
+                  (selectedCategory === "" && c === "All") || selectedCategory === c
+                    ? "text-white font-semibold shadow-md"
+                    : "bg-white shadow-sm hover:shadow-md text-gray-700"
+                }`}
+                style={
+                  (selectedCategory === "" && c === "All") || selectedCategory === c
+                    ? { backgroundColor: "#2d5016" }
+                    : {}
+                }
+              >
+                {c}
+              </button>
+            ))}
+          </div>
+        </nav>
+      )}
     </header>
   );
 }
