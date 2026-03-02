@@ -38,9 +38,8 @@ export default function Auth() {
       <div className="w-full max-w-md">
         {/* Header with Logo and Branding */}
         <div className="text-center mb-4">
-          <div className="text-5xl flex justify-center">
-            <img src="/src/assets/ubinex.png" alt="Ubinex Logo" className="h-24" />
-          </div>
+          <img src="/src/assets/ubinex.png" alt="Ubinex Logo" className="h-30 flex justify-center" />
+
           <h1 className="text-3xl font-bold" style={{ color: "#2d5016" }}>
             Ubinex
           </h1>
@@ -209,7 +208,7 @@ export default function Auth() {
         </div>
 
         {/* Footer Text */}
-        <p className="text-center text-xs text-gray-500 my-6">
+        <p className="text-center text-xs text-gray-500 mt-6">
           By continuing, you agree to our Terms of Service and Privacy Policy
         </p>
       </div>
