@@ -37,9 +37,9 @@ export default function Auth() {
     <div className="min-h-screen flex items-center justify-center" style={{ background: "linear-gradient(135deg, #f5f1e8 0%, #e8f4e1 100%)" }}>
       <div className="w-full max-w-md">
         {/* Header with Logo and Branding */}
-        <div className="text-center mb-4">
-          <div className="text-5xl flex justify-center">
-            <img src="/src/assets/ubinex.png" alt="Ubinex Logo" className="h-28" />
+        <div className="text-center mb-8">
+          <div className="mb-4 text-5xl flex justify-center">
+            <img src="/src/assets/logo.png" alt="Ubinex Logo" className="h-16 w-16" />
           </div>
           <h1 className="text-3xl font-bold" style={{ color: "#2d5016" }}>
             Ubinex
