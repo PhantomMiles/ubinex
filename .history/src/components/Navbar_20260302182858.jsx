@@ -1,29 +1,10 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/useAppContext';
 
-export default function Navbar({ query = "", setQuery = () => {}, selectedCategory = "", setSelectedCategory = () => {} }) {
+export default function Navbar({ query = "", setQuery = () => {} }) {
   const [open, setOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const { user, logout } = useApp();
-
-  const navigateTo = (path) => {
-    window.location.hash = path;
-  };
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    // Search is already handled by parent component via setQuery
-  };
-
-  const categories = [
-    "All",
-    "Vegetables",
-    "Fruits",
-    "Grains",
-    "Dairy",
-    "Poultry",
-    "Herbs",
-  ];
 
   return (
     <header className="w-full bg-white shadow-sm sticky top-0 z-20">
@@ -33,7 +14,7 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
         </div>
 
         <div className="flex-1 max-w-xl hidden sm:block">
-          <form className="relative block" onSubmit={handleSearch}>
+          <label className="relative block">
             <span className="sr-only">Search products</span>
             <input
               value={query}
@@ -41,37 +22,18 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
               placeholder="Search products, farms or categories"
               className="w-full border border-gray-200 rounded-full py-2 pl-4 pr-10 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2d5016] transition"
             />
-            <button type="submit" className="absolute right-1 top-1/2 -translate-y-1/2 text-white rounded-full px-3 py-1 text-sm transition flex items-center gap-1" style={{ backgroundColor: "#2d5016" }}>
+            <button className="absolute right-1 top-1/2 -translate-y-1/2 text-white rounded-full px-3 py-1 text-sm transition flex items-center gap-1" style={{ backgroundColor: "#2d5016" }}>
               <i className="fas fa-search"></i>
             </button>
-          </form>
+          </label>
         </div>
 
         <div className="flex items-center gap-3">
-          <button 
-            onClick={() => navigateTo('/categories')}
-            className="px-3 space-x-2 py-2 rounded-md hover:bg-gray-100 hidden sm:inline text-sm text-gray-700 transition flex items-center gap-1"
-            title="Browse all categories"
-          >
-            <i className="fas fa-th-large"></i>
-            <span>Categories</span>
-          </button>
-          <button 
-            onClick={() => navigateTo('/orders')}
-            className="px-3 space-x-2 py-2 rounded-md hover:bg-gray-100 hidden sm:inline text-sm text-gray-700 transition flex items-center gap-1"
-            title="View your orders"
-          >
-            <i className="fas fa-list-ul"></i>
-            <span>Orders</span>
-          </button>
-          <button 
-            onClick={() => navigateTo('/cart')}
-            className="text-white px-3 space-x-2 py-2 rounded-md flex items-center gap-2 hidden sm:inline text-sm transition hover:shadow-md" 
-            style={{ backgroundColor: "#2d5016" }}
-            title="View shopping cart"
-          > 
+          <button className="px-3 py-2 rounded-md hover:bg-gray-100 hidden sm:inline text-sm text-gray-700">Categories</button>
+          <button className="px-3 py-2 rounded-md hover:bg-gray-100 hidden sm:inline text-sm text-gray-700">Orders</button>
+          <button className="text-white px-3 py-2 rounded-md flex items-center gap-2 hidden sm:inline text-sm transition" style={{ backgroundColor: "#2d5016" }}> 
             <i className="fas fa-shopping-cart"></i>
-            <span>Cart</span>
+            <span className="">Cart</span>
             <span className="bg-white text-gray-900 font-semibold text-xs rounded-full px-2">0</span>
           </button>
 
@@ -127,36 +89,8 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
             <p className="text-sm text-gray-500">{user?.email}</p>
           </div>
           <div className="px-4 py-3 space-y-2">
-            <button 
-              onClick={() => {
-                navigateTo('/categories');
-                setOpen(false);
-              }} 
-              className="w-full block text-left text-sm text-gray-700 hover:text-gray-900 py-2 transition flex items-center gap-2"
-            >
-              <i className="fas fa-th-large"></i>
-              <span>Categories</span>
-            </button>
-            <button 
-              onClick={() => {
-                navigateTo('/orders');
-                setOpen(false);
-              }} 
-              className="w-full block text-left text-sm text-gray-700 hover:text-gray-900 py-2 transition flex items-center gap-2"
-            >
-              <i className="fas fa-list-ul"></i>
-              <span>Orders</span>
-            </button>
-            <button 
-              onClick={() => {
-                navigateTo('/cart');
-                setOpen(false);
-              }} 
-              className="w-full block text-left text-sm text-gray-700 hover:text-gray-900 py-2 transition flex items-center gap-2"
-            >
-              <i className="fas fa-shopping-cart"></i>
-              <span>Cart</span>
-            </button>
+            <a className="block text-sm text-gray-700 hover:text-gray-900">Categories</a>
+            <a className="block text-sm text-gray-700 hover:text-gray-900">Orders</a>
             <label className="block mt-2">
               <input value={query} onChange={(e)=> setQuery(e.target.value)} placeholder="Search" className="w-full border border-gray-300 p-2 rounded text-sm" />
             </label>
@@ -165,10 +99,9 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
                 logout();
                 setOpen(false);
               }}
-              className="w-full text-red-600 text-sm font-medium py-2 hover:bg-red-50 rounded transition mt-4 flex items-center justify-center gap-2"
+              className="w-full text-red-600 text-sm font-medium py-2 hover:bg-red-50 rounded transition mt-4"
             >
-              <i className="fas fa-sign-out-alt"></i>
-              <span>Log Out</span>
+              Log Out
             </button>
           </div>
         </div>
@@ -176,23 +109,16 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
 
       <nav className="bg-green-50 border-t border-green-100" style={{ backgroundColor: "#f0ffe8" }}>
         <div className="max-w-5xl mx-auto px-4 py-2 flex gap-3 overflow-x-auto">
-          {categories.map((c) => (
-            <button 
-              key={c} 
-              onClick={() => setSelectedCategory(c === "All" ? "" : c)}
-              className={`text-sm px-3 py-1.5 rounded-full whitespace-nowrap transition ${ 
-                (selectedCategory === "" && c === "All") || selectedCategory === c
-                  ? "text-white font-semibold shadow-md"
-                  : "bg-white shadow-sm hover:shadow-md text-gray-700"
-              }`}
-              style={
-                (selectedCategory === "" && c === "All") || selectedCategory === c
-                  ? { backgroundColor: "#2d5016" }
-                  : {}
-              }
-            >
-              {c}
-            </button>
+          {[
+            "All",
+            "Vegetables",
+            "Fruits",
+            "Grains",
+            "Dairy",
+            "Poultry",
+            "Herbs",
+          ].map((c) => (
+            <button key={c} className="text-sm px-3 py-1.5 bg-white rounded-full shadow-sm whitespace-nowrap hover:shadow-md transition">{c}</button>
           ))}
         </div>
       </nav>

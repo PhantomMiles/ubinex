@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useApp } from "../context/useAppContext";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart, faTractor, faLeaf } from '@fortawesome/free-solid-svg-icons';
 
 export default function Auth() {
   const { login } = useApp();
@@ -38,7 +40,8 @@ export default function Auth() {
       <div className="w-full max-w-md">
         {/* Header with Logo and Branding */}
         <div className="text-center mb-4">
-          <div className="text-5xl flex justify-center">
+          <div className="text-5xl flex justify-center items-center gap-2">
+            <FontAwesomeIcon icon={faLeaf} className="text-green-700" size="2x" />
             <img src="./src/assets/ubinex.png" alt="Ubinex Logo" className="h-24" />
           </div>
           <h1 className="text-3xl font-bold" style={{ color: "#2d5016" }}>
@@ -60,10 +63,7 @@ export default function Auth() {
             }`}
             style={role === "consumer" ? { borderColor: "#2d5016", backgroundColor: "#f0ffe8" } : {}}
           >
-            <i
-              className="fas fa-shopping-cart text-2xl mb-2"
-              style={{ color: role === "consumer" ? "#2d5016" : "#666" }}
-            ></i>
+            <div className="text-2xl mb-2">🛒</div>
             <div style={{ color: role === "consumer" ? "#2d5016" : "#666" }}>
               Consumer
             </div>
@@ -78,10 +78,7 @@ export default function Auth() {
             }`}
             style={role === "farmer" ? { borderColor: "#8B5A3C", backgroundColor: "#fff9f0" } : {}}
           >
-            <i
-              className="fas fa-tractor text-2xl mb-2"
-              style={{ color: role === "farmer" ? "#8B5A3C" : "#666" }}
-            ></i>
+            <div className="text-2xl mb-2">👨‍🌾</div>
             <div style={{ color: role === "farmer" ? "#8B5A3C" : "#666" }}>
               Farmer
             </div>
@@ -136,7 +133,7 @@ export default function Auth() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="John Doe"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#2d5016] transition"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-600 transition"
                 />
               </div>
             )}

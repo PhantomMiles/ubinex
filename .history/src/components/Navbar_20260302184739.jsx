@@ -50,7 +50,7 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
         <div className="flex items-center gap-3">
           <button 
             onClick={() => navigateTo('/categories')}
-            className="px-3 space-x-2 py-2 rounded-md hover:bg-gray-100 hidden sm:inline text-sm text-gray-700 transition flex items-center gap-1"
+            className="px-3 py-2 rounded-md hover:bg-gray-100 hidden sm:inline text-sm text-gray-700 transition flex items-center gap-1"
             title="Browse all categories"
           >
             <i className="fas fa-th-large"></i>
@@ -58,7 +58,7 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
           </button>
           <button 
             onClick={() => navigateTo('/orders')}
-            className="px-3 space-x-2 py-2 rounded-md hover:bg-gray-100 hidden sm:inline text-sm text-gray-700 transition flex items-center gap-1"
+            className="px-3 py-2 rounded-md hover:bg-gray-100 hidden sm:inline text-sm text-gray-700 transition flex items-center gap-1"
             title="View your orders"
           >
             <i className="fas fa-list-ul"></i>

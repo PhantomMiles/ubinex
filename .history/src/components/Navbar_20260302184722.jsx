@@ -50,7 +50,7 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
         <div className="flex items-center gap-3">
           <button 
             onClick={() => navigateTo('/categories')}
-            className="px-3 space-x-2 py-2 rounded-md hover:bg-gray-100 hidden sm:inline text-sm text-gray-700 transition flex items-center gap-1"
+            className="px-3 py-2 rounded-md hover:bg-gray-100 hidden sm:inline text-sm text-gray-700 transition flex items-center gap-1"
             title="Browse all categories"
           >
             <i className="fas fa-th-large"></i>
@@ -58,7 +58,7 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
           </button>
           <button 
             onClick={() => navigateTo('/orders')}
-            className="px-3 space-x-2 py-2 rounded-md hover:bg-gray-100 hidden sm:inline text-sm text-gray-700 transition flex items-center gap-1"
+            className="px-3 py-2 rounded-md hover:bg-gray-100 hidden sm:inline text-sm text-gray-700 transition flex items-center gap-1"
             title="View your orders"
           >
             <i className="fas fa-list-ul"></i>
@@ -127,36 +127,8 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
             <p className="text-sm text-gray-500">{user?.email}</p>
           </div>
           <div className="px-4 py-3 space-y-2">
-            <button 
-              onClick={() => {
-                navigateTo('/categories');
-                setOpen(false);
-              }} 
-              className="w-full block text-left text-sm text-gray-700 hover:text-gray-900 py-2 transition flex items-center gap-2"
-            >
-              <i className="fas fa-th-large"></i>
-              <span>Categories</span>
-            </button>
-            <button 
-              onClick={() => {
-                navigateTo('/orders');
-                setOpen(false);
-              }} 
-              className="w-full block text-left text-sm text-gray-700 hover:text-gray-900 py-2 transition flex items-center gap-2"
-            >
-              <i className="fas fa-list-ul"></i>
-              <span>Orders</span>
-            </button>
-            <button 
-              onClick={() => {
-                navigateTo('/cart');
-                setOpen(false);
-              }} 
-              className="w-full block text-left text-sm text-gray-700 hover:text-gray-900 py-2 transition flex items-center gap-2"
-            >
-              <i className="fas fa-shopping-cart"></i>
-              <span>Cart</span>
-            </button>
+            <a className="block text-sm text-gray-700 hover:text-gray-900">Categories</a>
+            <a className="block text-sm text-gray-700 hover:text-gray-900">Orders</a>
             <label className="block mt-2">
               <input value={query} onChange={(e)=> setQuery(e.target.value)} placeholder="Search" className="w-full border border-gray-300 p-2 rounded text-sm" />
             </label>
@@ -165,10 +137,9 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
                 logout();
                 setOpen(false);
               }}
-              className="w-full text-red-600 text-sm font-medium py-2 hover:bg-red-50 rounded transition mt-4 flex items-center justify-center gap-2"
+              className="w-full text-red-600 text-sm font-medium py-2 hover:bg-red-50 rounded transition mt-4"
             >
-              <i className="fas fa-sign-out-alt"></i>
-              <span>Log Out</span>
+              Log Out
             </button>
           </div>
         </div>
@@ -176,23 +147,16 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
 
       <nav className="bg-green-50 border-t border-green-100" style={{ backgroundColor: "#f0ffe8" }}>
         <div className="max-w-5xl mx-auto px-4 py-2 flex gap-3 overflow-x-auto">
-          {categories.map((c) => (
-            <button 
-              key={c} 
-              onClick={() => setSelectedCategory(c === "All" ? "" : c)}
-              className={`text-sm px-3 py-1.5 rounded-full whitespace-nowrap transition ${ 
-                (selectedCategory === "" && c === "All") || selectedCategory === c
-                  ? "text-white font-semibold shadow-md"
-                  : "bg-white shadow-sm hover:shadow-md text-gray-700"
-              }`}
-              style={
-                (selectedCategory === "" && c === "All") || selectedCategory === c
-                  ? { backgroundColor: "#2d5016" }
-                  : {}
-              }
-            >
-              {c}
-            </button>
+          {[
+            "All",
+            "Vegetables",
+            "Fruits",
+            "Grains",
+            "Dairy",
+            "Poultry",
+            "Herbs",
+          ].map((c) => (
+            <button key={c} className="text-sm px-3 py-1.5 bg-white rounded-full shadow-sm whitespace-nowrap hover:shadow-md transition">{c}</button>
           ))}
         </div>
       </nav>

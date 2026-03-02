@@ -36,7 +36,7 @@ export default function Negotiation({ product = {}, onClose }) {
         <h3 className="text-lg font-semibold">Negotiate — {product.name}</h3>
         <div className="flex items-center gap-2">
           <button onClick={onClose} className="text-sm text-gray-500 flex items-center gap-1">
-            <i className="fas fa-times"></i>
+            <i className="fas fa-times"></i> Close
           </button>
         </div>
       </div>

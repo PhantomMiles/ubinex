@@ -7,19 +7,16 @@ import Negotiation from "./Negotiation";
 
 export default function Home() {
   const [query, setQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [openNegotiation, setOpenNegotiation] = useState(false);
 
-  const products = agroProducts.filter((p) => {
-    const matchesQuery = `${p.name} ${p.category} ${p.location}`.toLowerCase().includes(query.toLowerCase());
-    const matchesCategory = !selectedCategory || p.category === selectedCategory;
-    return matchesQuery && matchesCategory;
-  });
+  const products = agroProducts.filter((p) =>
+    `${p.name} ${p.category} ${p.location}`.toLowerCase().includes(query.toLowerCase())
+  );
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#f0ffe8' }}>
-      <Navbar query={query} setQuery={setQuery} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
+      <Navbar query={query} setQuery={setQuery} />
 
       <main className="max-w-6xl mx-auto px-4 py-8">
         {/* Section Header */}

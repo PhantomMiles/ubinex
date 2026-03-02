@@ -60,10 +60,7 @@ export default function Auth() {
             }`}
             style={role === "consumer" ? { borderColor: "#2d5016", backgroundColor: "#f0ffe8" } : {}}
           >
-            <i
-              className="fas fa-shopping-cart text-2xl mb-2"
-              style={{ color: role === "consumer" ? "#2d5016" : "#666" }}
-            ></i>
+            <div className="text-2xl mb-2">🛒</div>
             <div style={{ color: role === "consumer" ? "#2d5016" : "#666" }}>
               Consumer
             </div>
@@ -78,10 +75,7 @@ export default function Auth() {
             }`}
             style={role === "farmer" ? { borderColor: "#8B5A3C", backgroundColor: "#fff9f0" } : {}}
           >
-            <i
-              className="fas fa-tractor text-2xl mb-2"
-              style={{ color: role === "farmer" ? "#8B5A3C" : "#666" }}
-            ></i>
+            <div className="text-2xl mb-2">👨‍🌾</div>
             <div style={{ color: role === "farmer" ? "#8B5A3C" : "#666" }}>
               Farmer
             </div>
@@ -136,7 +130,8 @@ export default function Auth() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="John Doe"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#2d5016] transition"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:border-transparent transition"
+                  style={{ focusRingColor: "#2d5016" }}
                 />
               </div>
             )}

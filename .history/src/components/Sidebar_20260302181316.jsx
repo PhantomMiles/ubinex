@@ -98,9 +98,9 @@ export default function Sidebar({ active = "products", open = false, onClose = (
           <a 
             href="#/" 
             onClick={onClose} 
-            className="block w-full px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors text-sm text-center font-medium flex items-center justify-center gap-1"
+            className="block w-full px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors text-sm text-center font-medium"
           >
-            <i className="fas fa-arrow-left"></i> Marketplace
+            ← Marketplace
           </a>
           <button
             onClick={handleLogout}

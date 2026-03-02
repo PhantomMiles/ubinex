@@ -60,10 +60,9 @@ export default function Auth() {
             }`}
             style={role === "consumer" ? { borderColor: "#2d5016", backgroundColor: "#f0ffe8" } : {}}
           >
-            <i
-              className="fas fa-shopping-cart text-2xl mb-2"
-              style={{ color: role === "consumer" ? "#2d5016" : "#666" }}
-            ></i>
+            <div className="text-3xl mb-2" style={{ color: role === "consumer" ? "#2d5016" : "#999" }}>
+              <i className="fas fa-shopping-cart"></i>
+            </div>
             <div style={{ color: role === "consumer" ? "#2d5016" : "#666" }}>
               Consumer
             </div>
@@ -78,10 +77,9 @@ export default function Auth() {
             }`}
             style={role === "farmer" ? { borderColor: "#8B5A3C", backgroundColor: "#fff9f0" } : {}}
           >
-            <i
-              className="fas fa-tractor text-2xl mb-2"
-              style={{ color: role === "farmer" ? "#8B5A3C" : "#666" }}
-            ></i>
+            <div className="text-3xl mb-2" style={{ color: role === "farmer" ? "#8B5A3C" : "#999" }}>
+              <i className="fas fa-leaf"></i>
+            </div>
             <div style={{ color: role === "farmer" ? "#8B5A3C" : "#666" }}>
               Farmer
             </div>
@@ -129,20 +127,21 @@ export default function Auth() {
           <form onSubmit={submit} className="space-y-4">
             {mode === "signup" && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1"><i className="fas fa-user" style={{ color: "#2d5016", marginRight: "8px" }}></i>Full Name</label>
                 <input
                   type="text"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="John Doe"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#2d5016] transition"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:border-transparent transition"
+                  style={{ focusRingColor: "#2d5016" }}
                 />
               </div>
             )}
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1"><i className="fas fa-envelope" style={{ color: "#2d5016", marginRight: "8px" }}></i>Email Address</label>
               <input
                 type="email"
                 required
@@ -154,7 +153,7 @@ export default function Auth() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1"><i className="fas fa-lock" style={{ color: "#2d5016", marginRight: "8px" }}></i>Password</label>
               <input
                 type="password"
                 required
@@ -182,9 +181,9 @@ export default function Auth() {
             {/* Role Info */}
             <div className="p-3 rounded-lg bg-blue-50 border border-blue-200 text-sm text-blue-800">
               {role === "consumer" ? (
-                <p><strong>Consumer Mode:</strong> Browse and purchase fresh farm products from local farmers.</p>
+                <p><i className="fas fa-info-circle" style={{ marginRight: "8px" }}></i><strong>Consumer Mode:</strong> Browse and purchase fresh farm products from local farmers.</p>
               ) : (
-                <p><strong>Farmer Mode:</strong> Manage your products and connect with buyers directly.</p>
+                <p><i className="fas fa-info-circle" style={{ marginRight: "8px" }}></i><strong>Farmer Mode:</strong> Manage your products and connect with buyers directly.</p>
               )}
             </div>
 
@@ -193,6 +192,7 @@ export default function Auth() {
               className="w-full py-2 rounded-lg font-semibold text-white transition-all hover:shadow-lg text-base"
               style={{ backgroundColor: role === "consumer" ? "#2d5016" : "#8B5A3C" }}
             >
+              <i className={`fas ${mode === "login" ? "fa-sign-in-alt" : "fa-user-plus"}`} style={{ marginRight: "8px" }}></i>
               {mode === "login" ? "Log In" : "Create Account"}
             </button>
           </form>
