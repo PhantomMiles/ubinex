@@ -4,217 +4,180 @@ import { useApp } from "../context/useAppContext";
 
 export default function Orders() {
   const [query, setQuery] = useState("");
-  const { currencies, currency } = useApp();
+  const { currencies, currency, user } = useApp();
   const symbol = (currencies && currencies[currency] && currencies[currency].symbol) || '₦';
 
-  // Mock orders data - in a real app, this would come from the backend
+  // Mock orders data with Enugu focus
   const [orders] = useState([
     {
-      id: 1,
-      productName: "Fresh Tomatoes",
+      id: "UBX-7721",
+      productName: "Fresh Tomatoes (Basket)",
       quantity: 5,
-      unit: "kg",
-      price: 2500,
-      totalPrice: 12500,
-      date: "2026-02-28",
+      unit: "basket",
+      totalPrice: 22500,
+      date: "2026-03-20",
       status: "delivered",
-      farmerName: "John Farmer",
-      farmLocation: "Enugu East"
+      farmerName: "Nenwe Farmers Coop",
+      farmLocation: "Amorji, Nenwe (Aninri LGA)"
     },
     {
-      id: 2,
-      productName: "Organic Spinach",
+      id: "UBX-8842",
+      productName: "Nsukka Yellow Pepper",
       quantity: 2,
       unit: "kg",
-      price: 3500,
-      totalPrice: 7000,
-      date: "2026-03-01",
+      totalPrice: 3000,
+      date: "2026-03-21",
       status: "in-transit",
-      farmerName: "Mary's Farm",
-      farmLocation: "Nsukka"
+      farmerName: "Obukpa Organic Farms",
+      farmLocation: "Ihe/Owerre, Nsukka LGA"
     },
     {
-      id: 3,
-      productName: "Fresh Corn",
+      id: "UBX-9910",
+      productName: "Large White Yam",
       quantity: 10,
-      unit: "pieces",
-      price: 800,
-      totalPrice: 8000,
-      date: "2026-03-02",
-      status: "pending",
-      farmerName: "Green Valley Farm",
-      farmLocation: "Agbani"
+      unit: "tuber",
+      totalPrice: 35000,
+      date: "2026-03-22",
+      status: "processing",
+      farmerName: "Inyi Root Crops",
+      farmLocation: "Umuagu, Inyi (Oji River LGA)"
     }
   ]);
 
-  const getStatusColor = (status) => {
+  const getStatusStyle = (status) => {
     switch (status) {
       case "delivered":
-        return "bg-green-100 text-green-800";
+        return "bg-primary/10 text-primary border-primary/20";
       case "in-transit":
-        return "bg-blue-100 text-blue-800";
-      case "pending":
-        return "bg-yellow-100 text-yellow-800";
+        return "bg-blue-50 text-blue-600 border-blue-100";
+      case "processing":
+        return "bg-orange-50 text-orange-600 border-orange-100";
       case "cancelled":
-        return "bg-red-100 text-red-800";
+        return "bg-red-50 text-red-600 border-red-100";
       default:
-        return "bg-gray-100 text-gray-800";
-    }
-  };
-
-  const getStatusIcon = (status) => {
-    switch (status) {
-      case "delivered":
-        return "fas fa-check-circle";
-      case "in-transit":
-        return "fas fa-truck";
-      case "pending":
-        return "fas fa-clock";
-      case "cancelled":
-        return "fas fa-times-circle";
-      default:
-        return "fas fa-question-circle";
+        return "bg-gray-50 text-gray-400 border-gray-100";
     }
   };
 
   const filteredOrders = orders.filter((order) =>
-    `${order.productName} ${order.farmerName}`.toLowerCase().includes(query.toLowerCase())
+    `${order.productName} ${order.farmerName} ${order.id}`.toLowerCase().includes(query.toLowerCase())
   );
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#f0ffe8' }}>
+    <div className="min-h-screen bg-white font-sans">
       <Navbar query={query} setQuery={setQuery} />
 
-      <main className="max-w-6xl mx-auto px-4 py-8">
-        {/* Section Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-extrabold mb-2" style={{ color: '#2d5016' }}>
-            <i className="fas fa-receipt mr-3"></i>
-            My Orders
-          </h1>
-          <p style={{ color: '#8B5A3C' }}>Track your purchases and delivery status</p>
+      <main className="max-w-7xl mx-auto px-6 py-12">
+        {/* Header */}
+        <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div>
+            <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.4em] mb-3">Accounts / History</p>
+            <h1 className="text-5xl font-black text-gray-900 italic tracking-tighter uppercase leading-none">
+              Order Tracking
+            </h1>
+          </div>
+          
+          <div className="w-full md:w-80">
+            <div className="relative">
+              <i className="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-300"></i>
+              <input 
+                type="text"
+                placeholder="Find Order ID..."
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="w-full pl-12 pr-6 py-4 bg-gray-50 border border-gray-100 rounded-lg text-[10px] font-black uppercase tracking-widest focus:ring-4 focus:ring-primary/5 transition shadow-inner outline-none"
+              />
+            </div>
+          </div>
         </div>
 
-        {/* Search Bar */}
-        <div className="mb-6">
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search orders by product or farmer name..."
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2d5016]"
-          />
-        </div>
-
-        {/* Orders List */}
-        <div className="space-y-4">
+        {/* Orders Listing */}
+        <div className="space-y-6">
           {filteredOrders.length > 0 ? (
             filteredOrders.map((order) => (
-              <div key={order.id} className="bg-white rounded-lg shadow border border-gray-200 p-6">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
-                  {/* Product Info */}
-                  <div className="md:col-span-4">
-                    <h3 className="font-semibold text-gray-900 text-lg">{order.productName}</h3>
-                    <p className="text-sm text-gray-600 mt-1">
-                      <i className="fas fa-user-tie mr-2" style={{ color: '#8B5A3C' }}></i>
-                      {order.farmerName}
-                    </p>
-                    <p className="text-sm text-gray-600">
-                      <i className="fas fa-map-marker-alt mr-2" style={{ color: '#8B5A3C' }}></i>
-                      {order.farmLocation}
-                    </p>
-                  </div>
-
-                  {/* Quantity & Price */}
-                  <div className="md:col-span-3">
-                    <div className="text-sm text-gray-600 mb-2">
-                      Quantity: <span className="font-semibold text-gray-900">{order.quantity} {order.unit}</span>
+              <div key={order.id} className="group bg-white rounded-xl border border-gray-100 hover:border-primary/20 hover:shadow-2xl transition-all duration-700 overflow-hidden relative">
+                <div className="absolute top-0 left-0 w-1 h-full bg-gray-50 group-hover:bg-primary transition duration-500"></div>
+                <div className="p-8">
+                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+                    {/* Order Meta */}
+                    <div className="flex-1">
+                      <div className="flex items-center gap-4 mb-4">
+                        <span className="text-[10px] font-black text-white bg-[#0a0a0a] px-3 py-1 rounded shadow-lg uppercase tracking-widest italic">#{order.id}</span>
+                        <span className={`text-[8px] font-black px-3 py-1 rounded border uppercase tracking-[0.2em] italic ${getStatusStyle(order.status)}`}>
+                          {order.status}
+                        </span>
+                      </div>
+                      <h3 className="text-2xl font-black text-gray-900 italic uppercase tracking-tighter mb-2 leading-none">{order.productName}</h3>
+                      <div className="flex flex-wrap gap-6 mt-4">
+                         <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2 italic">
+                           <i className="fas fa-calendar-alt text-primary/50"></i>
+                           {new Date(order.date).toLocaleDateString('en-NG', { day: 'numeric', month: 'long', year: 'numeric' })}
+                         </p>
+                         <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2 italic">
+                           <i className="fas fa-map-marker-alt text-accent/50"></i>
+                           {order.farmLocation}
+                         </p>
+                      </div>
                     </div>
-                    <div className="text-sm text-gray-600">
-                      Total: <span className="font-semibold text-gray-900">{symbol} {order.totalPrice.toLocaleString()}</span>
+
+                    {/* Order Details */}
+                    <div className="flex items-center gap-8 lg:border-l lg:border-gray-100 lg:pl-12">
+                       <div className="text-right">
+                         <p className="text-[8px] font-black text-gray-400 uppercase tracking-widest mb-1">Items Summary</p>
+                         <p className="text-sm font-black italic text-gray-900">{order.quantity} {order.unit}</p>
+                       </div>
+                       <div className="text-right">
+                         <p className="text-[8px] font-black text-gray-400 uppercase tracking-widest mb-1">Amount Settled</p>
+                         <p className="text-2xl font-black text-primary italic leading-none">{symbol}{order.totalPrice.toLocaleString()}</p>
+                       </div>
+                       <button className="w-12 h-12 rounded-lg bg-gray-50 hover:bg-primary hover:text-white transition flex items-center justify-center text-gray-300 group-hover:shadow-xl active:scale-95 transform">
+                         <i className="fas fa-arrow-right text-xs"></i>
+                       </button>
                     </div>
                   </div>
+                </div>
 
-                  {/* Date & Status */}
-                  <div className="md:col-span-3">
-                    <div className="text-sm text-gray-600 mb-3">
-                      <i className="fas fa-calendar mr-2"></i>
-                      {new Date(order.date).toLocaleDateString()}
-                    </div>
-                    <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-semibold ${getStatusColor(order.status)}`}>
-                      <i className={getStatusIcon(order.status)}></i>
-                      {order.status.charAt(0).toUpperCase() + order.status.slice(1).replace('-', ' ')}
-                    </span>
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="md:col-span-2 flex gap-2 justify-between md:justify-end">
-                    <button className="px-3 py-2 text-sm rounded-lg transition border border-gray-300 hover:bg-gray-100" style={{ color: '#2d5016' }}>
-                      <i className="fas fa-eye mr-2"></i>
-                      Details
-                    </button>
-                  </div>
+                {/* Progress Visualizer */}
+                <div className="px-8 pb-4">
+                   <div className="flex justify-between mb-2">
+                       {["Received", "Processing", "Shipped", "Delivered"].map((step, idx) => (
+                         <div key={idx} className={`text-[8px] font-black uppercase tracking-widest italic ${idx <= (order.status === 'delivered' ? 3 : order.status === 'in-transit' ? 2 : 1) ? 'text-primary' : 'text-gray-200'}`}>
+                            {step}
+                         </div>
+                       ))}
+                   </div>
+                   <div className="h-1 bg-gray-50 rounded-full overflow-hidden">
+                      <div 
+                        className={`h-full bg-primary transition-all duration-1000 ${order.status === 'delivered' ? 'w-full' : order.status === 'in-transit' ? 'w-2/3' : 'w-1/3'}`}
+                      ></div>
+                   </div>
                 </div>
               </div>
             ))
           ) : (
-            <div className="text-center py-12 bg-white rounded-lg border border-gray-200">
-              <i className="fas fa-inbox text-5xl text-gray-300 mb-4 block"></i>
-              <p className="text-gray-500 text-lg">
-                {query ? "No orders match your search" : "You haven't placed any orders yet"}
-              </p>
-              {!query && (
-                <button
-                  onClick={() => window.location.hash = '#/'}
-                  className="mt-4 px-6 py-2 rounded-lg text-white transition"
-                  style={{ backgroundColor: '#2d5016' }}
-                >
-                  <i className="fas fa-shopping-bag mr-2"></i>
-                  Start Shopping
-                </button>
-              )}
+            <div className="py-40 text-center bg-gray-50 rounded-xl border border-dashed border-gray-200 flex flex-col items-center justify-center">
+               <div className="w-20 h-20 bg-white rounded-lg shadow-xl flex items-center justify-center text-gray-100 text-3xl mb-10 border border-gray-50">
+                  <i className="fas fa-receipt opacity-20"></i>
+               </div>
+               <h2 className="text-3xl font-black text-gray-900 uppercase italic tracking-tighter mb-4">No records found</h2>
+               <p className="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em] italic">We couldn't find any orders matching your criteria</p>
             </div>
           )}
         </div>
 
-        {/* Summary Stats */}
-        {filteredOrders.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-            <div className="bg-white rounded-lg shadow p-6 border border-gray-200">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600">Total Orders</p>
-                  <p className="text-2xl font-bold mt-2" style={{ color: '#2d5016' }}>{orders.length}</p>
-                </div>
-                <i className="fas fa-shopping-bag text-4xl" style={{ color: '#f0ffe8' }}></i>
+        {/* Verification / Support Info */}
+        <div className="mt-20 p-12 bg-gray-50 rounded-xl border border-gray-100 flex flex-col md:flex-row justify-between items-center gap-8">
+           <div className="flex items-center gap-6">
+              <div className="w-16 h-16 rounded-xl bg-white shadow-xl flex items-center justify-center text-primary text-2xl border border-gray-200">
+                 <i className="fas fa-headset"></i>
               </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow p-6 border border-gray-200">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600">Total Spent</p>
-                  <p className="text-2xl font-bold mt-2" style={{ color: '#2d5016' }}>
-                    {symbol} {orders.reduce((sum, o) => sum + o.totalPrice, 0).toLocaleString()}
-                  </p>
-                </div>
-                <i className="fas fa-dollar-sign text-4xl" style={{ color: '#f0ffe8' }}></i>
+              <div>
+                 <h4 className="text-xl font-black italic uppercase tracking-tighter text-gray-900 leading-none mb-2">Need Assistance?</h4>
+                 <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest italic leading-none">Our logistics support is active 24/7 for you</p>
               </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow p-6 border border-gray-200">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600">Delivered Orders</p>
-                  <p className="text-2xl font-bold mt-2" style={{ color: '#2d5016' }}>
-                    {orders.filter(o => o.status === 'delivered').length}
-                  </p>
-                </div>
-                <i className="fas fa-check-circle text-4xl" style={{ color: '#f0ffe8' }}></i>
-              </div>
-            </div>
-          </div>
-        )}
+           </div>
+           <button className="bg-[#0a0a0a] hover:bg-primary text-white px-10 py-5 rounded-lg text-[10px] font-black uppercase tracking-[0.3em] shadow-2xl transition-all duration-500 italic active:scale-95">Open Support Ticket</button>
+        </div>
       </main>
     </div>
   );

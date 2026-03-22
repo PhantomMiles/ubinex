@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #2d5016;
+  --color-accent: #8B5A3C;
+  --color-bg-soft: #f0ffe8;
+  
+  --font-sans: 'Inter', 'Lato', system-ui, -apple-system, sans-serif;
+  --font-lato: 'Lato', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-bg-soft text-gray-900 font-sans;
+  }
+}

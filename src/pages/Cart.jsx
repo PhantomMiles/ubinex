@@ -4,57 +4,19 @@ import { useApp } from "../context/useAppContext";
 
 export default function Cart() {
   const [query, setQuery] = useState("");
-  const { currencies, currency } = useApp();
+  const { currencies, currency, cart, removeFromCart, updateCartQuantity } = useApp();
   const symbol = (currencies && currencies[currency] && currencies[currency].symbol) || '₦';
 
-  // Mock cart items - in a real app, this would come from state management (Redux, Context, etc.)
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      productName: "Fresh Tomatoes",
-      quantity: 5,
-      unit: "kg",
-      pricePerUnit: 2500,
-      farmerName: "John Farmer",
-      farmLocation: "Enugu East",
-      image: "tomatoes.jpg"
-    },
-    {
-      id: 2,
-      productName: "Organic Spinach",
-      quantity: 2,
-      unit: "kg",
-      pricePerUnit: 3500,
-      farmerName: "Mary's Farm",
-      farmLocation: "Nsukka",
-      image: "spinach.jpg"
-    }
-  ]);
-
-  const updateQuantity = (id, newQuantity) => {
-    if (newQuantity < 1) {
-      removeItem(id);
-    } else {
-      setCartItems(cartItems.map(item => 
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      ));
-    }
-  };
-
-  const removeItem = (id) => {
-    setCartItems(cartItems.filter(item => item.id !== id));
-  };
-
   const calculateSubtotal = () => {
-    return cartItems.reduce((sum, item) => sum + (item.quantity * item.pricePerUnit), 0);
+    return cart.reduce((sum, item) => sum + (item.quantity * item.price), 0);
   };
 
   const calculateTax = () => {
-    return Math.round(calculateSubtotal() * 0.075); // 7.5% tax
+    return Math.round(calculateSubtotal() * 0.05); // 5% VAT
   };
 
   const calculateShipping = () => {
-    return cartItems.length > 0 ? 1500 : 0; // Fixed shipping
+    return cart.length > 0 ? 2000 : 0; // Local delivery fee
   };
 
   const calculateTotal = () => {
@@ -62,171 +24,158 @@ export default function Cart() {
   };
 
   const handleCheckout = () => {
-    alert("Proceeding to checkout...\nTotal: " + symbol + " " + calculateTotal().toLocaleString());
-    // In a real app, redirect to checkout page
+    alert("Proceeding to checkout via Paystack...\nTotal: " + symbol + " " + calculateTotal().toLocaleString());
+  };
+
+  const navigateTo = (path) => {
+    window.location.hash = `/${path}`;
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#f0ffe8' }}>
+    <div className="min-h-screen bg-white font-sans">
       <Navbar query={query} setQuery={setQuery} />
 
-      <main className="max-w-6xl mx-auto px-4 py-8">
-        {/* Section Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-extrabold mb-2" style={{ color: '#2d5016' }}>
-            <i className="fas fa-shopping-cart mr-3"></i>
-            Shopping Cart
+      <main className="max-w-7xl mx-auto px-6 py-12">
+        {/* Header */}
+        <div className="mb-12">
+          <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.4em] mb-3">Shop / Checkout</p>
+          <h1 className="text-5xl font-black text-gray-900 italic tracking-tighter uppercase leading-none">
+            Shopping Bag
           </h1>
-          <p style={{ color: '#8B5A3C' }}>{cartItems.length} item{cartItems.length !== 1 ? 's' : ''} in your cart</p>
         </div>
 
-        {cartItems.length > 0 ? (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Cart Items */}
-            <div className="lg:col-span-2">
-              <div className="space-y-4">
-                {cartItems.map((item) => (
-                  <div key={item.id} className="bg-white rounded-lg shadow border border-gray-200 p-6">
-                    <div className="flex flex-col md:flex-row gap-6">
-                      {/* Product Image Placeholder */}
-                      <div className="w-full md:w-32 h-32 bg-gray-200 rounded-lg flex items-center justify-center">
-                        <i className="fas fa-image text-gray-400 text-3xl"></i>
-                      </div>
+        {cart.length > 0 ? (
+          <div className="flex flex-col lg:flex-row gap-16">
+            {/* Cart Items List */}
+            <div className="flex-1 space-y-8">
+              {cart.map((item) => (
+                <div key={item.id} className="group flex flex-col sm:flex-row gap-8 pb-8 border-b border-gray-100 last:border-0">
+                  <div className="w-full sm:w-40 h-40 rounded-xl overflow-hidden bg-gray-50 border border-gray-100 relative shadow-inner">
+                    <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+                    <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition duration-500"></div>
+                  </div>
 
-                      {/* Product Details */}
-                      <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-gray-900">{item.productName}</h3>
-                        <p className="text-sm text-gray-600 mt-1">
-                          <i className="fas fa-user-tie mr-2" style={{ color: '#8B5A3C' }}></i>
-                          {item.farmerName}
-                        </p>
-                        <p className="text-sm text-gray-600">
-                          <i className="fas fa-map-marker-alt mr-2" style={{ color: '#8B5A3C' }}></i>
-                          {item.farmLocation}
-                        </p>
-                        <p className="text-sm font-semibold mt-3" style={{ color: '#2d5016' }}>
-                          {symbol} {item.pricePerUnit.toLocaleString()} per {item.unit}
-                        </p>
-                      </div>
-
-                      {/* Quantity & Price */}
-                      <div className="flex flex-col items-end justify-between">
-                        <div className="flex items-center gap-2 border border-gray-300 rounded-lg p-1">
-                          <button
-                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            className="w-8 h-8 flex items-center justify-center hover:bg-gray-100 rounded transition"
-                          >
-                            <i className="fas fa-minus text-sm"></i>
-                          </button>
-                          <span className="w-8 text-center font-semibold">{item.quantity}</span>
-                          <button
-                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            className="w-8 h-8 flex items-center justify-center hover:bg-gray-100 rounded transition"
-                          >
-                            <i className="fas fa-plus text-sm"></i>
-                          </button>
-                        </div>
-
-                        <div className="text-right mt-4">
-                          <p className="text-sm text-gray-600">Subtotal</p>
-                          <p className="text-lg font-bold" style={{ color: '#2d5016' }}>
-                            {symbol} {(item.quantity * item.pricePerUnit).toLocaleString()}
-                          </p>
-                        </div>
-
-                        <button
-                          onClick={() => removeItem(item.id)}
-                          className="mt-4 text-red-600 hover:text-red-900 text-sm font-medium transition"
+                  <div className="flex-1 flex flex-col justify-between py-1 font-sans">
+                    <div>
+                      <div className="flex justify-between items-start mb-2">
+                        <h3 className="text-xl font-black text-gray-900 italic uppercase tracking-tighter leading-none">{item.name}</h3>
+                        <button 
+                          onClick={() => removeFromCart(item.id)}
+                          className="text-[9px] font-black text-red-600 uppercase tracking-widest hover:underline transform active:scale-95"
                         >
-                          <i className="fas fa-trash mr-1"></i>
-                          Remove
+                          Delete Item
                         </button>
+                      </div>
+                      <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-1 flex items-center gap-2 italic">
+                        <i className="fas fa-leaf text-primary"></i> {item.category}
+                      </p>
+                      <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2 italic">
+                        <i className="fas fa-map-marker-alt text-accent"></i> {item.location || 'Enugu, Nigeria'}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center justify-between mt-8">
+                      <div className="flex items-center gap-4 bg-gray-50 px-4 py-2 rounded-lg border border-gray-100 shadow-inner">
+                        <button 
+                          onClick={() => updateCartQuantity(item.id, item.quantity - 1)}
+                          className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-primary transition active:scale-75"
+                        >
+                          <i className="fas fa-minus text-xs"></i>
+                        </button>
+                        <span className="text-xs font-black w-4 text-center">{item.quantity}</span>
+                        <button 
+                          onClick={() => updateCartQuantity(item.id, item.quantity + 1)}
+                          className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-primary transition active:scale-75"
+                        >
+                          <i className="fas fa-plus text-xs"></i>
+                        </button>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-[8px] font-black text-gray-400 uppercase tracking-widest mb-1">Subtotal Value</p>
+                        <p className="text-xl font-black text-primary italic leading-none">{symbol}{(item.quantity * item.price).toLocaleString()}</p>
                       </div>
                     </div>
                   </div>
-                ))}
-              </div>
-
-              {/* Continue Shopping Button */}
-              <button
-                onClick={() => window.location.hash = '#/'}
-                className="mt-6 w-full px-6 py-3 rounded-lg text-white transition font-semibold"
-                style={{ backgroundColor: '#8B5A3C' }}
+                </div>
+              ))}
+              
+              <button 
+                onClick={() => navigateTo('categories')}
+                className="text-[9px] font-black text-gray-400 uppercase tracking-[0.2em] hover:text-primary transition flex items-center gap-3 italic mt-12 bg-gray-50 px-6 py-3 rounded-lg border border-gray-100"
               >
-                <i className="fas fa-arrow-left mr-2"></i>
-                Continue Shopping
+                <i className="fas fa-arrow-left"></i>
+                Continue Exploring Markets
               </button>
             </div>
 
             {/* Order Summary Sidebar */}
-            <div className="lg:col-span-1">
-              <div className="bg-white rounded-lg shadow border border-gray-200 p-6 sticky top-24">
-                <h2 className="text-xl font-bold text-gray-900 mb-6">Order Summary</h2>
-
-                <div className="space-y-4 border-b border-gray-200 pb-4">
-                  <div className="flex justify-between text-gray-600">
-                    <span>Subtotal</span>
-                    <span className="font-semibold">{symbol} {calculateSubtotal().toLocaleString()}</span>
+            <aside className="w-full lg:w-96">
+              <div className="bg-[#0a0a0a] text-white p-10 rounded-xl shadow-2xl relative overflow-hidden lg:sticky lg:top-32 border border-white/5">
+                {/* Decorative Pattern */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                
+                <h2 className="text-2xl font-black italic uppercase tracking-tighter mb-10 border-b border-white/10 pb-6 leading-none">Order Checklist</h2>
+                
+                <div className="space-y-6 mb-10">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] font-black text-white/40 uppercase tracking-widest italic">Subtotal</span>
+                    <span className="text-sm font-black italic">{symbol}{calculateSubtotal().toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between text-gray-600">
-                    <span>Tax (7.5%)</span>
-                    <span className="font-semibold">{symbol} {calculateTax().toLocaleString()}</span>
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] font-black text-white/40 uppercase tracking-widest italic">Delivery (Logistics)</span>
+                    <span className="text-sm font-black italic">{symbol}{calculateShipping().toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between text-gray-600">
-                    <span>Shipping</span>
-                    <span className="font-semibold">{symbol} {calculateShipping().toLocaleString()}</span>
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] font-black text-white/40 uppercase tracking-widest italic">VAT (5%)</span>
+                    <span className="text-sm font-black italic">{symbol}{calculateTax().toLocaleString()}</span>
                   </div>
                 </div>
 
-                <div className="mt-4 pt-4 border-t border-gray-200">
-                  <div className="flex justify-between items-center mb-6">
-                    <span className="text-lg font-bold text-gray-900">Total</span>
-                    <span className="text-2xl font-bold" style={{ color: '#2d5016' }}>
-                      {symbol} {calculateTotal().toLocaleString()}
-                    </span>
+                <div className="pt-8 border-t border-white/10 mb-10">
+                  <div className="flex justify-between items-end">
+                    <div>
+                       <p className="text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-1 italic">Total Due</p>
+                       <p className="text-4xl font-black italic text-primary leading-none">{symbol}{calculateTotal().toLocaleString()}</p>
+                    </div>
                   </div>
-
-                  <button
-                    onClick={handleCheckout}
-                    className="w-full px-6 py-3 rounded-lg text-white font-semibold transition hover:shadow-lg"
-                    style={{ backgroundColor: '#2d5016' }}
-                  >
-                    <i className="fas fa-credit-card mr-2"></i>
-                    Proceed to Checkout
-                  </button>
                 </div>
 
-                {/* Trust Badges */}
-                <div className="mt-6 pt-6 border-t border-gray-200 space-y-3 text-sm text-gray-600">
-                  <div className="flex items-center gap-2">
-                    <i className="fas fa-lock text-green-600"></i>
-                    Safe and secure payments
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <i className="fas fa-truck text-green-600"></i>
-                    Fast delivery to your location
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <i className="fas fa-undo text-green-600"></i>
-                    Easy returns & refunds
-                  </div>
+                <button 
+                  onClick={handleCheckout}
+                  className="w-full bg-primary hover:bg-white hover:text-primary text-white py-5 rounded-lg text-[10px] font-black uppercase tracking-[0.3em] shadow-xl transition-all duration-500 italic active:scale-95"
+                >
+                  Pay Securely Now
+                </button>
+
+                <div className="mt-12 pt-10 border-t border-white/5 space-y-4 font-sans">
+                   <div className="flex items-center gap-4 text-[8px] font-bold text-white/30 uppercase tracking-widest italic">
+                      <i className="fas fa-shield-alt text-primary opacity-50"></i>
+                      Secured by Paystack Encryption
+                   </div>
+                   <div className="flex items-center gap-4 text-[8px] font-bold text-white/30 uppercase tracking-widest italic">
+                      <i className="fas fa-map-marker-alt text-primary opacity-50"></i>
+                      Enugu Logistics Network Active
+                   </div>
                 </div>
               </div>
-            </div>
+            </aside>
           </div>
         ) : (
-          <div className="text-center py-16 bg-white rounded-lg border border-gray-200">
-            <i className="fas fa-shopping-cart text-6xl text-gray-300 mb-4 block"></i>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Your cart is empty</h2>
-            <p className="text-gray-600 mb-6">Start adding fresh farm products to your cart!</p>
-            <button
-              onClick={() => window.location.hash = '#/'}
-              className="px-8 py-3 rounded-lg text-white font-semibold transition hover:shadow-lg"
-              style={{ backgroundColor: '#2d5016' }}
-            >
-              <i className="fas fa-shopping-bag mr-2"></i>
-              Start Shopping
-            </button>
+          <div className="py-40 text-center bg-gray-50 rounded-xl border border-dashed border-gray-200 mt-12 font-sans relative overflow-hidden min-h-[500px] flex flex-col items-center justify-center">
+             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 blur-[100px] rounded-full pointer-events-none"></div>
+             <div className="relative z-10">
+                <div className="w-24 h-24 bg-white rounded-xl shadow-xl flex items-center justify-center text-gray-100 text-4xl mb-10 mx-auto border border-gray-50">
+                   <i className="fas fa-shopping-basket opacity-20"></i>
+                </div>
+                <h2 className="text-3xl font-black text-gray-900 uppercase italic tracking-tighter mb-4">Your basket is empty</h2>
+                <p className="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em] mb-12 italic">Fresh farm harvests are waiting for you in the markets</p>
+                <button 
+                  onClick={() => navigateTo('categories')}
+                  className="bg-[#0a0a0a] text-white px-16 py-5 rounded-lg text-[10px] font-black uppercase tracking-[0.4em] shadow-2xl hover:bg-primary transition-all duration-500 italic active:scale-95 transform"
+                >
+                  View Today's Harvests
+                </button>
+             </div>
           </div>
         )}
       </main>
