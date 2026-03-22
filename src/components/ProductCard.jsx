@@ -12,8 +12,20 @@ export default function ProductCard({ product = {}, onView }) {
     addToCart(product);
   };
 
+  const handleNegotiate = (e) => {
+    e.stopPropagation();
+    // To trigger negotiation, we first need to open details or have a direct way.
+    // However, the home/categories pages handle the negotiation modal.
+    // For now, we'll trigger onView which opens the details, and the user can negotiate there.
+    // Or we can add an onNegotiate prop if we want direct access.
+    onView && onView(product);
+  };
+
   return (
-    <article className="group bg-white rounded-xl shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 flex flex-col h-full relative font-sans">
+    <article 
+      onClick={() => onView && onView(product)}
+      className="group bg-white rounded-xl shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 flex flex-col h-full relative font-sans cursor-pointer"
+    >
       {/* Discount Badge */}
       {product.discount && (
         <div className="absolute top-4 left-4 z-10 bg-red-600 text-white text-[8px] font-black px-2 py-1 rounded shadow-lg uppercase tracking-widest">
@@ -30,17 +42,25 @@ export default function ProductCard({ product = {}, onView }) {
         />
         <div className="absolute inset-0 bg-black/0 group-hover:bg-primary/5 transition duration-500"></div>
         
-        {/* Quick Actions Overlay */}
-        <div className="absolute bottom-4 right-4 flex flex-col gap-2 translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300">
+        {/* Quick Actions Overlay - Visible on MD+, hidden on small screens by default (overlay) */}
+        <div className="absolute bottom-4 right-4 flex flex-col gap-2 translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 md:flex hidden">
            <button className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white shadow-xl transition active:scale-95">
              <i className="far fa-heart"></i>
            </button>
            <button 
-             onClick={() => onView && onView(product)}
+             onClick={(e) => { e.stopPropagation(); onView && onView(product); }}
              className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white shadow-xl transition active:scale-95"
            >
              <i className="far fa-eye"></i>
            </button>
+        </div>
+
+        {/* Mobile-only Direct Action Badge */}
+        <div className="absolute bottom-3 left-3 md:hidden">
+           <div className="bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-lg shadow-xl border border-gray-100 flex items-center gap-2">
+              <i className="fas fa-handshake text-primary text-[10px]"></i>
+              <span className="text-[8px] font-black uppercase tracking-widest text-primary">Negotiable</span>
+           </div>
         </div>
       </div>
 
@@ -69,18 +89,28 @@ export default function ProductCard({ product = {}, onView }) {
             <span className="text-[9px] text-gray-400 font-black ml-1 uppercase tracking-widest">/ {unit}</span>
           </div>
           
-          <button 
-            onClick={handleAddToCart}
-            className="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center text-gray-400 hover:bg-primary hover:text-white transition shadow-inner group-hover:shadow-md active:scale-95"
-            title="Add to Basket"
-          >
-            <i className="fas fa-shopping-basket text-xs"></i>
-          </button>
+          <div className="flex items-center gap-2">
+            {/* Negotiate Button - Visible for both, but more prominent on card now */}
+            <button 
+              onClick={handleNegotiate}
+              className="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center text-gray-400 hover:bg-primary hover:text-white transition shadow-inner active:scale-95"
+              title="Negotiate Price"
+            >
+              <i className="fas fa-comments text-xs"></i>
+            </button>
+            <button 
+              onClick={handleAddToCart}
+              className="w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center hover:bg-[#0a0a0a] transition shadow-md active:scale-95"
+              title="Add to Basket"
+            >
+              <i className="fas fa-shopping-basket text-xs"></i>
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Hover Status */}
-      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-2 py-1 rounded text-[8px] font-black text-primary opacity-0 group-hover:opacity-100 transition duration-300 shadow-sm border border-primary/10 uppercase tracking-widest">
+      {/* Status */}
+      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-2 py-1 rounded text-[8px] font-black text-primary opacity-0 group-hover:opacity-100 transition duration-300 shadow-sm border border-primary/10 uppercase tracking-widest md:block hidden">
         Available
       </div>
     </article>
