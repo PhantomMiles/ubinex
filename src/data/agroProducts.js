@@ -10,7 +10,6 @@ export const agroProducts = [
         location: "Amorji, Nenwe (Aninri LGA)",
         stock: 50,
         description: "Freshly harvested Roma tomatoes from the fertile lands of Nenwe.",
-        icon: "fa-apple"
     },
     {
         id: "2",
@@ -22,7 +21,6 @@ export const agroProducts = [
         location: "Ihe/Owerre, Nsukka LGA",
         stock: 120,
         description: "The famous aromatic and spicy yellow pepper unique to Nsukka.",
-        icon: "fa-fire"
     },
     {
         id: "3",
@@ -34,31 +32,28 @@ export const agroProducts = [
         location: "Awgu Town, Awgu LGA",
         stock: 200,
         description: "Unadulterated palm oil processed locally in Awgu.",
-        icon: "fa-droplet"
     },
     {
         id: "4",
         name: "Large White Yam (Tubers)",
-        category: "Root Crops",
+        category: "Roots",
         price: 3500,
         unit: "tuber",
         image: "https://i.pinimg.com/1200x/49/4e/8e/494e8eb058f63e67fab6ef6662edf16e.jpg",
         location: "Umuagu, Inyi (Oji River LGA)",
         stock: 300,
         description: "Premium large white yams from the Inyi community.",
-        icon: "fa-leaf"
     },
     {
         id: "5",
         name: "Fresh Cassava (IJW)",
-        category: "Root Crops",
+        category: "Roots",
         price: 800,
         unit: "kg",
         image: "https://i.pinimg.com/1200x/91/47/98/914798111718a729cefb25504546123b.jpg",
         location: "Umunagbo, Ogwogo (Enugu East LGA)",
         stock: 500,
         description: "Fresh cassava tubers ready for processing into Garri or Fufu.",
-        icon: "fa-leaf"
     },
     {
         id: "6",
@@ -70,7 +65,6 @@ export const agroProducts = [
         location: "Ajuona, Obukpa (Nsukka LGA)",
         stock: 45,
         description: "100% pure organic honey harvested from the bush of Obukpa.",
-        icon: "fa-flask"
     },
     {
         id: "7",
@@ -82,7 +76,6 @@ export const agroProducts = [
         location: "Abacheku, Ndeaboh (Aninri LGA)",
         stock: 400,
         description: "Nutritious stone-free local brown rice from Aninri.",
-        icon: "fa-wheat-awn"
     },
     {
         id: "8",
@@ -94,7 +87,6 @@ export const agroProducts = [
         location: "Amorji, Nenwe (Aninri LGA)",
         stock: 80,
         description: "Crispy and fresh garden eggs, a local favorite.",
-        icon: "fa-leaf"
     },
     {
         id: "9",
@@ -106,7 +98,6 @@ export const agroProducts = [
         location: "Ogbete Market, Enugu North LGA",
         stock: 60,
         description: "High quality imported and locally processed stockfish.",
-        icon: "fa-fish"
     },
     {
         id: "10",
@@ -118,8 +109,107 @@ export const agroProducts = [
         location: "Amani-Odo, Ezeagu LGA",
         stock: 150,
         description: "Finely shredded and dried cassava for making the popular African Salad.",
-        icon: "fa-box-open"
-    }
+    },
+    // New Products
+    {
+        id: "11",
+        name: "Local Goat Meat",
+        category: "Meat",
+        price: 5500,
+        unit: "kg",
+        image: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&h=400",
+        location: "Nachi, Udi LGA",
+        stock: 30,
+        description: "Freshly slaughtered local goat meat, healthy and organic.",
+    },
+    {
+        id: "12",
+        name: "Catfish (Point & Kill)",
+        category: "Fish",
+        price: 3500,
+        unit: "large size",
+        image: "https://images.unsplash.com/photo-1516594798947-e65505dbb29d?q=80&w=400&h=400",
+        location: "Adani, Uzo Uwani LGA",
+        stock: 100,
+        description: "Fresh live catfish directly from the ponds of Adani.",
+    },
+    {
+        id: "13",
+        name: "Old Layer Chicken",
+        category: "Poultry",
+        price: 4500,
+        unit: "bird",
+        image: "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?q=80&w=400&h=400",
+        location: "Emene, Enugu East LGA",
+        stock: 200,
+        description: "Healthy old layer chickens, perfect for traditional soups.",
+    },
+    {
+        id: "14",
+        name: "Fresh Eggs (Crate)",
+        category: "Poultry",
+        price: 3600,
+        unit: "crate",
+        image: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?q=80&w=400&h=400",
+        location: "Obollo-Afor, Udenu LGA",
+        stock: 150,
+        description: "Large size fresh eggs directly from the poultry farm.",
+    },
+    {
+        id: "15",
+        name: "Dried Tilapia Fish",
+        category: "Fish",
+        price: 2000,
+        unit: "medium bunch",
+        image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=400&h=400",
+        location: "Nimbo, Uzo Uwani LGA",
+        stock: 85,
+        description: "Well-dried tilapia fish, perfect for local delicacies.",
+    },
+    {
+        id: "16",
+        name: "Smoked Beef (Suya style)",
+        category: "Meat",
+        price: 7000,
+        unit: "kg",
+        image: "https://images.unsplash.com/photo-1558030006-45ef67dee930?q=80&w=400&h=400",
+        location: "9th Mile, Udi LGA",
+        stock: 40,
+        description: "Quality smoked beef processed with traditional spices.",
+    },
+    {
+        id: "17",
+        name: "Sweet Oranges (Basket)",
+        category: "Fruits",
+        price: 3500,
+        unit: "basket",
+        image: "https://images.unsplash.com/photo-1557800636-894a64c1696f?q=80&w=400&h=400",
+        location: "Igga, Uzo Uwani LGA",
+        stock: 150,
+        description: "Freshly picked sweet oranges from northern Enugu.",
+    },
+    {
+        id: "18",
+        name: "Honey Pineapples",
+        category: "Fruits",
+        price: 800,
+        unit: "piece",
+        image: "https://images.unsplash.com/photo-1550258114-68bd66523ad7?q=80&w=400&h=400",
+        location: "9th Mile, Udi LGA",
+        stock: 200,
+        description: "Large, juicy honey pineapples consolidated at 9th Mile.",
+    },
+    {
+        id: "19",
+        name: "Local Bananas (Bunch)",
+        category: "Fruits",
+        price: 2500,
+        unit: "bunch",
+        image: "https://images.unsplash.com/photo-1571771894821-ad990241ec7a?q=80&w=400&h=400",
+        location: "Amechi, Enugu South LGA",
+        stock: 100,
+        description: "Sweet local bananas harvested in the outskirts of the city.",
+    },
 ];
 
 export const enuguLGAs = [

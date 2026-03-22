@@ -39,7 +39,7 @@ export default function Cart() {
         {/* Header */}
         <div className="mb-12">
           <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.4em] mb-3">Shop / Checkout</p>
-          <h1 className="text-5xl font-black text-gray-900 italic tracking-tighter uppercase leading-none">
+          <h1 className="text-5xl font-black text-gray-900 tracking-tighter uppercase leading-none">
             Shopping Bag
           </h1>
         </div>
@@ -58,7 +58,7 @@ export default function Cart() {
                   <div className="flex-1 flex flex-col justify-between py-1 font-sans">
                     <div>
                       <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-xl font-black text-gray-900 italic uppercase tracking-tighter leading-none">{item.name}</h3>
+                        <h3 className="text-xl font-black text-gray-900 uppercase tracking-tighter leading-none">{item.name}</h3>
                         <button 
                           onClick={() => removeFromCart(item.id)}
                           className="text-[9px] font-black text-red-600 uppercase tracking-widest hover:underline transform active:scale-95"
@@ -66,10 +66,10 @@ export default function Cart() {
                           Delete Item
                         </button>
                       </div>
-                      <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-1 flex items-center gap-2 italic">
+                      <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-1 flex items-center gap-2">
                         <i className="fas fa-leaf text-primary"></i> {item.category}
                       </p>
-                      <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2 italic">
+                      <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2">
                         <i className="fas fa-map-marker-alt text-accent"></i> {item.location || 'Enugu, Nigeria'}
                       </p>
                     </div>
@@ -92,7 +92,7 @@ export default function Cart() {
                       </div>
                       <div className="text-right">
                         <p className="text-[8px] font-black text-gray-400 uppercase tracking-widest mb-1">Subtotal Value</p>
-                        <p className="text-xl font-black text-primary italic leading-none">{symbol}{(item.quantity * item.price).toLocaleString()}</p>
+                        <p className="text-xl font-black text-primary leading-none">{symbol}{(item.quantity * item.price).toLocaleString()}</p>
                       </div>
                     </div>
                   </div>
@@ -101,7 +101,7 @@ export default function Cart() {
               
               <button 
                 onClick={() => navigateTo('categories')}
-                className="text-[9px] font-black text-gray-400 uppercase tracking-[0.2em] hover:text-primary transition flex items-center gap-3 italic mt-12 bg-gray-50 px-6 py-3 rounded-lg border border-gray-100"
+                className="text-[9px] font-black text-gray-400 uppercase tracking-[0.2em] hover:text-primary transition flex items-center gap-3 mt-12 bg-gray-50 px-6 py-3 rounded-lg border border-gray-100"
               >
                 <i className="fas fa-arrow-left"></i>
                 Continue Exploring Markets
@@ -114,45 +114,45 @@ export default function Cart() {
                 {/* Decorative Pattern */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2"></div>
                 
-                <h2 className="text-2xl font-black italic uppercase tracking-tighter mb-10 border-b border-white/10 pb-6 leading-none">Order Checklist</h2>
+                <h2 className="text-2xl font-black uppercase tracking-tighter mb-10 border-b border-white/10 pb-6 leading-none">Order Checklist</h2>
                 
                 <div className="space-y-6 mb-10">
                   <div className="flex justify-between items-center">
-                    <span className="text-[10px] font-black text-white/40 uppercase tracking-widest italic">Subtotal</span>
-                    <span className="text-sm font-black italic">{symbol}{calculateSubtotal().toLocaleString()}</span>
+                    <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Subtotal</span>
+                    <span className="text-sm font-black">{symbol}{calculateSubtotal().toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-[10px] font-black text-white/40 uppercase tracking-widest italic">Delivery (Logistics)</span>
-                    <span className="text-sm font-black italic">{symbol}{calculateShipping().toLocaleString()}</span>
+                    <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Delivery (Logistics)</span>
+                    <span className="text-sm font-black">{symbol}{calculateShipping().toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-[10px] font-black text-white/40 uppercase tracking-widest italic">VAT (5%)</span>
-                    <span className="text-sm font-black italic">{symbol}{calculateTax().toLocaleString()}</span>
+                    <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">VAT (5%)</span>
+                    <span className="text-sm font-black">{symbol}{calculateTax().toLocaleString()}</span>
                   </div>
                 </div>
 
                 <div className="pt-8 border-t border-white/10 mb-10">
                   <div className="flex justify-between items-end">
                     <div>
-                       <p className="text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-1 italic">Total Due</p>
-                       <p className="text-4xl font-black italic text-primary leading-none">{symbol}{calculateTotal().toLocaleString()}</p>
+                       <p className="text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-1">Total Due</p>
+                       <p className="text-4xl font-black text-primary leading-none">{symbol}{calculateTotal().toLocaleString()}</p>
                     </div>
                   </div>
                 </div>
 
                 <button 
                   onClick={handleCheckout}
-                  className="w-full bg-primary hover:bg-white hover:text-primary text-white py-5 rounded-lg text-[10px] font-black uppercase tracking-[0.3em] shadow-xl transition-all duration-500 italic active:scale-95"
+                  className="w-full bg-primary hover:bg-white hover:text-primary text-white py-5 rounded-lg text-[10px] font-black uppercase tracking-[0.3em] shadow-xl transition-all duration-500 active:scale-95"
                 >
                   Pay Securely Now
                 </button>
 
                 <div className="mt-12 pt-10 border-t border-white/5 space-y-4 font-sans">
-                   <div className="flex items-center gap-4 text-[8px] font-bold text-white/30 uppercase tracking-widest italic">
+                   <div className="flex items-center gap-4 text-[8px] font-bold text-white/30 uppercase tracking-widest">
                       <i className="fas fa-shield-alt text-primary opacity-50"></i>
                       Secured by Paystack Encryption
                    </div>
-                   <div className="flex items-center gap-4 text-[8px] font-bold text-white/30 uppercase tracking-widest italic">
+                   <div className="flex items-center gap-4 text-[8px] font-bold text-white/30 uppercase tracking-widest">
                       <i className="fas fa-map-marker-alt text-primary opacity-50"></i>
                       Enugu Logistics Network Active
                    </div>
@@ -167,11 +167,11 @@ export default function Cart() {
                 <div className="w-24 h-24 bg-white rounded-xl shadow-xl flex items-center justify-center text-gray-100 text-4xl mb-10 mx-auto border border-gray-50">
                    <i className="fas fa-shopping-basket opacity-20"></i>
                 </div>
-                <h2 className="text-3xl font-black text-gray-900 uppercase italic tracking-tighter mb-4">Your basket is empty</h2>
-                <p className="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em] mb-12 italic">Fresh farm harvests are waiting for you in the markets</p>
+                <h2 className="text-3xl font-black text-gray-900 uppercase tracking-tighter mb-4">Your basket is empty</h2>
+                <p className="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em] mb-12">Fresh farm harvests are waiting for you in the markets</p>
                 <button 
                   onClick={() => navigateTo('categories')}
-                  className="bg-[#0a0a0a] text-white px-16 py-5 rounded-lg text-[10px] font-black uppercase tracking-[0.4em] shadow-2xl hover:bg-primary transition-all duration-500 italic active:scale-95 transform"
+                  className="bg-[#0a0a0a] text-white px-16 py-5 rounded-lg text-[10px] font-black uppercase tracking-[0.4em] shadow-2xl hover:bg-primary transition-all duration-500 active:scale-95 transform"
                 >
                   View Today's Harvests
                 </button>

@@ -52,7 +52,7 @@ export default function Auth() {
           {/* Header */}
           <div className="text-center mb-6">
             <img src="/ubinex.png" alt="Logo" className="w-22 h-20 mx-auto mb-2 object-contain" />
-            <h1 className="text-3xl font-black text-gray-900 tracking-tighter uppercase italic leading-none mb-1">UBINEX</h1>
+            <h1 className="text-3xl font-black text-gray-900 tracking-tighter uppercase leading-none mb-1">UBINEX</h1>
             <p className="text-[8px] font-black text-gray-400 uppercase tracking-[0.3em]">Connecting Nigerian Farms to Markets</p>
           </div>
 
@@ -69,7 +69,7 @@ export default function Auth() {
               <div className={`w-8 h-8 rounded-md flex items-center justify-center text-lg transition ${role === 'consumer' ? 'bg-primary text-white' : 'bg-white text-gray-300'}`}>
                 <i className="fas fa-shopping-basket text-sm"></i>
               </div>
-              <span className="text-[8px] font-black uppercase tracking-[0.1em] italic">Consumer</span>
+              <span className="text-[8px] font-black uppercase tracking-[0.1em]">Consumer</span>
             </button>
 
             <button
@@ -83,7 +83,7 @@ export default function Auth() {
               <div className={`w-8 h-8 rounded-md flex items-center justify-center text-lg transition ${role === 'farmer' ? 'bg-accent text-white' : 'bg-white text-gray-300'}`}>
                 <i className="fas fa-tractor text-sm"></i>
               </div>
-              <span className="text-[8px] font-black uppercase tracking-[0.1em] italic">Farmer</span>
+              <span className="text-[8px] font-black uppercase tracking-[0.1em]">Farmer</span>
             </button>
           </div>
 
@@ -91,7 +91,7 @@ export default function Auth() {
           <div className="flex gap-2 mb-6 bg-gray-50 p-1 rounded-lg border border-gray-100">
             <button
               className={`flex-1 py-2 rounded-md text-[8px] font-black uppercase tracking-widest transition-all duration-300 ${
-                mode === "login" ? "bg-white text-gray-900 shadow-sm italic" : "text-gray-400 hover:text-gray-600"
+                mode === "login" ? "bg-white text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-600"
               }`}
               onClick={() => { setMode("login"); setError(""); }}
             >
@@ -99,7 +99,7 @@ export default function Auth() {
             </button>
             <button
               className={`flex-1 py-2 rounded-md text-[8px] font-black uppercase tracking-widest transition-all duration-300 ${
-                mode === "signup" ? "bg-white text-gray-900 shadow-sm italic" : "text-gray-400 hover:text-gray-600"
+                mode === "signup" ? "bg-white text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-600"
               }`}
               onClick={() => { setMode("signup"); setError(""); }}
             >
@@ -115,11 +115,11 @@ export default function Auth() {
             </div>
           )}
 
-          {/* Form - Scrollable if necessary but target is 100vh */}
+          {/* Form */}
           <form onSubmit={submit} className="space-y-4 overflow-y-auto pr-1 no-scrollbar max-h-[40vh]">
             {mode === "signup" && (
               <div className="space-y-1">
-                <label className="text-[8px] font-black uppercase tracking-widest text-gray-400 ml-1 italic">Name</label>
+                <label className="text-[8px] font-black uppercase tracking-widest text-gray-400 ml-1">Name</label>
                 <div className="relative">
                    <i className="far fa-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-300 text-xs"></i>
                    <input
@@ -135,7 +135,7 @@ export default function Auth() {
             )}
 
             <div className="space-y-1">
-              <label className="text-[8px] font-black uppercase tracking-widest text-gray-400 ml-1 italic">Email</label>
+              <label className="text-[8px] font-black uppercase tracking-widest text-gray-400 ml-1">Email</label>
               <div className="relative">
                  <i className="far fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-300 text-xs"></i>
                  <input
@@ -150,7 +150,7 @@ export default function Auth() {
             </div>
 
             <div className="space-y-1">
-              <label className="text-[8px] font-black uppercase tracking-widest text-gray-400 ml-1 italic">Password</label>
+              <label className="text-[8px] font-black uppercase tracking-widest text-gray-400 ml-1">Password</label>
               <div className="relative">
                  <i className="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-300 text-xs"></i>
                  <input
@@ -166,7 +166,7 @@ export default function Auth() {
 
             {mode === "signup" && (
               <div className="space-y-1">
-                <label className="text-[8px] font-black uppercase tracking-widest text-gray-400 ml-1 italic">Confirm</label>
+                <label className="text-[8px] font-black uppercase tracking-widest text-gray-400 ml-1">Confirm</label>
                 <div className="relative">
                    <i className="fas fa-shield-alt absolute left-4 top-1/2 -translate-y-1/2 text-gray-300 text-xs"></i>
                    <input
@@ -185,7 +185,7 @@ export default function Auth() {
           <button
             type="submit"
             onClick={submit}
-            className={`w-full py-4 rounded-lg font-black text-white transition-all duration-500 shadow-xl text-[9px] uppercase tracking-[0.3em] mt-6 italic transform active:scale-95 ${
+            className={`w-full py-4 rounded-lg font-black text-white transition-all duration-500 shadow-xl text-[9px] uppercase tracking-[0.3em] mt-6 transform active:scale-95 ${
                role === 'consumer' ? 'bg-primary' : 'bg-accent'
             }`}
           >
@@ -195,7 +195,7 @@ export default function Auth() {
           {/* Footer Text */}
           <button
             onClick={() => { setMode(mode === "login" ? "signup" : "login"); setError(""); }}
-            className="text-[8px] font-black text-gray-400 uppercase tracking-widest hover:text-primary transition mt-6 text-center italic"
+            className="text-[8px] font-black text-gray-400 uppercase tracking-widest hover:text-primary transition mt-6 text-center"
           >
             {mode === "login" ? "New here? Create Account" : "Registered? Login"}
           </button>

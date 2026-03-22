@@ -16,7 +16,7 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
   };
 
   const menuItems = [
-    { label: "Markets", path: "markets", dropdown: ["Vegetables", "Fruits", "Grains", "Roots"] },
+    { label: "Markets", path: "markets", dropdown: ["Vegetables", "Fruits", "Grains", "Roots", "Meat", "Fish", "Poultry"] },
     { label: "Wholesale", path: "wholesale", dropdown: ["Bulk Grains", "Palm Oil", "Bulk Tubers", "Sacks"] },
     { label: "Farms", path: "farms", dropdown: ["Verified Farms", "Farming Tools", "Seedlings", "Consultancy"] },
     { label: "Logistics", path: "logistics", dropdown: ["Track Order", "Freight", "Cold Storage", "Pick-up"] },
@@ -40,13 +40,13 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
               <i className="fas fa-phone-alt text-primary"></i>
               +234 814 305 4030
             </span>
-            <span className="hidden lg:inline border-l border-white/10 pl-6 text-white/50 italic">
+            <span className="hidden lg:inline border-l border-white/10 pl-6 text-white/50">
               Bridging Nigerian <span className="text-white">Farms & Consumers</span>
             </span>
           </div>
           <div className="flex items-center gap-6">
             <button className="hover:text-primary transition lowercase">En</button>
-            <button className="hover:text-primary transition text-primary italic">₦ NGN</button>
+            <button className="hover:text-primary transition text-primary">₦ NGN</button>
           </div>
         </div>
       </div>
@@ -75,7 +75,7 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
               <div className="h-4 w-px bg-gray-200 mx-6"></div>
               <button 
                 type="submit" 
-                className="text-[10px] font-black text-primary hover:text-green-800 transition tracking-[0.2em] uppercase whitespace-nowrap italic"
+                className="text-[10px] font-black text-primary hover:text-green-800 transition tracking-[0.2em] uppercase whitespace-nowrap"
               >
                 Search Market
               </button>
@@ -86,12 +86,12 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
           <div className="flex items-center gap-8">
             <button className="relative group text-gray-400 transition" onClick={() => navigateTo('orders')}>
               <i className="far fa-heart text-xl group-hover:text-primary"></i>
-              <span className="absolute -top-2 -right-2 bg-primary text-white text-[8px] font-black w-4 h-4 rounded-md flex items-center justify-center border-2 border-white shadow-sm italic">0</span>
+              <span className="absolute -top-2 -right-2 bg-primary text-white text-[8px] font-black w-4 h-4 rounded-md flex items-center justify-center border-2 border-white shadow-sm">0</span>
             </button>
             
             <button className="relative group text-gray-400 transition" onClick={() => navigateTo('cart')}>
               <i className="fas fa-shopping-basket text-xl group-hover:text-primary"></i>
-              <span className="absolute -top-2 -right-2 bg-accent text-white text-[8px] font-black w-4 h-4 rounded-md flex items-center justify-center border-2 border-white shadow-sm italic">0</span>
+              <span className="absolute -top-2 -right-2 bg-accent text-white text-[8px] font-black w-4 h-4 rounded-md flex items-center justify-center border-2 border-white shadow-sm">0</span>
             </button>
 
             {/* Profile Dropdown */}
@@ -100,12 +100,12 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
                 onClick={() => setProfileOpen(!profileOpen)}
                 className={`flex items-center gap-3 bg-gray-50 hover:bg-white hover:shadow-xl transition p-2 pr-5 rounded-xl border border-transparent hover:border-gray-100 group ${profileOpen ? 'bg-white border-gray-100 shadow-xl' : ''}`}
               >
-                <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center text-white font-black text-xs shadow-lg group-hover:scale-105 transition italic">
+                <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center text-white font-black text-xs shadow-lg group-hover:scale-105 transition">
                   {user?.name?.charAt(0) || user?.email?.charAt(0)}
                 </div>
                 <div className="hidden lg:block text-left">
                   <p className="text-[9px] text-gray-400 font-black uppercase tracking-widest leading-none mb-1">Account</p>
-                  <p className="text-xs font-black text-gray-900 leading-none truncate max-w-[100px] italic uppercase tracking-tighter">
+                  <p className="text-xs font-black text-gray-900 leading-none truncate max-w-[100px] uppercase tracking-tighter">
                     {user?.name || user?.email?.split('@')[0]}
                   </p>
                 </div>
@@ -114,23 +114,24 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
               {profileOpen && (
                 <div className="absolute right-0 mt-4 w-64 bg-white rounded-xl shadow-2xl border border-gray-100 z-[110] overflow-hidden animate-in fade-in slide-in-from-top-4 duration-500">
                   <div className="p-6 bg-gray-50 border-b border-gray-100">
-                    <p className="font-black text-gray-900 italic uppercase tracking-tighter">{user?.name || 'User'}</p>
+                    <p className="font-black text-gray-900 uppercase tracking-tighter">{user?.name || 'User'}</p>
                     <p className="text-[9px] text-gray-400 truncate mt-1 uppercase tracking-widest font-black">{user?.email}</p>
-                    <div className="mt-4 flex items-center gap-2 py-1.5 px-3 bg-white rounded-lg border border-gray-200 text-[8px] font-black text-primary uppercase tracking-[0.2em] shadow-sm w-fit italic">
+                    <div className="mt-4 flex items-center gap-2 py-1.5 px-3 bg-white rounded-lg border border-gray-200 text-[8px] font-black text-primary uppercase tracking-[0.2em] shadow-sm w-fit">
                       {user?.role === 'farmer' ? <i className="fas fa-tractor"></i> : <i className="fas fa-shopping-cart"></i>}
                       {user?.role} Portal
                     </div>
                   </div>
                   <div className="p-3">
-                    <button onClick={() => navigateTo('orders')} className="w-full text-left px-4 py-3 hover:bg-primary/5 rounded-lg text-[9px] font-black uppercase tracking-widest transition italic">Track Orders</button>
-                    <button onClick={() => navigateTo('cart')} className="w-full text-left px-4 py-3 hover:bg-primary/5 rounded-lg text-[9px] font-black uppercase tracking-widest transition italic">Shopping Bag</button>
+                    <button onClick={() => navigateTo('settings')} className="w-full text-left px-4 py-3 hover:bg-primary/5 rounded-lg text-[9px] font-black uppercase tracking-widest transition">Account Settings</button>
+                    <button onClick={() => navigateTo('orders')} className="w-full text-left px-4 py-3 hover:bg-primary/5 rounded-lg text-[9px] font-black uppercase tracking-widest transition">Track Orders</button>
+                    <button onClick={() => navigateTo('cart')} className="w-full text-left px-4 py-3 hover:bg-primary/5 rounded-lg text-[9px] font-black uppercase tracking-widest transition">Shopping Bag</button>
                     <div className="h-px bg-gray-100 my-2 mx-4"></div>
                     <button
                       onClick={() => {
                         logout();
                         navigateTo('home');
                       }}
-                      className="w-full text-left px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg text-[9px] font-black uppercase tracking-widest transition flex items-center gap-3 italic"
+                      className="w-full text-left px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg text-[9px] font-black uppercase tracking-widest transition flex items-center gap-3"
                     >
                       <i className="fas fa-sign-out-alt"></i>
                       Exit Market
@@ -156,7 +157,7 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
               >
                 <button 
                   onClick={() => navigateTo(item.path)}
-                  className={`py-5 text-[10px] font-black transition tracking-[0.3em] uppercase italic flex items-center gap-2 ${
+                  className={`py-5 text-[10px] font-black transition tracking-[0.3em] uppercase flex items-center gap-2 ${
                     window.location.hash.includes(item.path) ? 'text-primary border-b-[3px] border-primary' : 'text-gray-400 hover:text-primary'
                   }`}
                 >
@@ -177,7 +178,7 @@ export default function Navbar({ query = "", setQuery = () => {}, selectedCatego
                               navigateTo(item.path);
                             }
                           }}
-                          className="w-full text-left px-8 py-3 hover:bg-primary/5 text-[9px] font-black uppercase tracking-widest text-gray-500 hover:text-primary transition italic"
+                          className="w-full text-left px-8 py-3 hover:bg-primary/5 text-[9px] font-black uppercase tracking-widest text-gray-500 hover:text-primary transition"
                         >
                           {subItem}
                         </button>

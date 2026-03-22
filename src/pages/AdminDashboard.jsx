@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import AdminProducts from "./AdminProducts";
+import Settings from "./Settings";
+import Messages from "./Messages";
+import { useApp } from "../context/useAppContext";
 
 export default function AdminDashboard() {
+  const { user } = useApp();
   const [route, setRoute] = useState('analytics');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -20,7 +24,7 @@ export default function AdminDashboard() {
     <div className="min-h-screen bg-gray-50 flex font-sans">
       <Sidebar active={route} open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden md:pl-64">
         {/* Header - Classy & Modern */}
         <header className="bg-white border-b border-gray-100 py-6 px-10 flex items-center justify-between z-20">
           <div className="flex items-center gap-6 flex-1">
@@ -39,22 +43,28 @@ export default function AdminDashboard() {
             </div>
           </div>
 
-          <div className="flex items-center gap-8">
-            <button className="relative text-gray-400 hover:text-primary transition group">
-               <i className="far fa-comment-dots text-xl"></i>
-               <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-primary rounded-full border-2 border-white shadow-sm"></span>
-            </button>
-            <div className="h-8 w-px bg-gray-100 hidden md:block"></div>
-            <div className="hidden md:flex items-center gap-4">
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-4 bg-gray-50 p-2 pr-6 rounded-xl border border-gray-100 group cursor-pointer hover:bg-white hover:shadow-xl transition-all duration-300">
+               <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white font-black shadow-lg group-hover:scale-110 transition group-hover:rotate-3">
+                  {user?.name?.charAt(0) || 'F'}
+               </div>
                <div className="text-right">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-gray-900 italic">Farmer Chidi</p>
-                  <p className="text-[8px] text-gray-400 font-black uppercase tracking-widest">Enugu North / Nigeria</p>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-gray-900">Farmer {user?.name || 'Producer'}</p>
+                  <p className="text-[8px] text-primary font-black uppercase tracking-widest flex items-center justify-end gap-1">
+                    <i className="fas fa-fingerprint text-[6px]"></i>
+                    {user?.ubxId || 'UBX-F-PENDING'}
+                  </p>
                </div>
-               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-black shadow-inner border border-primary/5 italic">
-                  C
-               </div>
-               <i className="fas fa-chevron-down text-[8px] text-gray-300"></i>
+               <i className="fas fa-chevron-down text-[8px] text-gray-300 ml-2 group-hover:text-primary transition"></i>
             </div>
+            <div className="h-8 w-px bg-gray-100 hidden md:block"></div>
+            <button 
+              onClick={() => { window.location.hash = '#/admin/messages' }}
+              className="relative text-gray-400 hover:text-primary transition group p-2"
+            >
+               <i className="far fa-comment-dots text-xl"></i>
+               <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-primary rounded-full border-2 border-white shadow-sm ring-4 ring-primary/10"></span>
+            </button>
           </div>
         </header>
 
@@ -70,19 +80,19 @@ export default function AdminDashboard() {
                       <i className="fas fa-cloud-sun text-9xl"></i>
                    </div>
                    <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.4em] mb-4">Local Weather</p>
-                   <h3 className="text-2xl font-black text-gray-900 mb-8 italic uppercase tracking-tighter">Enugu City <span className="text-gray-300 font-normal NOT-italic opacity-50 ml-2">Today</span></h3>
+                   <h3 className="text-2xl font-black text-gray-900 mb-8 uppercase tracking-tighter">Enugu City <span className="text-gray-300 font-normal opacity-50 ml-2">Today</span></h3>
                    
                    <div className="flex items-center gap-10">
                       <div className="relative w-28 h-28 rounded-xl bg-gray-50 flex items-center justify-center border border-gray-100 shadow-inner">
                          <div className="text-center">
-                            <span className="text-3xl font-black italic text-gray-900">32°c</span>
+                            <span className="text-3xl font-black text-gray-900">32°c</span>
                             <p className="text-[8px] font-black uppercase tracking-widest text-gray-400">Sunny</p>
                          </div>
                       </div>
                       <div className="space-y-6">
                          <div className="flex items-baseline gap-1">
-                            <span className="text-5xl font-black italic text-gray-900">34°</span>
-                            <span className="text-sm font-black text-gray-300 italic uppercase">High</span>
+                            <span className="text-5xl font-black text-gray-900">34°</span>
+                            <span className="text-sm font-black text-gray-300 uppercase">High</span>
                          </div>
                          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-primary bg-primary/5 px-3 py-1 rounded-md w-fit">Strong Sun (12h)</p>
                       </div>
@@ -106,7 +116,7 @@ export default function AdminDashboard() {
                       <svg className="absolute inset-0 w-full h-full text-primary opacity-50" viewBox="0 0 400 200" preserveAspectRatio="none">
                          <path d="M0,180 Q100,20 200,140 T400,40" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
                       </svg>
-                      <div className="absolute top-10 left-[40%] px-4 py-2 bg-primary text-white text-[10px] font-black rounded-lg uppercase shadow-2xl italic tracking-tighter transition-transform hover:scale-110 cursor-pointer">
+                      <div className="absolute top-10 left-[40%] px-4 py-2 bg-primary text-white text-[10px] font-black rounded-lg uppercase shadow-2xl tracking-tighter transition-transform hover:scale-110 cursor-pointer">
                         +24% Increase
                       </div>
                    </div>
@@ -125,7 +135,7 @@ export default function AdminDashboard() {
                       <div className="flex justify-between items-end mb-6">
                          <div>
                             <span className="text-[8px] font-black uppercase tracking-[0.4em] text-primary mb-2 block">Premium Marketplace</span>
-                            <h3 className="text-3xl font-black italic leading-none uppercase tracking-tighter">Ogbete Main Market</h3>
+                            <h3 className="text-3xl font-black leading-none uppercase tracking-tighter">Ogbete Market</h3>
                          </div>
                          <button className="w-14 h-14 bg-primary rounded-lg flex items-center justify-center hover:bg-white text-white hover:text-primary transition shadow-xl active:scale-90"><i className="fas fa-arrow-right text-xl"></i></button>
                       </div>
@@ -141,7 +151,7 @@ export default function AdminDashboard() {
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-8">
                    <div>
                       <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.4em] mb-2">Inventory Analytics</p>
-                      <h2 className="text-3xl font-black italic text-gray-900 uppercase tracking-tighter">Production Summary</h2>
+                      <h2 className="text-3xl font-black text-gray-900 uppercase tracking-tighter">Production Summary</h2>
                    </div>
                    <div className="flex flex-wrap items-center gap-10 border-b border-gray-50 pb-4">
                       <div className="flex items-center gap-3">
@@ -165,14 +175,14 @@ export default function AdminDashboard() {
                    ))}
                    {/* Tooltip - Enugu Produce */}
                    <div className="absolute top-24 left-[75%] -translate-x-1/2 flex flex-col items-center group cursor-pointer">
-                      <div className="px-5 py-2 bg-[#0a0a0a] text-white text-[10px] font-black rounded-lg uppercase mb-3 shadow-2xl italic tracking-widest group-hover:bg-primary transition whitespace-nowrap">
+                      <div className="px-5 py-2 bg-[#0a0a0a] text-white text-[10px] font-black rounded-lg uppercase mb-3 shadow-2xl tracking-widest group-hover:bg-primary transition whitespace-nowrap">
                         Nsukka Pepper: 4.2 Tons
                       </div>
                       <div className="w-px h-48 bg-gray-200 border-l border-dashed border-gray-300"></div>
                    </div>
                 </div>
                 
-                <div className="flex justify-between mt-10 px-4 text-[9px] font-black text-gray-300 uppercase tracking-[0.2em] italic">
+                <div className="flex justify-between mt-10 px-4 text-[9px] font-black text-gray-300 uppercase tracking-[0.2em]">
                    {['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'].map(m => <span key={m}>{m}</span>)}
                 </div>
               </div>
@@ -180,9 +190,11 @@ export default function AdminDashboard() {
           )}
 
           {route === 'products' && <AdminProducts />}
+          {route === 'settings' && <Settings />}
+          {route === 'messages' && <Messages />}
           {route === 'sales' && (
             <div className="p-16 bg-white rounded-xl shadow-sm border border-gray-100 animate-in fade-in slide-in-from-bottom-6 duration-700">
-               <h2 className="text-3xl font-black italic text-gray-900 mb-12 uppercase tracking-tighter"><i className="fas fa-history mr-4 text-primary opacity-50"></i>Sales History</h2>
+               <h2 className="text-3xl font-black text-gray-900 mb-12 uppercase tracking-tighter"><i className="fas fa-history mr-4 text-primary opacity-50"></i>Sales History</h2>
                <div className="text-center py-32 bg-gray-50 rounded-xl border border-dashed border-gray-200">
                   <div className="text-7xl text-gray-200 mb-8"><i className="fas fa-folder-open"></i></div>
                   <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">No sales data recorded for your account.</p>
@@ -191,7 +203,7 @@ export default function AdminDashboard() {
           )}
           {route === 'orders' && (
             <div className="p-16 bg-white rounded-xl shadow-sm border border-gray-100 animate-in fade-in slide-in-from-bottom-6 duration-700">
-               <h2 className="text-3xl font-black italic text-gray-900 mb-12 uppercase tracking-tighter"><i className="fas fa-shopping-basket mr-4 text-primary opacity-50"></i>Order Management</h2>
+               <h2 className="text-3xl font-black text-gray-900 mb-12 uppercase tracking-tighter"><i className="fas fa-shopping-basket mr-4 text-primary opacity-50"></i>Order Management</h2>
                <div className="text-center py-32 bg-gray-50 rounded-xl border border-dashed border-gray-200">
                   <div className="text-7xl text-gray-200 mb-8"><i className="fas fa-box-open"></i></div>
                   <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">You have no active orders to process.</p>

@@ -14,10 +14,6 @@ export default function ProductCard({ product = {}, onView }) {
 
   const handleNegotiate = (e) => {
     e.stopPropagation();
-    // To trigger negotiation, we first need to open details or have a direct way.
-    // However, the home/categories pages handle the negotiation modal.
-    // For now, we'll trigger onView which opens the details, and the user can negotiate there.
-    // Or we can add an onNegotiate prop if we want direct access.
     onView && onView(product);
   };
 
@@ -42,7 +38,7 @@ export default function ProductCard({ product = {}, onView }) {
         />
         <div className="absolute inset-0 bg-black/0 group-hover:bg-primary/5 transition duration-500"></div>
         
-        {/* Quick Actions Overlay - Visible on MD+, hidden on small screens by default (overlay) */}
+        {/* Quick Actions Overlay */}
         <div className="absolute bottom-4 right-4 flex flex-col gap-2 translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 md:flex hidden">
            <button className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white shadow-xl transition active:scale-95">
              <i className="far fa-heart"></i>
@@ -72,7 +68,7 @@ export default function ProductCard({ product = {}, onView }) {
             <span className="w-1 h-1 rounded-full bg-gray-200"></span>
             <span className="text-[8px] font-black text-gray-400 uppercase tracking-widest truncate">{product.location?.split(',')[1] || product.location || 'Enugu'}</span>
           </div>
-          <h3 className="text-sm font-black text-gray-900 leading-tight group-hover:text-primary transition line-clamp-2 uppercase italic tracking-tighter">{product.name}</h3>
+          <h3 className="text-sm font-black text-gray-900 leading-tight group-hover:text-primary transition line-clamp-2 uppercase tracking-tighter">{product.name}</h3>
         </div>
 
         {/* Rating */}
@@ -85,12 +81,11 @@ export default function ProductCard({ product = {}, onView }) {
 
         <div className="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between">
           <div>
-            <span className="text-lg font-black text-primary italic">{symbol}{price.toLocaleString()}</span>
+            <span className="text-lg font-black text-primary">{symbol}{price.toLocaleString()}</span>
             <span className="text-[9px] text-gray-400 font-black ml-1 uppercase tracking-widest">/ {unit}</span>
           </div>
           
           <div className="flex items-center gap-2">
-            {/* Negotiate Button - Visible for both, but more prominent on card now */}
             <button 
               onClick={handleNegotiate}
               className="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center text-gray-400 hover:bg-primary hover:text-white transition shadow-inner active:scale-95"

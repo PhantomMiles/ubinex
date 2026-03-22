@@ -17,6 +17,9 @@ export default function Categories({ query = "", setQuery = () => {}, selectedCa
     "Roots",
     "Oils",
     "Spices",
+    "Meat",
+    "Fish",
+    "Poultry",
     "Processed"
   ];
 
@@ -37,10 +40,9 @@ export default function Categories({ query = "", setQuery = () => {}, selectedCa
       />
 
       <main className="max-w-7xl mx-auto px-6 py-12">
-        {/* Breadcrumbs / Header */}
         <div className="mb-12">
           <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.4em] mb-3">Markets / Enugu State</p>
-          <h1 className="text-5xl font-black text-gray-900 italic tracking-tighter uppercase leading-none">
+          <h1 className="text-5xl font-black text-gray-900 tracking-tighter uppercase leading-none">
             Agricultural Categories
           </h1>
         </div>
@@ -55,7 +57,7 @@ export default function Categories({ query = "", setQuery = () => {}, selectedCa
                 <button
                   onClick={() => setSelectedCategory("")}
                   className={`w-full text-left px-4 py-3 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
-                    !selectedCategory ? 'bg-primary text-white shadow-lg italic translate-x-1' : 'text-gray-400 hover:bg-gray-50'
+                    !selectedCategory ? 'bg-primary text-white shadow-lg translate-x-1' : 'text-gray-400 hover:bg-gray-50'
                   }`}
                 >
                   All Categories
@@ -65,7 +67,7 @@ export default function Categories({ query = "", setQuery = () => {}, selectedCa
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
                     className={`w-full text-left px-4 py-3 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
-                      selectedCategory === cat ? 'bg-primary text-white shadow-lg italic translate-x-1' : 'text-gray-400 hover:bg-gray-50'
+                      selectedCategory === cat ? 'bg-primary text-white shadow-lg translate-x-1' : 'text-gray-400 hover:bg-gray-50'
                     }`}
                   >
                     {cat}
@@ -81,7 +83,7 @@ export default function Categories({ query = "", setQuery = () => {}, selectedCa
                 <button
                   onClick={() => setSelectedLGA("")}
                   className={`w-full text-left px-4 py-3 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
-                    !selectedLGA ? 'bg-accent text-white shadow-lg italic translate-x-1' : 'text-gray-400 hover:bg-gray-50'
+                    !selectedLGA ? 'bg-accent text-white shadow-lg translate-x-1' : 'text-gray-400 hover:bg-gray-50'
                   }`}
                 >
                   All LGAs
@@ -91,7 +93,7 @@ export default function Categories({ query = "", setQuery = () => {}, selectedCa
                     key={lga.name}
                     onClick={() => setSelectedLGA(lga.name)}
                     className={`w-full text-left px-4 py-3 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
-                      selectedLGA === lga.name ? 'bg-accent text-white shadow-lg italic translate-x-1' : 'text-gray-400 hover:bg-gray-50'
+                      selectedLGA === lga.name ? 'bg-accent text-white shadow-lg translate-x-1' : 'text-gray-400 hover:bg-gray-50'
                     }`}
                   >
                     {lga.name}
@@ -106,8 +108,8 @@ export default function Categories({ query = "", setQuery = () => {}, selectedCa
             <div className="flex items-center justify-between mb-8 pb-4 border-b border-gray-100">
                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
                   Showing <span className="text-gray-900">{filteredProducts.length}</span> results 
-                  {selectedCategory && <span> in <span className="text-primary italic">{selectedCategory}</span></span>}
-                  {selectedLGA && <span> from <span className="text-accent italic">{selectedLGA} LGA</span></span>}
+                  {selectedCategory && <span> in <span className="text-primary">{selectedCategory}</span></span>}
+                  {selectedLGA && <span> from <span className="text-accent">{selectedLGA} LGA</span></span>}
                </p>
                <div className="flex items-center gap-4">
                   <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Sort By:</span>

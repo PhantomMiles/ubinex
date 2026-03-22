@@ -21,7 +21,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="text-lg font-black mb-8 italic">Quick Links</h4>
+          <h4 className="text-lg font-black mb-8">Quick Links</h4>
           <ul className="space-y-4 text-sm text-gray-400 font-bold uppercase tracking-widest">
             <li><a href="#" className="hover:text-primary transition">About Us</a></li>
             <li><a href="#" className="hover:text-primary transition">Shop with Us</a></li>
@@ -31,7 +31,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="text-lg font-black mb-8 italic">Categories</h4>
+          <h4 className="text-lg font-black mb-8">Categories</h4>
           <ul className="space-y-4 text-sm text-gray-400 font-bold uppercase tracking-widest">
             <li><a href="#" className="hover:text-primary transition">Vegetables</a></li>
             <li><a href="#" className="hover:text-primary transition">Fresh Fruit</a></li>
@@ -41,7 +41,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="text-lg font-black mb-8 italic">Newsletter</h4>
+          <h4 className="text-lg font-black mb-8">Newsletter</h4>
           <p className="text-gray-400 text-sm mb-6">Subscribe to get the latest updates and offers.</p>
           <form className="relative">
             <input 

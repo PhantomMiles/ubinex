@@ -47,7 +47,7 @@ export default function Home({ query = "", setQuery = () => {}, selectedCategory
                 <span className="w-8 h-px bg-primary"></span>
                 Freshly Harvested
               </p>
-              <h2 className="text-4xl font-black text-gray-900 italic tracking-tighter uppercase">Featured Produce</h2>
+              <h2 className="text-4xl font-black text-gray-900 tracking-tighter uppercase">Featured Produce</h2>
             </div>
             <div className="flex flex-wrap gap-6 border-b border-gray-100 pb-2">
                {["All product", "Organic", "Vegetables", "Fruits", "Roots"].map((tab) => (
@@ -83,7 +83,7 @@ export default function Home({ query = "", setQuery = () => {}, selectedCategory
           <div className="relative rounded-xl overflow-hidden shadow-2xl group bg-orange-50/50 border border-orange-100 min-h-[300px]">
             <div className="absolute inset-0 p-12 flex flex-col justify-center max-w-[65%] z-10">
               <span className="text-[10px] font-black text-orange-600 uppercase tracking-[0.4em] mb-4">Limited Edition</span>
-              <h3 className="text-3xl font-black text-gray-900 mb-4 italic uppercase tracking-tighter leading-none">Nsukka Yellow Pepper Basket</h3>
+              <h3 className="text-3xl font-black text-gray-900 mb-4 uppercase tracking-tighter leading-none">Nsukka Yellow Pepper Basket</h3>
               <p className="text-xs text-gray-600 mb-8 font-bold uppercase tracking-widest leading-relaxed">Direct from the farms of Obukpa. Aromatic, spicy, and purely organic.</p>
               <button className="text-[10px] font-black uppercase tracking-[0.3em] text-white bg-[#0a0a0a] px-8 py-4 rounded-lg w-fit transition hover:bg-primary shadow-xl">Shop Now</button>
             </div>
@@ -93,7 +93,7 @@ export default function Home({ query = "", setQuery = () => {}, selectedCategory
           <div className="relative rounded-xl overflow-hidden shadow-2xl group bg-[#0a0a0a] min-h-[300px]">
              <div className="absolute inset-0 p-12 flex flex-col justify-center max-w-[65%] text-white z-10">
               <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4">Premium Quality</span>
-              <h3 className="text-3xl font-black mb-4 italic uppercase tracking-tighter leading-none">Achi & Inyi Large White Yams</h3>
+              <h3 className="text-3xl font-black mb-4 uppercase tracking-tighter leading-none">Achi & Inyi Large White Yams</h3>
               <p className="text-xs text-white/50 mb-8 font-bold uppercase tracking-widest leading-relaxed">The king of crops, harvested with care from Oji River LGA. Premium grade tubers.</p>
               <button className="text-[10px] font-black uppercase tracking-[0.3em] text-[#0a0a0a] bg-white px-8 py-4 rounded-lg w-fit transition hover:bg-primary hover:text-white shadow-xl">Explore Markets</button>
             </div>
@@ -109,7 +109,7 @@ export default function Home({ query = "", setQuery = () => {}, selectedCategory
                 <span className="w-8 h-px bg-accent"></span>
                 Top Choices
               </p>
-              <h2 className="text-4xl font-black text-gray-900 italic tracking-tighter uppercase">Market Best Sellers</h2>
+              <h2 className="text-4xl font-black text-gray-900 tracking-tighter uppercase">Market Best Sellers</h2>
             </div>
             <div className="flex flex-wrap gap-6 border-b border-gray-100 pb-2">
                {["All product", "Oils", "Grains", "Spices"].map((tab) => (

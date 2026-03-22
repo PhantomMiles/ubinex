@@ -72,7 +72,7 @@ export default function Orders() {
         <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div>
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.4em] mb-3">Accounts / History</p>
-            <h1 className="text-5xl font-black text-gray-900 italic tracking-tighter uppercase leading-none">
+            <h1 className="text-5xl font-black text-gray-900 tracking-tighter uppercase leading-none">
               Order Tracking
             </h1>
           </div>
@@ -102,18 +102,18 @@ export default function Orders() {
                     {/* Order Meta */}
                     <div className="flex-1">
                       <div className="flex items-center gap-4 mb-4">
-                        <span className="text-[10px] font-black text-white bg-[#0a0a0a] px-3 py-1 rounded shadow-lg uppercase tracking-widest italic">#{order.id}</span>
-                        <span className={`text-[8px] font-black px-3 py-1 rounded border uppercase tracking-[0.2em] italic ${getStatusStyle(order.status)}`}>
+                        <span className="text-[10px] font-black text-white bg-[#0a0a0a] px-3 py-1 rounded shadow-lg uppercase tracking-widest">#{order.id}</span>
+                        <span className={`text-[8px] font-black px-3 py-1 rounded border uppercase tracking-[0.2em] ${getStatusStyle(order.status)}`}>
                           {order.status}
                         </span>
                       </div>
-                      <h3 className="text-2xl font-black text-gray-900 italic uppercase tracking-tighter mb-2 leading-none">{order.productName}</h3>
+                      <h3 className="text-2xl font-black text-gray-900 uppercase tracking-tighter mb-2 leading-none">{order.productName}</h3>
                       <div className="flex flex-wrap gap-6 mt-4">
-                         <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2 italic">
+                         <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
                            <i className="fas fa-calendar-alt text-primary/50"></i>
                            {new Date(order.date).toLocaleDateString('en-NG', { day: 'numeric', month: 'long', year: 'numeric' })}
                          </p>
-                         <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2 italic">
+                         <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
                            <i className="fas fa-map-marker-alt text-accent/50"></i>
                            {order.farmLocation}
                          </p>
@@ -124,11 +124,11 @@ export default function Orders() {
                     <div className="flex items-center gap-8 lg:border-l lg:border-gray-100 lg:pl-12">
                        <div className="text-right">
                          <p className="text-[8px] font-black text-gray-400 uppercase tracking-widest mb-1">Items Summary</p>
-                         <p className="text-sm font-black italic text-gray-900">{order.quantity} {order.unit}</p>
+                         <p className="text-sm font-black text-gray-900">{order.quantity} {order.unit}</p>
                        </div>
                        <div className="text-right">
                          <p className="text-[8px] font-black text-gray-400 uppercase tracking-widest mb-1">Amount Settled</p>
-                         <p className="text-2xl font-black text-primary italic leading-none">{symbol}{order.totalPrice.toLocaleString()}</p>
+                         <p className="text-2xl font-black text-primary leading-none">{symbol}{order.totalPrice.toLocaleString()}</p>
                        </div>
                        <button className="w-12 h-12 rounded-lg bg-gray-50 hover:bg-primary hover:text-white transition flex items-center justify-center text-gray-300 group-hover:shadow-xl active:scale-95 transform">
                          <i className="fas fa-arrow-right text-xs"></i>
@@ -141,7 +141,7 @@ export default function Orders() {
                 <div className="px-8 pb-4">
                    <div className="flex justify-between mb-2">
                        {["Received", "Processing", "Shipped", "Delivered"].map((step, idx) => (
-                         <div key={idx} className={`text-[8px] font-black uppercase tracking-widest italic ${idx <= (order.status === 'delivered' ? 3 : order.status === 'in-transit' ? 2 : 1) ? 'text-primary' : 'text-gray-200'}`}>
+                         <div key={idx} className={`text-[8px] font-black uppercase tracking-widest ${idx <= (order.status === 'delivered' ? 3 : order.status === 'in-transit' ? 2 : 1) ? 'text-primary' : 'text-gray-200'}`}>
                             {step}
                          </div>
                        ))}
@@ -159,8 +159,8 @@ export default function Orders() {
                <div className="w-20 h-20 bg-white rounded-lg shadow-xl flex items-center justify-center text-gray-100 text-3xl mb-10 border border-gray-50">
                   <i className="fas fa-receipt opacity-20"></i>
                </div>
-               <h2 className="text-3xl font-black text-gray-900 uppercase italic tracking-tighter mb-4">No records found</h2>
-               <p className="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em] italic">We couldn't find any orders matching your criteria</p>
+               <h2 className="text-3xl font-black text-gray-900 uppercase tracking-tighter mb-4">No records found</h2>
+               <p className="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em]">We couldn't find any orders matching your criteria</p>
             </div>
           )}
         </div>
@@ -172,11 +172,11 @@ export default function Orders() {
                  <i className="fas fa-headset"></i>
               </div>
               <div>
-                 <h4 className="text-xl font-black italic uppercase tracking-tighter text-gray-900 leading-none mb-2">Need Assistance?</h4>
-                 <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest italic leading-none">Our logistics support is active 24/7 for you</p>
+                 <h4 className="text-xl font-black uppercase tracking-tighter text-gray-900 leading-none mb-2">Need Assistance?</h4>
+                 <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none">Our logistics support is active 24/7 for you</p>
               </div>
            </div>
-           <button className="bg-[#0a0a0a] hover:bg-primary text-white px-10 py-5 rounded-lg text-[10px] font-black uppercase tracking-[0.3em] shadow-2xl transition-all duration-500 italic active:scale-95">Open Support Ticket</button>
+           <button className="bg-[#0a0a0a] hover:bg-primary text-white px-10 py-5 rounded-lg text-[10px] font-black uppercase tracking-[0.3em] shadow-2xl transition-all duration-500 active:scale-95">Open Support Ticket</button>
         </div>
       </main>
     </div>

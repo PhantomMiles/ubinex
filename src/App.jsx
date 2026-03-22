@@ -10,6 +10,8 @@ import Markets from './pages/Markets'
 import Wholesale from './pages/Wholesale'
 import Logistics from './pages/Logistics'
 import Farms from './pages/Farms'
+import Settings from './pages/Settings'
+import Legal from './pages/Legal'
 import { AppProvider, useApp } from './context/useAppContext'
 import React, { useEffect, useState } from 'react'
 
@@ -76,6 +78,12 @@ function AppContent() {
       break;
     case 'farms':
       content = <Farms />;
+      break;
+    case 'settings':
+      content = <Settings />;
+      break;
+    case 'legal':
+      content = <Legal />;
       break;
     default:
       content = <Home 

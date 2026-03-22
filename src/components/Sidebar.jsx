@@ -13,6 +13,7 @@ export default function Sidebar({ active, open, onClose }) {
   ];
 
   const navigateTo = (id) => {
+    // If it's settings, we might want to stay in the admin view
     window.location.hash = `#/admin/${id}`;
     if (onClose) onClose();
   };
@@ -27,12 +28,12 @@ export default function Sidebar({ active, open, onClose }) {
         />
       )}
 
-      {/* Sidebar - Black Background as requested */}
-      <aside className={`fixed md:relative inset-y-0 left-0 w-64 bg-[#0a0a0a] text-white z-50 transform ${open ? 'translate-x-0' : '-translate-x-full md:translate-x-0'} transition-transform duration-300 ease-in-out flex flex-col border-r border-white/5`}>
+      {/* Sidebar - Black Background */}
+      <aside className={`fixed inset-y-0 left-0 w-64 h-screen bg-[#0a0a0a] text-white z-50 transform ${open ? 'translate-x-0' : '-translate-x-full md:translate-x-0'} transition-transform duration-300 ease-in-out flex flex-col border-r border-white/5`}>
         {/* Branding */}
         <div className="p-6 flex items-center gap-3 border-b border-white/5">
           <img src="/ubinex.png" alt="Ubinex" className="w-8 h-8 object-contain" />
-          <span className="text-lg font-black tracking-tight uppercase italic text-white/90">HARVEST</span>
+          <span className="text-lg font-black tracking-tight uppercase text-white/90">HARVEST</span>
         </div>
 
         {/* Navigation */}
@@ -56,17 +57,8 @@ export default function Sidebar({ active, open, onClose }) {
           </ul>
         </nav>
 
-        {/* User Card */}
-        <div className="p-4 border-t border-white/5">
-          <div className="bg-white/5 rounded-xl p-4 flex items-center gap-3 mb-4">
-             <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white font-black shadow-sm">
-               {user?.name?.charAt(0) || user?.email?.charAt(0) || 'U'}
-             </div>
-             <div className="flex-1 truncate">
-               <p className="text-[10px] font-black uppercase tracking-widest truncate">{user?.name || user?.email?.split('@')[0] || 'User'}</p>
-               <p className="text-[8px] text-white/20 truncate uppercase font-bold tracking-tighter">Farmer / Enugu State</p>
-             </div>
-          </div>
+        {/* Log Out at Bottom */}
+        <div className="p-4 border-t border-white/5 mt-auto">
           <button 
             onClick={logout}
             className="w-full flex items-center justify-center gap-2 py-3 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] border border-white/10 hover:bg-white/5 transition-all duration-200"
