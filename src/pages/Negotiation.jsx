@@ -38,8 +38,8 @@ export default function Negotiation({ product = {}, onClose }) {
       {/* Header */}
       <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
         <div>
-           <p className="text-[9px] font-black text-primary uppercase tracking-[0.4em] mb-1">Live Negotiation</p>
-           <h3 className="text-lg font-black uppercase tracking-tighter text-gray-900 leading-none">{product.name}</h3>
+           <p className="text-[9px] font-black text-primary uppercase mb-1">Live Negotiation</p>
+           <h3 className="text-lg font-black uppercase text-gray-900 leading-none">{product.name}</h3>
         </div>
         <button onClick={onClose} className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-400 hover:text-red-500 transition active:scale-90">
           <i className="fas fa-times"></i>
@@ -56,7 +56,7 @@ export default function Negotiation({ product = {}, onClose }) {
                 : "bg-gray-50 text-gray-700 border-gray-100"
              }`}>
                 <div className="flex items-center justify-between gap-8 mb-2">
-                   <span className={`text-[8px] font-black uppercase tracking-widest ${o.from === 'buyer' ? 'text-white/50' : 'text-gray-400'}`}>
+                   <span className={`text-[8px] font-black uppercasest ${o.from === 'buyer' ? 'text-white/50' : 'text-gray-400'}`}>
                       {o.from === "buyer" ? "Your Proposal" : "Seller Quote"}
                    </span>
                    <span className={`text-sm font-black ${o.from === 'buyer' ? 'text-white' : 'text-primary'}`}>
@@ -67,7 +67,7 @@ export default function Negotiation({ product = {}, onClose }) {
                    {o.message}
                 </p>
              </div>
-             <p className="text-[7px] font-black text-gray-300 uppercase tracking-widest mt-2 px-2">
+             <p className="text-[7px] font-black text-gray-300 uppercasest mt-2 px-2">
                 Recently
              </p>
           </div>
@@ -91,7 +91,7 @@ export default function Negotiation({ product = {}, onClose }) {
             </div>
             <button 
                type="submit" 
-               className="bg-[#0a0a0a] hover:bg-primary text-white px-8 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl transition-all duration-300 active:scale-95"
+               className="bg-[#0a0a0a] hover:bg-primary text-white px-8 rounded-xl text-[10px] font-black uppercasest shadow-xl transition-all duration-300 active:scale-95"
             >
               Propose
             </button>
@@ -105,7 +105,7 @@ export default function Negotiation({ product = {}, onClose }) {
             className="w-full p-4 bg-white border border-gray-200 rounded-xl text-[10px] font-bold text-gray-600 focus:ring-4 focus:ring-primary/5 outline-none transition resize-none shadow-inner"
           />
         </form>
-        <p className="mt-4 text-[8px] font-black text-gray-400 uppercase tracking-widest text-center">
+        <p className="mt-4 text-[8px] font-black text-gray-400 uppercasest text-center">
            All negotiations are recorded for market transparency
         </p>
       </div>

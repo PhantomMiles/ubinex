@@ -15,11 +15,11 @@ export default function Markets() {
       <Navbar />
       <main className="max-w-7xl mx-auto px-6 py-12">
         <div className="mb-16">
-          <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4">Trading Hubs</p>
-          <h1 className="text-5xl font-black text-gray-900 uppercase tracking-tighter leading-none mb-4">
+          <p className="text-[10px] font-black text-primary uppercase mb-4">Trading Hubs</p>
+          <h1 className="text-5xl font-black text-gray-900 uppercase leading-none mb-4">
             Regional Markets
           </h1>
-          <p className="text-xs text-gray-400 font-bold uppercase tracking-widest max-w-lg">
+          <p className="text-xs text-gray-400 font-bold uppercasest max-w-lg">
             Discover the major agricultural trading hubs in Enugu state where fresh produce is consolidated daily.
           </p>
         </div>
@@ -29,11 +29,11 @@ export default function Markets() {
             <div key={market.name} className="group relative rounded-xl overflow-hidden shadow-2xl h-[400px]">
               <img src={market.image} alt={market.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent flex flex-col justify-end p-8 text-white z-10 transition-all group-hover:from-primary/90">
-                <span className="text-[8px] font-black uppercase tracking-widest text-primary group-hover:text-white transition-colors mb-2">{market.location}</span>
-                <h3 className="text-2xl font-black uppercase tracking-tighter mb-4">{market.name}</h3>
+                <span className="text-[8px] font-black uppercasest text-primary group-hover:text-white transition-colors mb-2">{market.location}</span>
+                <h3 className="text-2xl font-black uppercase mb-4">{market.name}</h3>
                 <div className="pt-4 border-t border-white/10 flex justify-between items-center transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition duration-500">
-                   <p className="text-[10px] font-black uppercase tracking-widest text-white/70">Specialty: {market.special}</p>
-                   <button className="text-[10px] font-black uppercase tracking-widest text-white border-b border-primary">Explore Vendors</button>
+                   <p className="text-[10px] font-black uppercasest text-white/70">Specialty: {market.special}</p>
+                   <button className="text-[10px] font-black uppercasest text-white border-b border-primary">Explore Vendors</button>
                 </div>
               </div>
             </div>

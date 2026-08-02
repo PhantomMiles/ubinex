@@ -2,18 +2,17 @@ import React from 'react';
 import { useApp } from '../context/useAppContext';
 
 export default function Sidebar({ active, open, onClose }) {
-  const { user, logout } = useApp();
+  const { logout, t } = useApp();
 
   const menuItems = [
-    { id: 'analytics', label: 'Analytics', icon: 'fas fa-chart-pie' },
-    { id: 'products', label: 'My Products', icon: 'fas fa-leaf' },
-    { id: 'orders', label: 'Orders', icon: 'fas fa-shopping-basket' },
-    { id: 'sales', label: 'Sales History', icon: 'fas fa-history' },
-    { id: 'settings', label: 'Settings', icon: 'fas fa-cog' },
+    { id: 'analytics', label: 'Analytics', key: 'Analytics', icon: 'fas fa-chart-pie' },
+    { id: 'products', label: 'My Products', key: 'My Products', icon: 'fas fa-leaf' },
+    { id: 'orders', label: 'Orders', key: 'track_orders', icon: 'fas fa-shopping-basket' },
+    { id: 'sales', label: 'Sales History', key: 'Sales History', icon: 'fas fa-history' },
+    { id: 'settings', label: 'Settings', key: 'account_settings', icon: 'fas fa-cog' },
   ];
 
   const navigateTo = (id) => {
-    // If it's settings, we might want to stay in the admin view
     window.location.hash = `#/admin/${id}`;
     if (onClose) onClose();
   };
@@ -33,7 +32,7 @@ export default function Sidebar({ active, open, onClose }) {
         {/* Branding */}
         <div className="p-6 flex items-center gap-3 border-b border-white/5">
           <img src="/ubinex.png" alt="Ubinex" className="w-8 h-8 object-contain" />
-          <span className="text-lg font-black tracking-tight uppercase text-white/90">HARVEST</span>
+          <span className="text-lg font-black uppercase text-white/90">HARVEST</span>
         </div>
 
         {/* Navigation */}
@@ -43,14 +42,14 @@ export default function Sidebar({ active, open, onClose }) {
               <li key={item.id}>
                 <button
                   onClick={() => navigateTo(item.id)}
-                  className={`w-full flex items-center gap-4 px-4 py-3 rounded-lg text-xs font-bold tracking-widest uppercase transition-all duration-200 ${
+                  className={`w-full flex items-center gap-4 px-4 py-3 rounded-lg text-xs font-boldst uppercase transition-all duration-200 ${
                     active === item.id 
                       ? 'bg-primary text-white shadow-lg' 
                       : 'text-white/40 hover:bg-white/5 hover:text-white'
                   }`}
                 >
                   <i className={`${item.icon} w-5 text-center text-sm`}></i>
-                  {item.label}
+                  {t(item.key) || item.label}
                 </button>
               </li>
             ))}
@@ -61,10 +60,10 @@ export default function Sidebar({ active, open, onClose }) {
         <div className="p-4 border-t border-white/5 mt-auto">
           <button 
             onClick={logout}
-            className="w-full flex items-center justify-center gap-2 py-3 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] border border-white/10 hover:bg-white/5 transition-all duration-200"
+            className="w-full flex items-center justify-center gap-2 py-3 rounded-lg text-[10px] font-black uppercase border border-white/10 hover:bg-white/5 transition-all duration-200"
           >
             <i className="fas fa-sign-out-alt"></i>
-            Log Out
+            {t('exit_market')}
           </button>
         </div>
       </aside>

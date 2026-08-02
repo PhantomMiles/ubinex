@@ -14,11 +14,11 @@ export default function Logistics() {
       <Navbar />
       <main className="max-w-7xl mx-auto px-6 py-12">
         <div className="mb-20">
-          <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4">Supply Chain</p>
-          <h1 className="text-5xl font-black text-gray-900 uppercase tracking-tighter leading-none mb-6">
+          <p className="text-[10px] font-black text-primary uppercase mb-4">Supply Chain</p>
+          <h1 className="text-5xl font-black text-gray-900 uppercase leading-none mb-6">
             Logistics & Warehousing
           </h1>
-          <p className="text-xs text-gray-400 font-bold uppercase tracking-widest max-w-2xl leading-relaxed">
+          <p className="text-xs text-gray-400 font-bold uppercasest max-w-2xl leading-relaxed">
             Ensuring that every harvest reaches its destination in peak condition through specialized transportation and storage solutions.
           </p>
         </div>
@@ -29,8 +29,8 @@ export default function Logistics() {
               <div className="w-16 h-16 rounded-lg bg-gray-50 flex items-center justify-center text-primary text-2xl mb-8 group-hover:bg-primary group-hover:text-white transition duration-500 shadow-inner">
                 <i className={svc.icon}></i>
               </div>
-              <h3 className="text-xl font-black uppercase tracking-tighter text-gray-900 mb-4">{svc.title}</h3>
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-relaxed">{svc.desc}</p>
+              <h3 className="text-xl font-black uppercase text-gray-900 mb-4">{svc.title}</h3>
+              <p className="text-[10px] font-bold text-gray-400 uppercasest leading-relaxed">{svc.desc}</p>
             </div>
           ))}
         </div>
@@ -42,13 +42,13 @@ export default function Logistics() {
            </div>
            
            <div className="max-w-xl relative z-10">
-              <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4 block">Track Shipment</span>
-              <h2 className="text-3xl font-black uppercase tracking-tighter mb-8">Where is your harvest?</h2>
+              <span className="text-[10px] font-black text-primary uppercase mb-4 block">Track Shipment</span>
+              <h2 className="text-3xl font-black uppercase mb-8">Where is your harvest?</h2>
               <div className="flex gap-4">
-                 <input placeholder="ENTER TRACKING ID (UBX-XXXX-XXXX)" className="flex-1 bg-white/5 border border-white/10 rounded-lg px-6 py-5 text-[10px] font-black uppercase tracking-widest focus:ring-4 focus:ring-primary/20 outline-none transition shadow-inner" />
-                 <button className="bg-primary hover:bg-white hover:text-primary px-8 py-5 rounded-lg text-[10px] font-black uppercase tracking-widest shadow-xl transition active:scale-95 border border-white/10">Locate</button>
+                 <input placeholder="ENTER TRACKING ID (UBX-XXXX-XXXX)" className="flex-1 bg-white/5 border border-white/10 rounded-lg px-6 py-5 text-[10px] font-black uppercasest focus:ring-4 focus:ring-primary/20 outline-none transition shadow-inner" />
+                 <button className="bg-primary hover:bg-white hover:text-primary px-8 py-5 rounded-lg text-[10px] font-black uppercasest shadow-xl transition active:scale-95 border border-white/10">Locate</button>
               </div>
-              <p className="mt-6 text-[8px] font-black text-white/30 uppercase tracking-[0.2em]">Contact Logistics Support for real-time issues: +234 812 000 0000</p>
+              <p className="mt-6 text-[8px] font-black text-white/30 uppercase">Contact Logistics Support for real-time issues: +234 812 000 0000</p>
            </div>
         </section>
       </main>

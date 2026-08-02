@@ -1,24 +1,27 @@
 import React from 'react';
+import { useApp } from '../context/useAppContext';
 
 const categories = [
-  { name: 'Vegetables', icon: 'fas fa-leaf', image: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=300&h=300&auto=format&fit=crop' },
-  { name: 'Grains', icon: 'fas fa-seedling', image: 'https://images.unsplash.com/photo-1586201327693-86649f7ba80d?q=80&w=300&h=300&auto=format&fit=crop' },
-  { name: 'Roots', icon: 'fas fa-box-open', image: 'https://i.pinimg.com/1200x/49/4e/8e/494e8eb058f63e67fab6ef6662edf16e.jpg' },
-  { name: 'Fruits', icon: 'fas fa-apple-alt', image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=300&h=300&auto=format&fit=crop' },
-  { name: 'Meat', icon: 'fas fa-drumstick-bite', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300&h=300&auto=format&fit=crop' },
-  { name: 'Fish', icon: 'fas fa-fish', image: 'https://images.unsplash.com/photo-1516594798947-e65505dbb29d?q=80&w=300&h=300&auto=format&fit=crop' },
-  { name: 'Poultry', icon: 'fas fa-feather', image: 'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?q=80&w=300&h=300&auto=format&fit=crop' },
-  { name: 'Oils', icon: 'fas fa-tint', image: 'https://i.pinimg.com/1200x/2d/a5/cb/2da5cb4f8f4a1f6a1d1e4e886b34af2a.jpg' },
-  { name: 'Spices', icon: 'fas fa-pepper-hot', image: 'https://i.pinimg.com/1200x/85/5e/74/855e74af0d4b469be60828d41e886b34.jpg' },
-  { name: 'Processed', icon: 'fas fa-cookie-bite', image: 'https://images.unsplash.com/photo-1599420186946-7b6fb4e9d72a?q=80&w=300&h=300&auto=format&fit=crop' },
+  { name: 'Vegetables', key: 'vegetables', icon: 'fas fa-leaf', image: 'https://i.pinimg.com/736x/9d/11/f2/9d11f2080e301f2f79b79a9364ef2b4b.jpg' },
+  { name: 'Grains', key: 'grains', icon: 'fas fa-wheat-awn', image: 'https://i.pinimg.com/1200x/b5/ef/e3/b5efe340e7d97fb9d0dde05625c82330.jpg' },
+  { name: 'Roots', key: 'roots', icon: 'fas fa-carrot', image: 'https://i.pinimg.com/1200x/49/4e/8e/494e8eb058f63e67fab6ef6662edf16e.jpg' },
+  { name: 'Fruits', key: 'fruits', icon: 'fas fa-apple-alt', image: 'https://i.pinimg.com/736x/6f/c7/d3/6fc7d309207ff0265fe6326a5132a7f7.jpg' },
+  { name: 'Meat', key: 'meat', icon: 'fas fa-cow', image: 'https://i.pinimg.com/736x/c8/63/d9/c863d92a74576d7ade497ff36d064d45.jpg' },
+  { name: 'Fish', key: 'fish', icon: 'fas fa-fish-fins', image: 'https://i.pinimg.com/1200x/83/9f/50/839f509321e6b3883be11280f95f613d.jpg' },
+  { name: 'Poultry', key: 'poultry', icon: 'fas fa-feather', image: 'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?q=80&w=300&h=300&auto=format&fit=crop' },
+  { name: 'Oils', key: 'palm_oil', icon: 'fas fa-tint', image: 'https://i.pinimg.com/1200x/7b/f3/82/7bf3820f4cd358223af714cf59cf80bc.jpg' },
+  { name: 'Spices', key: 'spices', icon: 'fas fa-pepper-hot', image: 'https://i.pinimg.com/1200x/85/5e/74/855e74af0d4b469be60828d41e886b34.jpg' },
+  { name: 'Processed', key: 'processed', icon: 'fas fa-bowl-food', image: 'https://i.pinimg.com/1200x/ea/4f/c0/ea4fc008379a6af31efbaf623d6ce284.jpg' },
 ];
 
 export default function CategoryList({ onSelect }) {
+  const { t } = useApp();
+
   return (
     <section className="max-w-7xl mx-auto px-6 py-16 font-sans">
       <div className="flex flex-col items-center mb-16">
-        <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.4em] mb-4">Explore Markets</p>
-        <h2 className="text-4xl font-black text-gray-900 uppercase tracking-tighter">Shop by Category</h2>
+        <p className="text-[10px] font-black text-gray-400 uppercase mb-4">{t("explore_markets")}</p>
+        <h2 className="text-4xl font-black text-gray-900 uppercase">{t("shop_by_category")}</h2>
         <div className="w-12 h-1 bg-primary mt-6 rounded-full"></div>
       </div>
       
@@ -37,7 +40,9 @@ export default function CategoryList({ onSelect }) {
                   </div>
               </div>
             </div>
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 group-hover:text-primary transition-colors duration-300">{cat.name}</span>
+            <span className="text-[10px] font-black uppercase text-gray-400 group-hover:text-primary transition-colors duration-300">
+              {t(cat.key)}
+            </span>
           </div>
         ))}
       </div>

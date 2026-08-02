@@ -41,8 +41,8 @@ export default function Categories({ query = "", setQuery = () => {}, selectedCa
 
       <main className="max-w-7xl mx-auto px-6 py-12">
         <div className="mb-12">
-          <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.4em] mb-3">Markets / Enugu State</p>
-          <h1 className="text-5xl font-black text-gray-900 tracking-tighter uppercase leading-none">
+          <p className="text-[10px] font-black text-gray-400 uppercase mb-3">Markets / Enugu State</p>
+          <h1 className="text-5xl font-black text-gray-900 uppercase leading-none">
             Agricultural Categories
           </h1>
         </div>
@@ -52,11 +52,11 @@ export default function Categories({ query = "", setQuery = () => {}, selectedCa
           <aside className="w-full lg:w-64 space-y-10">
             {/* Category Filter */}
             <div>
-              <h3 className="text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-6 border-b border-gray-100 pb-2">By Category</h3>
+              <h3 className="text-[10px] font-black text-primary uppercase mb-6 border-b border-gray-100 pb-2">By Category</h3>
               <div className="space-y-2">
                 <button
                   onClick={() => setSelectedCategory("")}
-                  className={`w-full text-left px-4 py-3 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
+                  className={`w-full text-left px-4 py-3 rounded-lg text-[10px] font-black uppercasest transition-all ${
                     !selectedCategory ? 'bg-primary text-white shadow-lg translate-x-1' : 'text-gray-400 hover:bg-gray-50'
                   }`}
                 >
@@ -66,7 +66,7 @@ export default function Categories({ query = "", setQuery = () => {}, selectedCa
                   <button
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
-                    className={`w-full text-left px-4 py-3 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
+                    className={`w-full text-left px-4 py-3 rounded-lg text-[10px] font-black uppercasest transition-all ${
                       selectedCategory === cat ? 'bg-primary text-white shadow-lg translate-x-1' : 'text-gray-400 hover:bg-gray-50'
                     }`}
                   >
@@ -78,11 +78,11 @@ export default function Categories({ query = "", setQuery = () => {}, selectedCa
 
             {/* LGA Filter */}
             <div>
-              <h3 className="text-[10px] font-black text-accent uppercase tracking-[0.3em] mb-6 border-b border-gray-100 pb-2">By Enugu LGA</h3>
+              <h3 className="text-[10px] font-black text-accent uppercase mb-6 border-b border-gray-100 pb-2">By Enugu LGA</h3>
               <div className="grid grid-cols-2 lg:grid-cols-1 gap-2">
                 <button
                   onClick={() => setSelectedLGA("")}
-                  className={`w-full text-left px-4 py-3 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
+                  className={`w-full text-left px-4 py-3 rounded-lg text-[10px] font-black uppercasest transition-all ${
                     !selectedLGA ? 'bg-accent text-white shadow-lg translate-x-1' : 'text-gray-400 hover:bg-gray-50'
                   }`}
                 >
@@ -92,7 +92,7 @@ export default function Categories({ query = "", setQuery = () => {}, selectedCa
                   <button
                     key={lga.name}
                     onClick={() => setSelectedLGA(lga.name)}
-                    className={`w-full text-left px-4 py-3 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
+                    className={`w-full text-left px-4 py-3 rounded-lg text-[10px] font-black uppercasest transition-all ${
                       selectedLGA === lga.name ? 'bg-accent text-white shadow-lg translate-x-1' : 'text-gray-400 hover:bg-gray-50'
                     }`}
                   >
@@ -106,14 +106,14 @@ export default function Categories({ query = "", setQuery = () => {}, selectedCa
           {/* Product Grid */}
           <div className="flex-1">
             <div className="flex items-center justify-between mb-8 pb-4 border-b border-gray-100">
-               <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+               <p className="text-[10px] font-black text-gray-400 uppercasest">
                   Showing <span className="text-gray-900">{filteredProducts.length}</span> results 
                   {selectedCategory && <span> in <span className="text-primary">{selectedCategory}</span></span>}
                   {selectedLGA && <span> from <span className="text-accent">{selectedLGA} LGA</span></span>}
                </p>
                <div className="flex items-center gap-4">
-                  <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Sort By:</span>
-                  <select className="text-[10px] font-black uppercase tracking-widest bg-transparent border-none focus:ring-0 cursor-pointer">
+                  <span className="text-[10px] font-black text-gray-400 uppercasest">Sort By:</span>
+                  <select className="text-[10px] font-black uppercasest bg-transparent border-none focus:ring-0 cursor-pointer">
                     <option>Latest</option>
                     <option>Price: Low to High</option>
                     <option>Price: High to Low</option>
@@ -133,10 +133,10 @@ export default function Categories({ query = "", setQuery = () => {}, selectedCa
               ) : (
                 <div className="col-span-full py-32 text-center bg-gray-50 rounded-xl border border-dashed border-gray-200">
                    <i className="fas fa-search text-gray-200 text-5xl mb-6"></i>
-                   <p className="text-gray-400 font-bold uppercase tracking-[0.2em]">No products found matching your filters</p>
+                   <p className="text-gray-400 font-bold uppercase">No products found matching your filters</p>
                    <button 
                     onClick={() => { setSelectedCategory(""); setSelectedLGA(""); setQuery(""); }}
-                    className="mt-6 text-[10px] font-black uppercase tracking-widest text-primary hover:underline"
+                    className="mt-6 text-[10px] font-black uppercasest text-primary hover:underline"
                    >
                      Reset Filters
                    </button>

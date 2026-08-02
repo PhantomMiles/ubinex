@@ -1,4 +1,5 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useCallback } from "react";
+import { translations, getTranslation } from "../data/translations";
 
 export const AppContext = createContext();
 
@@ -12,6 +13,7 @@ export const CURRENCIES = {
 
 const DB_KEY = "UBINEX_DATABASE";
 const CART_KEY = "UBINEX_CART";
+const LANG_KEY = "UBINEX_SELECTED_LANG";
 
 function generateFarmerID() {
   const random = Math.floor(10000 + Math.random() * 90000);
@@ -37,29 +39,47 @@ export function AppProvider({ children }) {
   const [currency, setCurrency] = useState("NG");
   const [db, setDb] = useState(getDB);
 
+  // Global i18n Language State (Persisted)
+  const [selectedLang, setSelectedLang] = useState(() => {
+    return localStorage.getItem(LANG_KEY) || "English";
+  });
+
+  useEffect(() => {
+    localStorage.setItem(LANG_KEY, selectedLang);
+  }, [selectedLang]);
+
+  // Translation function wrapper
+  const t = useCallback(
+    (key) => {
+      if (!key) return "";
+      return getTranslation(selectedLang, key) || key;
+    },
+    [selectedLang]
+  );
+
   // Cart state persisted
   const [cart, setCart] = useState(() => {
     const stored = localStorage.getItem(CART_KEY);
     return stored ? JSON.parse(stored) : [];
   });
 
-  // auth state
+  // Auth state
   const [user, setUser] = useState(() => {
-    const stored = localStorage.getItem('ubinex_user');
+    const stored = localStorage.getItem("ubinex_user");
     return stored ? JSON.parse(stored) : null;
   });
 
   // Negotiations / Messages state
   const [negotiations, setNegotiations] = useState(() => {
-    const stored = localStorage.getItem('UBX_NEGOTIATIONS');
+    const stored = localStorage.getItem("UBX_NEGOTIATIONS");
     return stored ? JSON.parse(stored) : [
-      { id: '1', productId: 'p1', buyerName: 'Obinna K.', lastMessage: 'Is the price negotiable for 10 bags?', status: 'active', timestamp: Date.now() - 100000 },
-      { id: '2', productId: 'p2', buyerName: 'Amaka J.', lastMessage: 'I need delivery to 9th Mile.', status: 'pending', timestamp: Date.now() - 500000 }
+      { id: "1", productId: "p1", buyerName: "Obinna K.", lastMessage: "Is the price negotiable for 10 bags?", status: "active", timestamp: Date.now() - 100000 },
+      { id: "2", productId: "p2", buyerName: "Amaka J.", lastMessage: "I need delivery to 9th Mile.", status: "pending", timestamp: Date.now() - 500000 }
     ];
   });
 
   useEffect(() => {
-    localStorage.setItem('UBX_NEGOTIATIONS', JSON.stringify(negotiations));
+    localStorage.setItem("UBX_NEGOTIATIONS", JSON.stringify(negotiations));
   }, [negotiations]);
 
   useEffect(() => {
@@ -68,15 +88,15 @@ export function AppProvider({ children }) {
 
   const register = (userData) => {
     const currentDB = getDB();
-    if (currentDB.users.find(u => u.email === userData.email)) {
+    if (currentDB.users.find((u) => u.email === userData.email)) {
       throw new Error("User already exists");
     }
-    const newUser = { 
-      ...userData, 
+    const newUser = {
+      ...userData,
       id: Date.now().toString(),
-      ubxId: userData.role === 'farmer' ? generateFarmerID() : null,
+      ubxId: userData.role === "farmer" ? generateFarmerID() : null,
       phone: userData.phone || "",
-      dob: userData.dob || ""
+      dob: userData.dob || "",
     };
     currentDB.users.push(newUser);
     saveDB(currentDB);
@@ -86,45 +106,48 @@ export function AppProvider({ children }) {
 
   const updateUser = (updates) => {
     const currentDB = getDB();
-    const updatedUsers = currentDB.users.map(u => 
+    const updatedUsers = currentDB.users.map((u) =>
       u.email === user.email ? { ...u, ...updates } : u
     );
     const updatedUser = { ...user, ...updates };
-    
+
     currentDB.users = updatedUsers;
     saveDB(currentDB);
     setDb(currentDB);
     setUser(updatedUser);
-    localStorage.setItem('ubinex_user', JSON.stringify(updatedUser));
+    localStorage.setItem("ubinex_user", JSON.stringify(updatedUser));
   };
 
   const login = (email, password) => {
     const currentDB = getDB();
-    const userMatch = currentDB.users.find(u => u.email === email && u.password === password);
+    const userMatch = currentDB.users.find(
+      (u) => u.email === email && u.password === password
+    );
     if (!userMatch) {
       throw new Error("Invalid email or password");
     }
-    
+
     const { password: _, ...userSafe } = userMatch;
     setUser(userSafe);
-    
-    // Simulate secure session token
-    const mockToken = btoa(JSON.stringify({ id: userSafe.id, exp: Date.now() + 86400000 }));
-    sessionStorage.setItem('UBX_SECURE_TOKEN', mockToken);
-    
-    localStorage.setItem('ubinex_user', JSON.stringify(userSafe));
+
+    const mockToken = btoa(
+      JSON.stringify({ id: userSafe.id, exp: Date.now() + 86400000 })
+    );
+    sessionStorage.setItem("UBX_SECURE_TOKEN", mockToken);
+
+    localStorage.setItem("ubinex_user", JSON.stringify(userSafe));
     return userSafe;
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('ubinex_user');
-    sessionStorage.removeItem('UBX_SECURE_TOKEN');
+    localStorage.removeItem("ubinex_user");
+    sessionStorage.removeItem("UBX_SECURE_TOKEN");
   };
 
   const deleteUserAccount = () => {
     const currentDB = getDB();
-    const filteredUsers = currentDB.users.filter(u => u.email !== user.email);
+    const filteredUsers = currentDB.users.filter((u) => u.email !== user.email);
     currentDB.users = filteredUsers;
     saveDB(currentDB);
     setDb(currentDB);
@@ -132,21 +155,26 @@ export function AppProvider({ children }) {
   };
 
   const addNegotiation = (neg) => {
-    setNegotiations(prev => [{ ...neg, id: Date.now().toString(), timestamp: Date.now() }, ...prev]);
+    setNegotiations((prev) => [
+      { ...neg, id: Date.now().toString(), timestamp: Date.now() },
+      ...prev,
+    ]);
   };
 
   const addToCart = (product) => {
-    setCart(prev => {
-      const existing = prev.find(item => item.id === product.id);
+    setCart((prev) => {
+      const existing = prev.find((item) => item.id === product.id);
       if (existing) {
-        return prev.map(item => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item);
+        return prev.map((item) =>
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
       }
       return [...prev, { ...product, quantity: 1 }];
     });
   };
 
   const removeFromCart = (productId) => {
-    setCart(prev => prev.filter(item => item.id !== productId));
+    setCart((prev) => prev.filter((item) => item.id !== productId));
   };
 
   const updateCartQuantity = (productId, quantity) => {
@@ -154,20 +182,39 @@ export function AppProvider({ children }) {
       removeFromCart(productId);
       return;
     }
-    setCart(prev => prev.map(item => item.id === productId ? { ...item, quantity } : item));
+    setCart((prev) =>
+      prev.map((item) => (item.id === productId ? { ...item, quantity } : item))
+    );
   };
 
   const clearCart = () => setCart([]);
 
   return React.createElement(
     AppContext.Provider,
-    { value: { 
-      currency, setCurrency, currencies: CURRENCIES, 
-      user, login, register, logout, updateUser, deleteUserAccount,
-      cart, addToCart, removeFromCart, updateCartQuantity, clearCart,
-      negotiations, addNegotiation,
-      db 
-    } },
+    {
+      value: {
+        currency,
+        setCurrency,
+        currencies: CURRENCIES,
+        selectedLang,
+        setSelectedLang,
+        t,
+        user,
+        login,
+        register,
+        logout,
+        updateUser,
+        deleteUserAccount,
+        cart,
+        addToCart,
+        removeFromCart,
+        updateCartQuantity,
+        clearCart,
+        negotiations,
+        addNegotiation,
+        db,
+      },
+    },
     children
   );
 }
