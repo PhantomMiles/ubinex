@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useCallback } from "react";
-import { translations, getTranslation } from "../data/translations";
+import { useTranslation } from "react-i18next";
+import { SUPPORTED_LANGUAGES } from "../data/translations";
 
 export const AppContext = createContext();
 
@@ -13,7 +14,6 @@ export const CURRENCIES = {
 
 const DB_KEY = "UBINEX_DATABASE";
 const CART_KEY = "UBINEX_CART";
-const LANG_KEY = "UBINEX_SELECTED_LANG";
 
 function generateFarmerID() {
   const random = Math.floor(10000 + Math.random() * 90000);
@@ -39,22 +39,23 @@ export function AppProvider({ children }) {
   const [currency, setCurrency] = useState("NG");
   const [db, setDb] = useState(getDB);
 
-  // Global i18n Language State (Persisted)
-  const [selectedLang, setSelectedLang] = useState(() => {
-    return localStorage.getItem(LANG_KEY) || "English";
-  });
+  // Global i18n language state, now backed by i18next (see src/i18n.js).
+  // Kept as `selectedLang` / `setSelectedLang` / `t` so nothing else in the
+  // app (Navbar.jsx included) needs to change.
+  const { t, i18n } = useTranslation();
 
-  useEffect(() => {
-    localStorage.setItem(LANG_KEY, selectedLang);
-  }, [selectedLang]);
+  const currentLangObj =
+    SUPPORTED_LANGUAGES.find((l) => l.code === i18n.language) || SUPPORTED_LANGUAGES[0];
+  const selectedLang = currentLangObj.name;
 
-  // Translation function wrapper
-  const t = useCallback(
-    (key) => {
-      if (!key) return "";
-      return getTranslation(selectedLang, key) || key;
+  const setSelectedLang = useCallback(
+    (langNameOrCode) => {
+      const match = SUPPORTED_LANGUAGES.find(
+        (l) => l.name === langNameOrCode || l.code === langNameOrCode
+      );
+      if (match) i18n.changeLanguage(match.code);
     },
-    [selectedLang]
+    [i18n]
   );
 
   // Cart state persisted

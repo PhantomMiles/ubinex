@@ -13,6 +13,7 @@ import Farms from './pages/Farms'
 import Settings from './pages/Settings'
 import Legal from './pages/Legal'
 import { AppProvider, useApp } from './context/useAppContext'
+import './i18n'
 import React, { useEffect, useState } from 'react'
 
 import Footer from './components/Footer'

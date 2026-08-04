@@ -81,7 +81,12 @@ export const translations = {
     negotiable: "Negotiable",
     negotiate_price: "Negotiate Price",
     add_to_basket: "Add to Basket",
-    available: "Available"
+    available: "Available",
+
+    basket: "Basket",
+    direct_from_farms: "Direct from local farms.",
+    achi_inyi_yams: "Achi & Inyi Large White Yams",
+    yams_desc: "The king of crops, harvested with care from Oji River LGA."
   },
   Igbo: {
     bridging: "Njikọ Ugbo na Ndị Ahịa",
@@ -160,7 +165,12 @@ export const translations = {
     negotiable: "Enwere Ikwe Onụ",
     negotiate_price: "Kwe Onụ",
     add_to_basket: "Gbakwunye na Basaketị",
-    available: "Ọ Dị Ya"
+    available: "Ọ Dị Ya",
+
+    basket: "Basaketị",
+    direct_from_farms: "Ihe si n'Ugbo",
+    achi_inyi_yams: "Achi na Inyi Ji Iri",
+    yams_desc: "Eze nke mkpuru osisi, weere site ncare si Oji River LGA."
   },
   Hausa: {
     bridging: "Hada Gonakin Najeriya da Masu Siyayya",
@@ -239,7 +249,12 @@ export const translations = {
     negotiable: "Za a iya Cin Ciniki",
     negotiate_price: "Cinikin Farashi",
     add_to_basket: "Sanya a Kwando",
-    available: "Akwai Akwai"
+    available: "Akwai Akwai",
+
+    basket: "Kwando",
+    direct_from_farms: "Daga Gona",
+    achi_inyi_yams: "Ji Iri",
+    yams_desc: "Sarkin amfanin gona, wanda aka girbe da kulawa daga Oji River LGA."
   },
   Yoruba: {
     bridging: "Sisopo Awọn Oko ati Awọn Onibara",
@@ -318,7 +333,12 @@ export const translations = {
     negotiable: "Gbe Semo Naa",
     negotiate_price: "Dowo Oye",
     add_to_basket: "Fi si Apo",
-    available: "O Wa Nibe"
+    available: "O Wa Nibe",
+
+    basket: "Agbọn",
+    direct_from_farms: "Láti oko wa taara.",
+    achi_inyi_yams: "Iṣu Achi àti Inyi",
+    yams_desc: "Ọba àwọn irugbin, tí a kórè pẹ̀lú ìtọ́jú láti Oji River LGA."
   },
   "Nigerian Pidgin": {
     bridging: "Connect Naija Farms and Customers",
@@ -397,7 +417,12 @@ export const translations = {
     negotiable: "You Fit Price Am",
     negotiate_price: "Price Am",
     add_to_basket: "Add to Bag",
-    available: "E Dey"
+    available: "E Dey",
+
+    basket: "Basket",
+    direct_from_farms: "Straight from local farms.",
+    achi_inyi_yams: "Achi & Inyi Big White Yam",
+    yams_desc: "De king of crops, dem harvest am well-well from Oji River LGA."
   },
   Efik: {
     bridging: "Ndidian Mfubie Inwang ye Mbon Dep",
@@ -474,7 +499,12 @@ export const translations = {
     negotiable: "Enekwe Ikwe",
     negotiate_price: "Kwe Onụ",
     add_to_basket: "Sìn ke Basket",
-    available: "Eneyene"
+    available: "Eneyene",
+
+    basket: "Akpa",
+    direct_from_farms: "Sitde ke Mme Inwang",
+    achi_inyi_yams: "Unie Achi ye Inyi",
+    yams_desc: "Edidem mkpọ inwang, oro ẹkpepde ye ukpọn̄ sitde ke Oji River LGA."
   },
   Ibibio: {
     bridging: "Ndidian Mfubie Inwang ye Mbon Dep",
@@ -551,7 +581,12 @@ export const translations = {
     negotiable: "Enekwe Ikwe",
     negotiate_price: "Kwe Onụ",
     add_to_basket: "Sìn ke Basket",
-    available: "Eneyene"
+    available: "Eneyene",
+
+    basket: "Akpa",
+    direct_from_farms: "Sitde ke Mme Inwang",
+    achi_inyi_yams: "Unie Achi ye Inyi",
+    yams_desc: "Edidem mkpọ inwang, oro ẹkpepde ye ukpọn̄ sitde ke Oji River LGA."
   },
   Tiv: {
     bridging: "Kware Suule me Naagba Kasev",
@@ -628,7 +663,12 @@ export const translations = {
     negotiable: "U Fatyọ u Cinik",
     negotiate_price: "Cinik Farashi",
     add_to_basket: "Sanga sha Basket",
-    available: "Ngi Hegen"
+    available: "Ngi Hegen",
+
+    basket: "Basket",
+    direct_from_farms: "Dugh ken suule wase.",
+    achi_inyi_yams: "Yiu Achi kua Inyi",
+    yams_desc: "Tor u mkaana, i kôr sha mhen dugh ken Oji River LGA."
   },
   "Kanuri (Yerwa and Manga)": {
     bridging: "Kari Bəne Karama-a Kasaa-a Kərte",
@@ -705,7 +745,12 @@ export const translations = {
     negotiable: "Ciniki",
     negotiate_price: "Cinikin Farashi",
     add_to_basket: "Sanya Kwando",
-    available: "Akwai"
+    available: "Akwai",
+
+    basket: "Kwando",
+    direct_from_farms: "Daga Bəne Nde",
+    achi_inyi_yams: "Kolram Achi kd Inyi",
+    yams_desc: "Sarkin girbi, aka girbe da kulawa daga Oji River LGA."
   },
   Fulfulde: {
     bridging: "Kawtal Remobe bee Soodooɓe",
@@ -782,7 +827,12 @@ export const translations = {
     negotiable: "Ɗon Cinik",
     negotiate_price: "Cinik Cede",
     add_to_basket: "Waɗu e Basket",
-    available: "Ɗon Ɗoo"
+    available: "Ɗon Ɗoo",
+
+    basket: "Bootoori",
+    direct_from_farms: "Ummaade e Gese Amin",
+    achi_inyi_yams: "Bulum Achi e Inyi",
+    yams_desc: "Laamiiɗo remuru, mo ñaawaa e reente ummaade Oji River LGA."
   },
   "Edo (Bini)": {
     bridging: "Ike Egbe Iko kpae Emwan re Dẹ",
@@ -859,7 +909,12 @@ export const translations = {
     negotiable: "Ikwe Onụ",
     negotiate_price: "Cinik Price",
     add_to_basket: "Sìn ke Basket",
-    available: "O Rẹ"
+    available: "O Rẹ",
+
+    basket: "Ẹkpẹ",
+    direct_from_farms: "Sitẹ Iko Mwan",
+    achi_inyi_yams: "Inyẹn Achi kevbe Inyi",
+    yams_desc: "Ọba iko, nọ họn kpọlọ nọ dẹ sitẹ Oji River LGA."
   },
   Urhobo: {
     bridging: "Sio Igbragba vẹ Ewhre Kuẹgbe",
@@ -936,7 +991,12 @@ export const translations = {
     negotiable: "Ikwe Onụ",
     negotiate_price: "Cinik Price",
     add_to_basket: "Sìn ke Basket",
-    available: "O Rẹ"
+    available: "O Rẹ",
+
+    basket: "Ẹkpẹ",
+    direct_from_farms: "Sitẹ Igbragba Avwanre",
+    achi_inyi_yams: "Iye Achi vẹ Inyi",
+    yams_desc: "Ovie iko, rẹ a vwo ọghẹnẹ vwo dẹ sitẹ Oji River LGA."
   },
   Igala: {
     bridging: "Kpokpo Oko kpai Anefē Kuana",
@@ -1013,7 +1073,12 @@ export const translations = {
     negotiable: "Dowo Oye",
     negotiate_price: "Dowo Oye",
     add_to_basket: "Fi si Apo",
-    available: "O Wa Nibe"
+    available: "O Wa Nibe",
+
+    basket: "Agbọn",
+    direct_from_farms: "Láti Oko Awa taara.",
+    achi_inyi_yams: "Uchẹ Achi àti Inyi",
+    yams_desc: "Attah ubi, tí a kórè pẹ̀lú ìtọ́jú láti Oji River LGA."
   },
   Idoma: {
     bridging: "Kpokpo Oko kpai Anefē Kuana",
@@ -1090,7 +1155,12 @@ export const translations = {
     negotiable: "Dowo Oye",
     negotiate_price: "Dowo Oye",
     add_to_basket: "Fi si Apo",
-    available: "O Wa Nibe"
+    available: "O Wa Nibe",
+
+    basket: "Agbọn",
+    direct_from_farms: "Láti Oko Awa taara.",
+    achi_inyi_yams: "Uchẹ Achi àti Inyi",
+    yams_desc: "Attah ubi, tí a kórè pẹ̀lú ìtọ́jú láti Oji River LGA."  
   },
   Nupe: {
     bridging: "Kikwa Latifoshi ke Onibaragi",
@@ -1167,7 +1237,12 @@ export const translations = {
     negotiable: "Ciniki",
     negotiate_price: "Cinikin Farashi",
     add_to_basket: "Sanya Kwando",
-    available: "Akwai"
+    available: "Akwai",
+
+    basket: "Kwando",
+    direct_from_farms: "Daga Lati Awa",
+    achi_inyi_yams: "Biye Achi da Inyi",
+    yams_desc: "Sarkin girbi, an girbe shi da kulawa daga Oji River LGA."
   },
   "Izon (Ijaw)": {
     bridging: "Connect Naija Farms and Customers",
@@ -1244,7 +1319,12 @@ export const translations = {
     negotiable: "You Fit Price Am",
     negotiate_price: "Price Am",
     add_to_basket: "Add to Bag",
-    available: "E Dey"
+    available: "E Dey",
+
+    basket: "Basket",
+    direct_from_farms: "Straight from local farms.",
+    achi_inyi_yams: "Achi & Inyi Big White Yam",
+    yams_desc: "De king of crops, dem harvest am well-well from Oji River LGA."
   },
   "Ebira (Okene, Eganyi, Koto)": {
     bridging: "Connect Naija Farms and Customers",
@@ -1321,7 +1401,12 @@ export const translations = {
     negotiable: "You Fit Price Am",
     negotiate_price: "Price Am",
     add_to_basket: "Add to Bag",
-    available: "E Dey"
+    available: "E Dey",
+
+    basket: "Basket",
+    direct_from_farms: "Straight from local farms.",
+    achi_inyi_yams: "Achi & Inyi Big White Yam",
+    yams_desc: "De king of crops, dem harvest am well-well from Oji River LGA."
   },
   Esan: {
     bridging: "Ike Egbe Iko kpae Emwan re Dẹ",
@@ -1398,7 +1483,12 @@ export const translations = {
     negotiable: "Ikwe Onụ",
     negotiate_price: "Cinik Price",
     add_to_basket: "Sìn ke Basket",
-    available: "O Rẹ"
+    available: "O Rẹ",
+
+    basket: "Ẹkpẹ",
+    direct_from_farms: "Sitẹ Iko Mwan",
+    achi_inyi_yams: "Inyẹn Achi kevbe Inyi",
+    yams_desc: "Ọba iko, nọ họn kpọlọ nọ dẹ sitẹ Oji River LGA."
   },
   Itsekiri: {
     bridging: "Sisopo Awọn Oko ati Awọn Onibara",
@@ -1475,7 +1565,12 @@ export const translations = {
     negotiable: "Gbe Semo Naa",
     negotiate_price: "Dowo Oye",
     add_to_basket: "Fi si Apo",
-    available: "O Wa Nibe"
+    available: "O Wa Nibe",
+
+    basket: "Agbọn",
+    direct_from_farms: "Láti oko wa taara.",
+    achi_inyi_yams: "Iṣu Achi àti Inyi",
+    yams_desc: "Ọba àwọn irugbin, tí a kórè pẹ̀lú ìtọ́jú láti Oji River LGA."
   },
   Ikwerre: {
     bridging: "Njikọ Ugbo na Ndị Ahịa",
@@ -1552,7 +1647,12 @@ export const translations = {
     negotiable: "Enwere Ikwe Onụ",
     negotiate_price: "Kwe Onụ",
     add_to_basket: "Gbakwunye na Basaketị",
-    available: "Ọ Dị Ya"
+    available: "Ọ Dị Ya",
+
+    basket: "Basaketị",
+    direct_from_farms: "Ihe si n'Ugbo",
+    achi_inyi_yams: "Achi na Inyi Ji Iri",
+    yams_desc: "Eze nke mkpuru osisi, weere site ncare si Oji River LGA."
   }
 };
 

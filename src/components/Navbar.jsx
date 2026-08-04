@@ -226,7 +226,7 @@ export default function Navbar({ query = "", setQuery = () => { }, selectedCateg
                     }`}
                 >
                   {t(item.labelKey)}
-                  <i className={`fas fa-chevron-down scale-[0.6] opacity-30 transition-transform duration-300 ${activeDropdown === item.label ? 'rotate-180 opacity-100 text-primary' : ''}`}></i>
+                  <i className={`fas fa-chevron-down scale-[0.6]  opacity-30 transition-transform duration-300 ${activeDropdown === item.label ? 'rotate-180 opacity-100 text-primary' : ''}`}></i>
                 </button>
 
                 {activeDropdown === item.label && (
@@ -241,7 +241,7 @@ export default function Navbar({ query = "", setQuery = () => { }, selectedCateg
                             navigateTo(item.path);
                           }
                         }}
-                        className="w-full text-left px-8 py-3 hover:bg-primary/5 text-[11px] font-black uppercasest text-gray-500 hover:text-primary transition"
+                        className="w-full text-left px-8 py-3 hover:bg-primary/5 text-[11px] font-black uppercase text-gray-500 hover:text-primary transition"
                       >
                         {t(subItem.key)}
                       </button>
