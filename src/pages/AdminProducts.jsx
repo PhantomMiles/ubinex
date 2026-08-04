@@ -4,11 +4,18 @@ import { agroProducts, enuguLGAs } from "../data/agroProducts";
 const STORAGE_KEY = "adminProducts";
 
 function loadProducts() {
+  // 1. If agroProducts is available and non-empty, use it directly
+  if (Array.isArray(agroProducts) && agroProducts.length > 0) {
+    return [...agroProducts];
+  }
+
+  // 2. Fallback to localStorage only if initial load/import fails
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) return JSON.parse(raw);
   } catch (_) {}
-  return agroProducts.slice();
+
+  return [];
 }
 
 export default function AdminProducts() {

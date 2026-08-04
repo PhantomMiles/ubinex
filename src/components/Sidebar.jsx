@@ -5,11 +5,12 @@ export default function Sidebar({ active, open, onClose }) {
   const { logout, t } = useApp();
 
   const menuItems = [
-    { id: 'analytics', label: 'Analytics', key: 'Analytics', icon: 'fas fa-chart-pie' },
-    { id: 'products', label: 'My Products', key: 'My Products', icon: 'fas fa-leaf' },
-    { id: 'orders', label: 'Orders', key: 'track_orders', icon: 'fas fa-shopping-basket' },
+    { id: 'analytics', label: 'Analytics', key: 'Analytics', icon: 'fas fa-chart-line' },
+    { id: 'products', label: 'My Products', key: 'My Products', icon: 'fas fa-box' },
+    { id: 'orders', label: 'Orders', key: 'track_orders', icon: 'fas fa-table-list' },
     { id: 'sales', label: 'Sales History', key: 'Sales History', icon: 'fas fa-history' },
-    { id: 'settings', label: 'Settings', key: 'account_settings', icon: 'fas fa-cog' },
+    { id: 'messages', label: 'Messages', key: 'Messages', icon: 'fas fa-comment-dots' },
+    { id: 'settings', label: 'Settings', key: 'account_settings', icon: 'fas fa-user-gear' },
   ];
 
   const navigateTo = (id) => {
@@ -32,7 +33,7 @@ export default function Sidebar({ active, open, onClose }) {
         {/* Branding */}
         <div className="p-6 flex items-center gap-3 border-b border-white/5">
           <img src="/ubinex.png" alt="Ubinex" className="w-8 h-8 object-contain" />
-          <span className="text-lg font-black uppercase text-white/90">HARVEST</span>
+          <span className="text-lg font-black uppercase text-white/90">HARVEST DASHBOARD </span>
         </div>
 
         {/* Navigation */}
@@ -63,7 +64,7 @@ export default function Sidebar({ active, open, onClose }) {
             className="w-full flex items-center justify-center gap-2 py-3 rounded-lg text-[10px] font-black uppercase border border-white/10 hover:bg-white/5 transition-all duration-200"
           >
             <i className="fas fa-sign-out-alt"></i>
-            {t('exit_market')}
+            {t('exit_dashboard')}
           </button>
         </div>
       </aside>
