@@ -238,7 +238,7 @@ export const agroProducts = [
         category: "Poultry",
         price: 3600,
         unit: "large size",
-        image: "https://i.pinimg.com/1200x/49/5b/4f/495b4fa93e14118735bd85f390dce765.jpg",
+        image: "https://i.pinimg.com/736x/79/69/92/79699254fa6b7271ea70616087e02394.jpg",
         location: "Obolo Afor, Udenu LGA",
         stock: 85,
         description: "Freshly slaughtered turkey, healthy and organic",

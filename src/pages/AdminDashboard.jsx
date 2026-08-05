@@ -143,14 +143,22 @@ export default function AdminDashboard() {
   const currentLangName = typeof selectedLang === 'object' ? selectedLang?.name : selectedLang;
   const currentLangObj = SUPPORTED_LANGUAGES?.find(l => l.name === currentLangName) || SUPPORTED_LANGUAGES?.[0] || { code: 'EN', name: 'English' };
 
+  // Polling hook: Fetch live weather + alerts every 5 minutes
   useEffect(() => {
     async function fetchWeather() {
-      setWeatherLoading(true);
       const data = await getRealTimeWeather(6.4584, 7.5464);
       if (data) setWeather(data);
       setWeatherLoading(false);
     }
+
     fetchWeather();
+
+    const FIVE_MINUTES = 5 * 60 * 1000;
+    const intervalId = setInterval(() => {
+      fetchWeather();
+    }, FIVE_MINUTES);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   useEffect(() => {
@@ -165,18 +173,13 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex font-sans">
-      {/* Desktop Sidebar */}
       <Sidebar active={route} open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-      
-      {/* Mobile Bottom Navigation Bar (Unchanged) */}
       <BottomNav active={route} />
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden md:pl-64">
         
-        {/* FIX 1: Clean Mobile Sticky Header */}
+        {/* Header */}
         <header className="bg-white border-b border-gray-100 py-3 px-4 sm:px-10 flex items-center justify-between z-20 sticky top-0 shadow-sm md:shadow-none">
-          
-          {/* Mobile Logo Branding */}
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-white font-black text-xs shadow-md overflow-hidden">
                <img src="/ubinex.png" alt="Ubinex Logo" className="w-full h-full object-cover" />
@@ -186,7 +189,6 @@ export default function AdminDashboard() {
             </span>
           </div>
 
-          {/* Desktop Search */}
           <div className="max-w-xl w-full relative hidden sm:block">
              <i className="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-300"></i>
              <input 
@@ -196,7 +198,6 @@ export default function AdminDashboard() {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-6">
-            {/* Language Selector */}
             <div className="relative">
               <button 
                 onClick={() => setLangOpen(!langOpen)}
@@ -226,7 +227,6 @@ export default function AdminDashboard() {
               )}
             </div>
 
-            {/* Profile Avatar */}
             <div className="flex items-center gap-2 bg-gray-50 p-1 sm:p-2 sm:pr-6 rounded-xl border border-gray-100 group cursor-pointer hover:bg-white transition-all">
                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-primary flex items-center justify-center text-white font-black shadow-md text-xs sm:text-base">
                   {user?.name?.charAt(0) || 'E'}
@@ -243,22 +243,56 @@ export default function AdminDashboard() {
           </div>
         </header>
 
-        {/* FIX 2: Responsive Main Content Container */}
+        {/* Main Content Area */}
         <main className="flex-1 p-4 sm:p-8 pb-28 md:pb-10 overflow-y-auto no-scrollbar">
           {route === 'analytics' && (
             <div className="space-y-6 sm:space-y-10 animate-in fade-in duration-500">
               
+              {/* --- DYNAMIC AGRICULTURAL ALERT BANNERS --- */}
+              {weather?.alerts?.length > 0 && (
+                <div className="space-y-3 animate-pulse">
+                  {weather.alerts.map((alert) => (
+                    <div 
+                      key={alert.id} 
+                      className={`${alert.bgColor} border-l-4 ${alert.borderColor} p-4 rounded-xl flex items-start justify-between gap-4 shadow-sm`}
+                    >
+                      <div className="flex items-start gap-3">
+                        <i className={`fas ${alert.icon} text-lg sm:text-xl mt-0.5`}></i>
+                        <div>
+                          <h4 className="text-[10px] sm:text-xs font-black uppercase tracking-wide">
+                            {alert.title}
+                          </h4>
+                          <p className="text-[9px] sm:text-[10px] font-bold opacity-90 mt-0.5">
+                            {alert.message}
+                          </p>
+                        </div>
+                      </div>
+                      <span className={`text-[8px] font-mono font-black uppercase px-2 py-1 rounded shrink-0 ${alert.badgeColor}`}>
+                        Live Alert
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
               {/* Cards Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
                 
-                {/* FIX 3: Dynamic Weather Card Mobile Scaling */}
+                {/* Weather Card */}
                 <div className="bg-white rounded-2xl p-6 sm:p-10 shadow-sm border border-gray-100 relative overflow-hidden flex flex-col justify-between">
                    <div className={`absolute top-0 right-0 p-6 sm:p-10 opacity-10 ${weather?.color || 'text-primary'}`}>
                       <i className={`fas ${weather?.icon || 'fa-cloud-sun'} text-7xl sm:text-9xl`}></i>
                    </div>
                    
                    <div>
-                     <p className="text-[9px] font-black text-gray-400 uppercase mb-2">Local Weather</p>
+                     <div className="flex justify-between items-center mb-2">
+                       <p className="text-[9px] font-black text-gray-400 uppercase">Local Weather</p>
+                       {weather?.lastUpdated && (
+                         <span className="text-[8px] font-mono text-gray-400 uppercase bg-gray-50 px-2 py-0.5 rounded">
+                           Sync: {weather.lastUpdated}
+                         </span>
+                       )}
+                     </div>
                      <h3 className="text-xl sm:text-2xl font-black text-gray-900 mb-6 uppercase">
                        Enugu City <span className="text-gray-300 font-normal opacity-50 ml-1">Today</span>
                      </h3>
@@ -310,7 +344,7 @@ export default function AdminDashboard() {
                    )}
                 </div>
 
-                {/* Productivity Card (Yield Growth Activity) */}
+                {/* Productivity Card */}
                 <div className="bg-[#0a0a0a] rounded-2xl p-6 sm:p-10 shadow-2xl border border-white/5 flex flex-col text-white relative overflow-hidden min-h-[260px]">
                    <div className="flex justify-between items-center mb-6 relative z-10 gap-2">
                       <p className="text-[9px] font-black text-white/40 uppercase">Yield Growth Activity</p>
@@ -373,7 +407,7 @@ export default function AdminDashboard() {
                 </div>
               </div>
 
-              {/* FIX 4: Production Summary Section & Legend Controls */}
+              {/* Production Summary Section */}
               <div className="bg-white rounded-2xl p-5 sm:p-12 shadow-sm border border-gray-100">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
                    <div>
@@ -381,7 +415,6 @@ export default function AdminDashboard() {
                       <h2 className="text-xl sm:text-3xl font-black text-gray-900 uppercase">Production Summary</h2>
                    </div>
 
-                   {/* Compact Filter Buttons for Mobile */}
                    <div className="flex items-center gap-1.5 bg-gray-50 p-1 rounded-xl border border-gray-100 self-start sm:self-auto">
                       <button
                         type="button"
@@ -423,7 +456,6 @@ export default function AdminDashboard() {
                    </div>
                 </div>
 
-                {/* FIX 5: Chart Responsive Height */}
                 <div className="h-64 sm:h-96 w-full">
                   <Line data={chartData} options={chartOptions} />
                 </div>
