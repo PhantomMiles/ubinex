@@ -4,6 +4,7 @@ import { useApp } from "../context/useAppContext";
 export default function Negotiation({ product = {}, onClose }) {
   const [offer, setOffer] = useState("");
   const [notes, setNotes] = useState("");
+  const [showLimitModal, setShowLimitModal] = useState(false);
   const { currency, currencies } = useApp();
   const symbol = (currencies && currencies[currency] && currencies[currency].symbol) || '₦';
 
@@ -23,7 +24,7 @@ export default function Negotiation({ product = {}, onClose }) {
     
     // Boundary check
     if (amt < priceBoundaries.min || amt > priceBoundaries.max) {
-      alert(`Offer must be within market range (₦${priceBoundaries.min.toLocaleString()} - ₦${priceBoundaries.max.toLocaleString()})`);
+      setShowLimitModal(true);
       return;
     }
 
@@ -34,7 +35,48 @@ export default function Negotiation({ product = {}, onClose }) {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden border border-gray-100 font-sans flex flex-col max-h-[90vh]">
+    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden border border-gray-100 font-sans flex flex-col max-h-[90vh] relative">
+
+      {/* Price Limit Modal */}
+      {showLimitModal && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center p-6 bg-black/60 backdrop-blur-sm rounded-2xl animate-in fade-in duration-200">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-xs overflow-hidden animate-in zoom-in-95 duration-300">
+            <div className="p-6 bg-red-50 border-b border-red-100 flex items-center gap-4">
+              <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-500 shrink-0">
+                <i className="fas fa-exclamation-triangle text-sm"></i>
+              </div>
+              <div>
+                <p className="text-[9px] font-black text-red-400 uppercase tracking-widest mb-0.5">Market Boundary</p>
+                <h4 className="text-sm font-black text-gray-900 uppercase leading-none">Offer Out of Range</h4>
+              </div>
+            </div>
+            <div className="p-6 space-y-5">
+              <p className="text-[10px] font-bold text-gray-500 uppercase leading-relaxed">
+                Your offer must fall within the approved market negotiation range for this product.
+              </p>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 text-center">
+                  <p className="text-[8px] font-black text-gray-400 uppercase mb-1">Min Offer</p>
+                  <p className="text-sm font-black text-gray-900">{symbol}{priceBoundaries.min.toLocaleString()}</p>
+                  <p className="text-[8px] text-gray-400 font-bold mt-1">70% of listing</p>
+                </div>
+                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 text-center">
+                  <p className="text-[8px] font-black text-gray-400 uppercase mb-1">Max Offer</p>
+                  <p className="text-sm font-black text-gray-900">{symbol}{priceBoundaries.max.toLocaleString()}</p>
+                  <p className="text-[8px] text-gray-400 font-bold mt-1">150% of listing</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowLimitModal(false)}
+                className="w-full bg-[#0a0a0a] hover:bg-primary text-white py-4 rounded-xl text-[10px] font-black uppercase transition-all active:scale-95 shadow-xl"
+              >
+                Got it — Revise Offer
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
         <div>
