@@ -2,11 +2,11 @@ import React from "react";
 import Navbar from "../components/Navbar";
 
 const marketHubs = [
-  { name: "Ogbete Market", location: "Enugu North", special: "Everything", image: "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?q=80&w=400&h=400" },
-  { name: "New Market", location: "Enugu North", special: "Fresh Produce", image: "https://images.unsplash.com/photo-1488459711612-071727719703?q=80&w=400&h=400" },
-  { name: "Kenyatta Market", location: "Enugu South", special: "Cereal & Grains", image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=400&h=400" },
-  { name: "9th Mile Corner", location: "Ngwo", special: "Fruits & Tubers", image: "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=400&h=400" },
-  { name: "Abakpa Market", location: "Enugu East", special: "Vegetables", image: "https://images.unsplash.com/photo-1516594798947-e65505dbb29d?q=80&w=400&h=400" },
+  { name: "Ogbete Market", location: "Enugu North", special: "Everything", image: "https://scontent.fabb1-1.fna.fbcdn.net/v/t1.6435-9/95926697_1114038835640037_5154846609384669184_n.jpg?stp=dst-jpg_tt6&cstp=mx720x960&ctp=s590x590&_nc_cat=108&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFocLLx_Ot47XEaElTgVc4mRVDlr6neqOtFUOWvqd6o60w-VkxRMH81XplO9fxBX9mIlGFvBGxGylbRHIyKkEQU&_nc_ohc=cINcigeNwu4Q7kNvwGQk7Up&_nc_oc=Ado5Yhx9YKgx_SGHTT2P4TkBN2RhUR3UW0pPHeckKBkq2Eg5Ok4i3PNcn2QWz-IYJAs&_nc_zt=23&_nc_ht=scontent.fabb1-1.fna&_nc_gid=9kFP8u391E0ftvh9d4qP5g&_nc_ss=7b2a8&oh=00_AQFHfkdYSXvMqZ3K9Lt2HYQX5yHw5eEH8Ns2yzmZes082g&oe=6A99B050" },
+  { name: "New Market", location: "Enugu North", special: "Fresh Produce", image: "https://images.pexels.com/photos/6193209/pexels-photo-6193209.jpeg" },
+  { name: "Kenyatta Market", location: "Enugu South", special: "Cereal & Grains", image: "https://images.pexels.com/photos/30179960/pexels-photo-30179960.jpeg" },
+  { name: "9th Mile Corner", location: "Ngwo", special: "Fruits & Tubers", image: "https://images.pexels.com/photos/6192532/pexels-photo-6192532.jpeg" },
+  { name: "Abakpa Market", location: "Enugu East", special: "Vegetables", image: "https://images.pexels.com/photos/38968324/pexels-photo-38968324.jpeg" },
 ];
 
 export default function Markets() {
