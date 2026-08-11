@@ -6,30 +6,30 @@ export default function Hero() {
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-3 gap-8 font-sans">
-      <div className="lg:col-span-2 relative rounded-xl overflow-hidden shadow-2xl group h-[450px] lg:h-[550px]">
+      <div className="lg:col-span-2 relative rounded-xl overflow-hidden shadow-2xl group h-[360px] sm:h-[450px] lg:h-[550px]">
         <img
           src="https://i.pinimg.com/1200x/b5/ef/e3/b5efe340e7d97fb9d0dde05625c82330.jpg"
           alt="Premium Abakaliki Rice"
           className="w-full h-full object-cover group-hover:scale-105 transition duration-1000 grayscale-[0.3] group-hover:grayscale-0"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/30 to-transparent flex flex-col justify-center px-16 text-white z-10">
-          <span className="text-green-600 font-black uppercase mb-6 animate-in fade-in slide-in-from-left duration-700">
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/30 to-transparent flex flex-col justify-center px-8 sm:px-12 lg:px-16 text-white z-10">
+          <span className="text-green-600 text-[10px] sm:text-xs font-black uppercase mb-3 sm:mb-6 animate-in fade-in slide-in-from-left duration-700">
             {t("premium_harvest")}
           </span>
-          <h1 className="text-5xl lg:text-7xl font-black mb-8 leading-tight max-w-xl animate-in fade-in slide-in-from-left duration-700 delay-100 uppercase tracking-tighter">
+          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black mb-4 sm:mb-8 leading-tight max-w-xl animate-in fade-in slide-in-from-left duration-700 delay-100 uppercase tracking-tighter">
             {t("stone_free")} <br />
             <span className="text-primary">{t("abakaliki_rice")}</span>
           </h1>
-          <p className="text-xl mb-10 opacity-80 delay-200 animate-in fade-in slide-in-from-left font-bold uppercase tracking-widest">
-            {t("starting_from")} <span className="text-white font-black">₦45,000</span> <span className="text-xs opacity-50">/ 50kg Bag</span>
+          <p className="text-sm sm:text-xl mb-6 sm:mb-10 opacity-80 delay-200 animate-in fade-in slide-in-from-left font-bold uppercase tracking-widest">
+            {t("starting_from")} <span className="text-white font-black">₦45,000</span> <span className="text-[10px] opacity-50">/ 50kg Bag</span>
           </p>
-          <button className="bg-primary hover:bg-white hover:text-primary text-white font-black py-5 px-12 rounded-lg transition-all shadow-2xl w-fit uppercase text-[10px] delay-300 animate-in fade-in slide-in-from-left transform active:scale-95 border border-white/10">
+          <button className="bg-primary hover:bg-white hover:text-primary text-white font-black py-3 sm:py-5 px-8 sm:px-12 rounded-lg transition-all shadow-2xl w-fit uppercase text-[10px] delay-300 animate-in fade-in slide-in-from-left transform active:scale-95 border border-white/10">
             {t("secure_your_bag")} <i className="fas fa-arrow-right ml-3 scale-90"></i>
           </button>
         </div>
       </div>
 
-      <div className="flex flex-col gap-8 h-[450px] lg:h-[550px]">
+      <div className="hidden lg:flex flex-col gap-8 h-[550px]">
         <div className="flex-1 relative rounded-xl overflow-hidden shadow-2xl group border border-gray-100">
           <img
             src="https://i.pinimg.com/1200x/85/5e/74/855e74af0d4b469be60828d41e886b34.jpg"
