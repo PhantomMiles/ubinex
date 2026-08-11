@@ -7,7 +7,19 @@ export default function Navbar({ query = "", setQuery = () => { }, selectedCateg
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [langOpen, setLangOpen] = useState(false);
   
-  const { user, logout, selectedLang, setSelectedLang, t } = useApp();
+  const { user, logout, selectedLang, setSelectedLang, t, cart } = useApp();
+
+  const cartCount = cart?.reduce((sum, item) => sum + (item.quantity || 1), 0) || 0;
+
+  // Orders count from localStorage (mock orders are always 2 for demo users)
+  const ordersCount = (() => {
+    try {
+      const stored = localStorage.getItem('UBX_ORDERS');
+      if (stored) return JSON.parse(stored).length;
+    } catch {}
+    // Fall back to mock count if user is logged in
+    return user ? 2 : 0;
+  })();
 
   // Safely extract current language string and display code
   const currentLangName = typeof selectedLang === 'object' ? selectedLang?.name : selectedLang;
@@ -151,12 +163,20 @@ export default function Navbar({ query = "", setQuery = () => { }, selectedCateg
           <div className="flex items-center gap-8">
             <button className="relative group text-gray-400 transition" onClick={() => navigateTo('orders')}>
               <i className="far fa-heart text-xl group-hover:text-primary"></i>
-              <span className="absolute -top-2 -right-2 bg-green-800 text-white text-[8px] font-black w-4 h-4 rounded-md flex items-center justify-center border-2 border-white shadow-sm">0</span>
+              {ordersCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-green-800 text-white text-[8px] font-black w-4 h-4 rounded-md flex items-center justify-center border-2 border-white shadow-sm">
+                  {ordersCount > 99 ? '99+' : ordersCount}
+                </span>
+              )}
             </button>
 
             <button className="relative group text-gray-400 transition" onClick={() => navigateTo('cart')}>
               <i className="fas fa-shopping-basket text-xl group-hover:text-primary"></i>
-              <span className="absolute -top-2 -right-2 bg-brown-800 text-white text-[8px] font-black w-4 h-4 rounded-md flex items-center justify-center border-2 border-white shadow-sm">0</span>
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-primary text-white text-[8px] font-black w-4 h-4 rounded-md flex items-center justify-center border-2 border-white shadow-sm">
+                  {cartCount > 99 ? '99+' : cartCount}
+                </span>
+              )}
             </button>
 
             {/* Profile Dropdown */}
