@@ -17,6 +17,7 @@ import './i18n'
 import React, { useEffect, useState } from 'react'
 
 import Footer from './components/Footer'
+import MobileNav from './components/MobileNav'
 
 function AppContent() {
   const { user } = useApp()
@@ -94,11 +95,12 @@ function AppContent() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <div className="flex-1">
+    <div className="flex flex-col min-h-screen relative">
+      <div className="flex-1 pb-20 sm:pb-0">
         {content}
       </div>
       <Footer />
+      <MobileNav />
     </div>
   );
 }
