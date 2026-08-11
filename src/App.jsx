@@ -96,7 +96,7 @@ function AppContent() {
 
   return (
     <div className="flex flex-col min-h-screen relative">
-      <div className="flex-1 pb-20 sm:pb-0">
+      <div className="flex-1">
         {content}
       </div>
       <Footer />

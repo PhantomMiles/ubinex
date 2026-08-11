@@ -161,7 +161,7 @@ export default function Navbar({ query = "", setQuery = () => { }, selectedCateg
 
           {/* Actions */}
           <div className="flex items-center gap-8">
-            <button className="relative group text-gray-400 transition" onClick={() => navigateTo('orders')}>
+            <button className="relative group text-gray-400 transition hidden sm:block" onClick={() => navigateTo('orders')}>
               <i className="far fa-heart text-xl group-hover:text-primary"></i>
               {ordersCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-green-800 text-white text-[8px] font-black w-4 h-4 rounded-md flex items-center justify-center border-2 border-white shadow-sm">
@@ -170,7 +170,7 @@ export default function Navbar({ query = "", setQuery = () => { }, selectedCateg
               )}
             </button>
 
-            <button className="relative group text-gray-400 transition" onClick={() => navigateTo('cart')}>
+            <button className="relative group text-gray-400 transition hidden sm:block" onClick={() => navigateTo('cart')}>
               <i className="fas fa-shopping-basket text-xl group-hover:text-primary"></i>
               {cartCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-primary text-white text-[8px] font-black w-4 h-4 rounded-md flex items-center justify-center border-2 border-white shadow-sm">
