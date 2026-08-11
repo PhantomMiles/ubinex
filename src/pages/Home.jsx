@@ -100,28 +100,38 @@ export default function Home({ query = "", setQuery = () => {}, selectedCategory
 
         {/* Dynamic Banner Section - Enugu Focused */}
         <section className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="relative rounded-xl overflow-hidden shadow-2xl group bg-orange-50/50 border border-orange-100 min-h-[300px]">
-            <div className="absolute inset-0 p-12 flex flex-col justify-center max-w-[65%] z-10">
-              <span className="text-[10px] font-black text-orange-600 uppercase mb-4 tracking-widest">{t("limited_edition")}</span>
-              <h3 className="text-3xl font-black text-gray-900 mb-4 uppercase leading-none">{t("nsukka_pepper")} Basket</h3>
-              <p className="text-xs text-gray-600 mb-8 font-bold uppercase leading-relaxed">{t("authentic_aroma")}. Direct from local farms.</p>
+          {/* Card 1 — Nsukka Pepper */}
+          <div className="rounded-xl overflow-hidden shadow-2xl group bg-orange-50/50 border border-orange-100 flex flex-col sm:relative sm:min-h-[300px]">
+            <div className="p-8 sm:p-12 flex flex-col justify-center sm:absolute sm:inset-0 sm:max-w-[65%] z-10">
+              <span className="text-[10px] font-black text-orange-600 uppercase mb-3 tracking-widest">{t("limited_edition")}</span>
+              <h3 className="text-2xl sm:text-3xl font-black text-gray-900 mb-3 uppercase leading-tight">{t("nsukka_pepper")} Basket</h3>
+              <p className="text-xs text-gray-600 mb-6 font-bold uppercase leading-relaxed">{t("authentic_aroma")}. Direct from local farms.</p>
               <button className="text-[10px] font-black uppercase text-white bg-[#0a0a0a] px-8 py-4 rounded-lg w-fit transition hover:bg-primary shadow-xl">
                 {t("shop_now")}
               </button>
             </div>
-            <img src="https://i.pinimg.com/1200x/31/4b/2d/314b2d6fe2d8c4241af1a3592dac521f.jpg" className="absolute top-0 right-0 h-full w-2/5 object-cover grayscale-[0.2] group-hover:grayscale-0 transition duration-700" alt="Nsukka Pepper" />
+            <img
+              src="https://i.pinimg.com/1200x/31/4b/2d/314b2d6fe2d8c4241af1a3592dac521f.jpg"
+              className="h-52 sm:h-full w-full sm:w-2/5 object-cover grayscale-[0.2] group-hover:grayscale-0 transition duration-700 sm:absolute sm:top-0 sm:right-0"
+              alt="Nsukka Pepper"
+            />
           </div>
 
-          <div className="relative rounded-xl overflow-hidden shadow-2xl group bg-[#0a0a0a] min-h-[300px]">
-             <div className="absolute inset-0 p-12 flex flex-col justify-center max-w-[65%] text-white z-10">
-              <span className="text-[10px] font-black text-primary uppercase mb-4 tracking-widest">{t("premium_quality")}</span>
-              <h3 className="text-3xl font-black mb-4 uppercase leading-none">Achi & Inyi Large White Yams</h3>
-              <p className="text-xs text-white/50 mb-8 font-bold uppercase leading-relaxed">The king of crops, harvested with care from Oji River LGA.</p>
+          {/* Card 2 — Yams */}
+          <div className="rounded-xl overflow-hidden shadow-2xl group bg-[#0a0a0a] flex flex-col sm:relative sm:min-h-[300px]">
+            <div className="p-8 sm:p-12 flex flex-col justify-center sm:absolute sm:inset-0 sm:max-w-[65%] text-white z-10">
+              <span className="text-[10px] font-black text-primary uppercase mb-3 tracking-widest">{t("premium_quality")}</span>
+              <h3 className="text-2xl sm:text-3xl font-black mb-3 uppercase leading-tight">Achi &amp; Inyi Large White Yams</h3>
+              <p className="text-xs text-white/50 mb-6 font-bold uppercase leading-relaxed">The king of crops, harvested with care from Oji River LGA.</p>
               <button className="text-[10px] font-black uppercase text-[#0a0a0a] bg-white px-8 py-4 rounded-lg w-fit transition hover:bg-primary hover:text-white shadow-xl">
                 {t("search_market")}
               </button>
             </div>
-            <img src="https://i.pinimg.com/1200x/49/4e/8e/494e8eb058f63e67fab6ef6662edf16e.jpg" className="absolute top-0 right-0 h-full w-2/5 object-cover opacity-60 group-hover:opacity-100 transition duration-700" alt="Large White Yams" />
+            <img
+              src="https://i.pinimg.com/1200x/49/4e/8e/494e8eb058f63e67fab6ef6662edf16e.jpg"
+              className="h-52 sm:h-full w-full sm:w-2/5 object-cover opacity-70 group-hover:opacity-100 transition duration-700 sm:absolute sm:top-0 sm:right-0"
+              alt="Large White Yams"
+            />
           </div>
         </section>
 
