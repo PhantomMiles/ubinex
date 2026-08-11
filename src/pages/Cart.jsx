@@ -165,7 +165,7 @@ export default function Cart() {
              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 blur-[100px] rounded-full pointer-events-none"></div>
              <div className="relative z-10">
                 <div className="w-24 h-24 bg-white rounded-xl shadow-xl flex items-center justify-center text-gray-100 text-4xl mb-10 mx-auto border border-gray-50">
-                   <i className="fas fa-shopping-basket opacity-60"></i>
+                   <i className="fas fa-shopping-basket opacity-80"></i>
                 </div>
                 <h2 className="text-3xl font-black text-gray-900 uppercase mb-4">Your basket is empty</h2>
                 <p className="text-[10px] text-gray-400 font-black uppercase mb-12">Fresh farm harvests are waiting for you in the markets</p>
