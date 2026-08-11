@@ -155,6 +155,20 @@ export function AppProvider({ children }) {
     logout();
   };
 
+  const updatePassword = (currentPassword, newPassword) => {
+    const currentDB = getDB();
+    const stored = currentDB.users.find((u) => u.email === user.email);
+    if (!stored || stored.password !== currentPassword) {
+      throw new Error("Current password is incorrect");
+    }
+    const updatedUsers = currentDB.users.map((u) =>
+      u.email === user.email ? { ...u, password: newPassword } : u
+    );
+    currentDB.users = updatedUsers;
+    saveDB(currentDB);
+    setDb(currentDB);
+  };
+
   const addNegotiation = (neg) => {
     setNegotiations((prev) => [
       { ...neg, id: Date.now().toString(), timestamp: Date.now() },
@@ -206,6 +220,7 @@ export function AppProvider({ children }) {
         logout,
         updateUser,
         deleteUserAccount,
+        updatePassword,
         cart,
         addToCart,
         removeFromCart,

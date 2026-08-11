@@ -4,7 +4,7 @@ import Sidebar from '../components/Sidebar';
 import { useApp } from '../context/useAppContext';
 
 export default function Settings() {
-  const { user, updateUser, deleteUserAccount } = useApp();
+  const { user, updateUser, deleteUserAccount, updatePassword } = useApp();
   const [formData, setFormData] = useState({
     name: user?.name || '',
     phone: user?.phone || '',
@@ -15,6 +15,8 @@ export default function Settings() {
   const [showSecurity, setShowSecurity] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [cardData, setCardData] = useState({ number: '', expiry: '', cvc: '' });
+  const [pwForm, setPwForm] = useState({ current: '', newPw: '', confirm: '' });
+  const [pwStatus, setPwStatus] = useState(null); // { type: 'error'|'success', msg: '' }
 
   // Determine if we are in admin dashboard context
   const isAdmin = window.location.hash.includes('/admin');
@@ -24,6 +26,31 @@ export default function Settings() {
     updateUser(formData);
     setSaved(true);
     setTimeout(() => setSaved(false), 3000);
+  };
+
+  const handlePasswordUpdate = () => {
+    setPwStatus(null);
+    const { current, newPw, confirm } = pwForm;
+    if (!current || !newPw || !confirm) {
+      return setPwStatus({ type: 'error', msg: 'All fields are required.' });
+    }
+    if (newPw.length < 6) {
+      return setPwStatus({ type: 'error', msg: 'New password must be at least 6 characters.' });
+    }
+    if (newPw === current) {
+      return setPwStatus({ type: 'error', msg: 'New password must differ from current password.' });
+    }
+    if (newPw !== confirm) {
+      return setPwStatus({ type: 'error', msg: 'Passwords do not match.' });
+    }
+    try {
+      updatePassword(current, newPw);
+      setPwStatus({ type: 'success', msg: 'Password updated successfully.' });
+      setPwForm({ current: '', newPw: '', confirm: '' });
+      setTimeout(() => { setShowSecurity(false); setPwStatus(null); }, 2000);
+    } catch (err) {
+      setPwStatus({ type: 'error', msg: err.message });
+    }
   };
 
   const Content = (
@@ -159,18 +186,53 @@ export default function Settings() {
            <div className="bg-white w-full max-w-md rounded-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-500">
               <div className="p-10 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
                  <h3 className="text-xl font-black text-gray-900 uppercase">Security Center</h3>
-                 <button onClick={() => setShowSecurity(false)} className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-400 hover:text-red-500 transition"><i className="fas fa-times"></i></button>
+                 <button onClick={() => { setShowSecurity(false); setPwStatus(null); setPwForm({ current: '', newPw: '', confirm: '' }); }} className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-400 hover:text-red-500 transition"><i className="fas fa-times"></i></button>
               </div>
-              <div className="p-10 space-y-6">
+              <div className="p-10 space-y-5">
+                 {pwStatus && (
+                   <div className={`px-5 py-4 rounded-lg text-[10px] font-black uppercase flex items-center gap-3 animate-in fade-in ${
+                     pwStatus.type === 'success'
+                       ? 'bg-green-50 text-green-700 border border-green-100'
+                       : 'bg-red-50 text-red-600 border border-red-100'
+                   }`}>
+                     <i className={`fas ${ pwStatus.type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle' }`}></i>
+                     {pwStatus.msg}
+                   </div>
+                 )}
                  <div className="space-y-2">
                     <label className="text-[9px] font-black uppercasest text-gray-400">Current Password</label>
-                    <input type="password" placeholder="••••••••" className="w-full bg-gray-50 border border-gray-100 rounded-lg py-4 px-6 text-[10px] focus:ring-4 focus:ring-primary/5 outline-none transition" />
+                    <input
+                      type="password"
+                      placeholder="••••••••"
+                      value={pwForm.current}
+                      onChange={e => setPwForm({ ...pwForm, current: e.target.value })}
+                      className="w-full bg-gray-50 border border-gray-100 rounded-lg py-4 px-6 text-[10px] focus:ring-4 focus:ring-primary/5 outline-none transition"
+                    />
                  </div>
                  <div className="space-y-2">
                     <label className="text-[9px] font-black uppercasest text-gray-400">New Password</label>
-                    <input type="password" placeholder="••••••••" className="w-full bg-gray-50 border border-gray-100 rounded-lg py-4 px-6 text-[10px] focus:ring-4 focus:ring-primary/5 outline-none transition" />
+                    <input
+                      type="password"
+                      placeholder="••••••••"
+                      value={pwForm.newPw}
+                      onChange={e => setPwForm({ ...pwForm, newPw: e.target.value })}
+                      className="w-full bg-gray-50 border border-gray-100 rounded-lg py-4 px-6 text-[10px] focus:ring-4 focus:ring-primary/5 outline-none transition"
+                    />
                  </div>
-                 <button className="w-full bg-[#0a0a0a] text-white py-4 rounded-lg text-[10px] font-black uppercasest shadow-xl transition-all active:scale-95">Update Security</button>
+                 <div className="space-y-2">
+                    <label className="text-[9px] font-black uppercasest text-gray-400">Confirm New Password</label>
+                    <input
+                      type="password"
+                      placeholder="••••••••"
+                      value={pwForm.confirm}
+                      onChange={e => setPwForm({ ...pwForm, confirm: e.target.value })}
+                      className="w-full bg-gray-50 border border-gray-100 rounded-lg py-4 px-6 text-[10px] focus:ring-4 focus:ring-primary/5 outline-none transition"
+                    />
+                 </div>
+                 <button
+                   onClick={handlePasswordUpdate}
+                   className="w-full bg-[#0a0a0a] text-white py-4 rounded-lg text-[10px] font-black uppercasest shadow-xl hover:bg-primary transition active:scale-95"
+                 >Update Security</button>
               </div>
            </div>
         </div>
